@@ -101,11 +101,7 @@
 				836965CA251DD78100810174 /* OnMyWay.entitlements */,
 				836965B4251DD75700810174 /* AppDelegate.swift */,
 				836965B6251DD75700810174 /* SceneDelegate.swift */,
-				8369E56F251F24EC00AB6216 /* CustomUIs */,
-				8369E54E251F129200AB6216 /* JSONFiles */,
-				836965B8251DD75700810174 /* WelcomeController.swift */,
-				8369E57C251F31DD00AB6216 /* LoggingController.swift */,
-				8369E577251F255F00AB6216 /* RegisterationController.swift */,
+				8369E57F251F344000AB6216 /* Authentication arch */,
 				8369E53A251E898F00AB6216 /* Model */,
 				836965BA251DD75700810174 /* Main.storyboard */,
 				836965BD251DD75900810174 /* Assets.xcassets */,
@@ -120,6 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				83696609251DDCD300810174 /* Extentions.swift */,
+				8369E56F251F24EC00AB6216 /* CustomUIs */,
+				8369E54E251F129200AB6216 /* JSONFiles */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -151,6 +149,16 @@
 				8369E574251F252C00AB6216 /* CustomContainerView.swift */,
 			);
 			path = CustomUIs;
+			sourceTree = "<group>";
+		};
+		8369E57F251F344000AB6216 /* Authentication arch */ = {
+			isa = PBXGroup;
+			children = (
+				836965B8251DD75700810174 /* WelcomeController.swift */,
+				8369E57C251F31DD00AB6216 /* LoggingController.swift */,
+				8369E577251F255F00AB6216 /* RegisterationController.swift */,
+			);
+			path = "Authentication arch";
 			sourceTree = "<group>";
 		};
 		8B5971168837B2458405BCE6 /* Frameworks */ = {

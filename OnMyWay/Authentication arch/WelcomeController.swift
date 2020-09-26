@@ -51,17 +51,34 @@ class WelcomeController: UIViewController {
         return label
     }()
     
+    private lazy var googleIcon: UIImageView = UIImageView(image: #imageLiteral(resourceName: "471px-Google__G__Logo.svg"))
+    private lazy var appleIcon: UIImageView = UIImageView(image: #imageLiteral(resourceName: "ezgif"))
+    private lazy var phoneIcon: UIImageView = UIImageView(image: UIImage(systemName: "phone"))
+    private lazy var mailIcon: UIImageView = UIImageView(image: UIImage(systemName: "envelope.fill"))
     
+    private lazy var socalStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [googleIcon, appleIcon, phoneIcon,mailIcon])
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 10
+        stackView.setDimensions(height: 20, width: 100)
+        stackView.isUserInteractionEnabled = true
+        stackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleLoggingTapped)))
+        return stackView
+    }()
     
     private lazy var registerButton = createButton(tag: 0, title: "Register",
                                                    backgroundColor: .blueLightBackground,
                                                    fontColor: .blueLightIcon)
     
     private lazy var loginButton: UIButton = {
-        let button = createButton(tag: 1, title: "Login",
+        let button = createButton(tag: 1, title: "  Login with ",
                                   backgroundColor: .backgroundGreen,
                                   fontColor: .greenIcon)
         button.addTarget(self, action: #selector(handleLoggingTapped), for: .touchUpInside)
+        button.contentHorizontalAlignment = .left
+        button.addSubview(socalStackView)
+        socalStackView.centerY(inView: button, leftAnchor: button.titleLabel?.rightAnchor, paddingLeft: 10)
         return button
     }()
     
@@ -70,14 +87,14 @@ class WelcomeController: UIViewController {
                                                        fontColor: .redIcon)
     
     
-    
-    
+
     private lazy var stackButtons: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [registerButton, loginButton, browsAsGuestButton])
         stackView.axis = .vertical
         stackView.spacing = 30
         stackView.distribution = .fill
         stackView.widthAnchor.constraint(equalToConstant: 250).isActive = true
+        [phoneIcon, mailIcon].forEach{$0.tintColor = .black}
         return stackView
     }()
     
@@ -99,9 +116,9 @@ class WelcomeController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.navigationBar.isHidden = true
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseInOut) {
-            self.buttonsContainerView.transform = .identity
-            self.buttonsContainerView.alpha = 1
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseInOut) {
+            self.stackButtons.transform = .identity
+            self.stackButtons.alpha = 1
         }
     }
     
@@ -124,14 +141,21 @@ class WelcomeController: UIViewController {
     
     @objc func handleLoggingTapped(){
         let loggingController = LoggingController()
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseInOut) {
-            self.buttonsContainerView.alpha = 0
-            self.buttonsContainerView.transform = .init(translationX: 0, y: 200)
-        } completion: { [weak self] _ in
-            self?.navigationController?.pushViewController(loggingController, animated: true)
+        animateView { [weak self] isFinished in
+            if isFinished {
+                self?.navigationController?.pushViewController(loggingController, animated: true)
+                self?.stackButtons.alpha = 0
+            }
         }
-
     }
+    
+    func animateView(completion: ((Bool) -> Void)?){
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [.curveEaseOut, .allowUserInteraction], animations: {
+            self.stackButtons.alpha = 0
+            self.stackButtons.transform = .init(translationX: 0, y: 100)
+        }, completion: completion)
+    }
+    
     
     func createButton(tag: Int, title: String, backgroundColor: UIColor, fontColor: UIColor) -> UIButton {
         let button = UIButton(type: .system)
