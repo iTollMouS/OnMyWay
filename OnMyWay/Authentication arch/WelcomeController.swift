@@ -86,8 +86,6 @@ class WelcomeController: UIViewController {
                                                        backgroundColor: .redBackground,
                                                        fontColor: .redIcon)
     
-    
-    
     private lazy var stackButtons: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [registerButton, loginButton, browsAsGuestButton])
         stackView.axis = .vertical
@@ -111,6 +109,8 @@ class WelcomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        print("DEBUG: iPhone Pro width \(UIScreen.main.bounds.width)")
+        print("DEBUG: iPhone Pro height \(UIScreen.main.bounds.height)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
