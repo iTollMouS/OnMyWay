@@ -87,7 +87,7 @@ class WelcomeController: UIViewController {
                                                        fontColor: .redIcon)
     
     
-
+    
     private lazy var stackButtons: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [registerButton, loginButton, browsAsGuestButton])
         stackView.axis = .vertical
@@ -137,7 +137,7 @@ class WelcomeController: UIViewController {
         buttonsContainerView.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,
                                     right: view.rightAnchor, paddingLeft: 20, paddingRight: 20)
     }
- 
+    
     
     @objc func handleLoggingTapped(){
         let loggingController = LoggingController()
@@ -155,7 +155,6 @@ class WelcomeController: UIViewController {
             self.stackButtons.transform = .init(translationX: 0, y: 100)
         }, completion: completion)
     }
-    
     
     func createButton(tag: Int, title: String, backgroundColor: UIColor, fontColor: UIColor) -> UIButton {
         let button = UIButton(type: .system)
