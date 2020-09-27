@@ -75,6 +75,7 @@ class LoggingController: UIViewController {
     private lazy var emailContainerView = CustomContainerView(image:  UIImage(systemName: "envelope"),
                                                               textField: emailTextField, iconTintColor: #colorLiteral(red: 0.7803921569, green: 0.662745098, blue: 0.5490196078, alpha: 1),
                                                               dividerViewColor: .black, setViewHeight: 50)
+    
     private let passwordTextField = CustomTextField(textColor: #colorLiteral(red: 0.7803921569, green: 0.662745098, blue: 0.5490196078, alpha: 1), placeholder: "Password",
                                                     placeholderColor: .white, isSecure: true)
     private lazy var passwordContainerView = CustomContainerView(image:  UIImage(systemName: "lock"),
@@ -244,15 +245,14 @@ extension LoggingController : GIDSignInDelegate {
                             location: .top, presentingDirection: .vertical, dismissingDirection: .vertical,
                             sender: self)
         }
-//        AuthService.signInWithGoogle(didSignInfo: user) { (error) in
-//            if let error = error {
-//                self.showAlertMessage( nil ,error.localizedDescription)
-//                return
-//            }
-//            self.removeBlurView()
-//            self.showLoader(false)
-//            self.delegate?.authenticationComplete()
-//        }
+        AuthService.signInWithGoogle(didSignInfo: user) { (error) in
+            if let error = error {
+                self.showAlertMessage( nil ,error.localizedDescription)
+                return
+            }
+            self.removeBlurView()
+            self.showLoader(false)
+        }
     }
 }
 

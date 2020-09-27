@@ -67,9 +67,13 @@ class WelcomeController: UIViewController {
         return stackView
     }()
     
-    private lazy var registerButton = createButton(tag: 0, title: "Register",
-                                                   backgroundColor: .blueLightBackground,
-                                                   fontColor: .blueLightIcon)
+    private lazy var registerButton: UIButton = {
+        let button = createButton(tag: 0, title: "Register",
+                                  backgroundColor: .blueLightBackground,
+                                  fontColor: .blueLightIcon)
+        button.addTarget(self, action: #selector(handleRegisterTapped), for: .touchUpInside)
+        return button
+    }()
     
     private lazy var loginButton: UIButton = {
         let button = createButton(tag: 1, title: "  Login with ",
@@ -147,6 +151,11 @@ class WelcomeController: UIViewController {
                 self?.stackButtons.alpha = 0
             }
         }
+    }
+    
+    @objc func handleRegisterTapped(){
+        let registerationController  = RegisterationController()
+        navigationController?.pushViewController(registerationController, animated: true)
     }
     
     func animateView(completion: ((Bool) -> Void)?){

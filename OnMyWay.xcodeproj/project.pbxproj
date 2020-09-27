@@ -29,6 +29,7 @@
 		8369E58E251F5BBE00AB6216 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E58D251F5BBE00AB6216 /* AuthService.swift */; };
 		8369E597251F683300AB6216 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E596251F683300AB6216 /* Service.swift */; };
 		8369E59D251F98EA00AB6216 /* AuthenticationPhoneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E59C251F98EA00AB6216 /* AuthenticationPhoneController.swift */; };
+		8369E5A0251F9B6400AB6216 /* sendingemail.json in Resources */ = {isa = PBXBuildFile; fileRef = 8369E59F251F9B6400AB6216 /* sendingemail.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		8369E58D251F5BBE00AB6216 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		8369E596251F683300AB6216 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		8369E59C251F98EA00AB6216 /* AuthenticationPhoneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationPhoneController.swift; sourceTree = "<group>"; };
+		8369E59F251F9B6400AB6216 /* sendingemail.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sendingemail.json; sourceTree = "<group>"; };
 		99C3F803AC42488C58AEEA7D /* Pods_OnMyWay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnMyWay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -141,6 +143,7 @@
 			children = (
 				8369E561251F136300AB6216 /* delivery_address_green.json */,
 				8369E568251F138600AB6216 /* hand_sanitizer.json */,
+				8369E59F251F9B6400AB6216 /* sendingemail.json */,
 				8369E566251F138600AB6216 /* height_measure_tape.json */,
 				8369E567251F138600AB6216 /* package_delivery.json */,
 				8369E569251F138700AB6216 /* width_measure_tape.json */,
@@ -251,6 +254,7 @@
 				836965C1251DD75900810174 /* LaunchScreen.storyboard in Resources */,
 				8369E564251F136300AB6216 /* delivery_home.json in Resources */,
 				8369E56C251F138700AB6216 /* hand_sanitizer.json in Resources */,
+				8369E5A0251F9B6400AB6216 /* sendingemail.json in Resources */,
 				83696606251DD8E600810174 /* GoogleService-Info.plist in Resources */,
 				8369E56B251F138700AB6216 /* package_delivery.json in Resources */,
 				836965BE251DD75900810174 /* Assets.xcassets in Resources */,

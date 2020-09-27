@@ -6,14 +6,172 @@
 //
 
 import UIKit
+import Lottie
+import Firebase
+import FirebaseAuth
 
 class AuthenticationPhoneController: UIViewController {
-
+    
+    private lazy var animation = Animation.named("sendingemail")
+    private lazy var animationView = AnimationView(animation: animation)
+    private let userDefault = UserDefaults.standard
+    
+    private lazy var infoLabel: UILabel = {
+        let label = UILabel()
+        let attributedText = NSMutableAttributedString(string: "Enter your phone number",
+                                                       attributes: [.foregroundColor : UIColor.black, .font: UIFont.boldSystemFont(ofSize: 26)])
+        attributedText.append(NSMutableAttributedString(string: "\nWe will send you a code to verify your phone number",
+                                                        attributes: [.foregroundColor : UIColor.black, .font: UIFont.systemFont(ofSize: 16)]))
+        label.attributedText = attributedText
+        label.setDimensions(height: 160, width: 300)
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private lazy var phoneNumberTextField: UITextField = {
+        let textField = UITextField()
+        textField.textAlignment = .left
+        textField.textColor = .black
+        let attributedPlaceholder = NSAttributedString(string: "05XXXXXXXX",
+                                                       attributes: [.foregroundColor : UIColor.black.withAlphaComponent(0.4)])
+        textField.attributedPlaceholder = attributedPlaceholder
+        textField.layer.cornerRadius = 40 / 2
+        textField.setHeight(height: 40)
+        textField.delegate = self
+        return textField
+    }()
+    
+    private lazy var verificationCodeTextField: UITextField = {
+        let textField = UITextField()
+        textField.textAlignment = .left
+        let attributedPlaceholder = NSAttributedString(string: "XXXX",
+                                                       attributes: [.foregroundColor : UIColor.black.withAlphaComponent(0.4)])
+        textField.attributedPlaceholder = attributedPlaceholder
+        textField.textColor = .black
+        textField.layer.cornerRadius = 40 / 2
+        textField.setHeight(height: 40)
+        return textField
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [infoLabel,
+                                                       phoneNumberTextField,
+                                                       verificationCodeTextField,
+                                                       requestOPTButton,
+                                                       verifyOPTButton])
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.spacing = 10
+        
+        return stackView
+    }()
+    
+    private lazy var requestOPTButton: UIButton = {
+        let button = UIButton(type: .system)
+//        button.isEnabled = false
+        button.setTitle("Send Text Message", for: .normal)
+        button.setTitleColor(#colorLiteral(red: 0.9019607843, green: 0.9019607843, blue: 0.9058823529, alpha: 1), for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.7803921569, green: 0.662745098, blue: 0.5490196078, alpha: 1)
+        button.titleLabel?.font = .systemFont(ofSize: 20)
+        button.setHeight(height: 60)
+        button.layer.cornerRadius = 60 / 2
+        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
+//        button.transform = .init(scaleX: 0.01, y: 0.01)
+        return button
+    }()
+    
+    private lazy var verifyOPTButton: UIButton = {
+        let button = UIButton(type: .system)
+//        button.isEnabled = false
+        button.setTitle("Send Text Message", for: .normal)
+        button.setTitleColor(#colorLiteral(red: 0.9019607843, green: 0.9019607843, blue: 0.9058823529, alpha: 1), for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.7803921569, green: 0.662745098, blue: 0.5490196078, alpha: 1)
+        button.titleLabel?.font = .systemFont(ofSize: 20)
+        button.setHeight(height: 60)
+        button.layer.cornerRadius = 60 / 2
+        button.addTarget(self, action: #selector(verify), for: .touchUpInside)
+//        button.transform = .init(scaleX: 0.01, y: 0.01)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .blueLightBackground
+        
+        configureUI()
+        self.hideKeyboardWhenTouchOutsideTextField()
     }
+    
+    override func viewDidLayoutSubviews() {
+        view.layer.configureGradientBackground(#colorLiteral(red: 0.9019607843, green: 0.9019607843, blue: 0.9058823529, alpha: 1),#colorLiteral(red: 0.7803921569, green: 0.662745098, blue: 0.5490196078, alpha: 1))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+    }
+    
+    func configureUI(){
+        view.addSubview(animationView)
+        animationView.centerX(inView: view, topAnchor: view.topAnchor, paddingTop: 10)
+        animationView.setDimensions(height: 180, width: view.frame.width)
+        view.addSubview(stackView)
+        stackView.centerX(inView: view, topAnchor: animationView.bottomAnchor, paddingTop: -20)
+        stackView.anchor(left: view.leftAnchor, right: view.rightAnchor, paddingLeft: 30, paddingRight: 30 , height: 300)
+        
+        phoneNumberTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+    }
+    
+    @objc func textDidChange(_ sender: UITextField){
+//        guard let textCount = sender.text?.count else { return }
+//        if textCount == 10 {
+//            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn) {
+//                self.requestOPTButton.setTitle("Send Text Message", for: .normal)
+//                self.requestOPTButton.isEnabled = true
+//                self.requestOPTButton.transform = .identity
+//            }
+//        } else {
+//
+//            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn) {
+//                self.requestOPTButton.setTitle("", for: .normal)
+//                self.requestOPTButton.isEnabled = false
+//                self.requestOPTButton.transform = .init(scaleX: 0.01, y: 0.01)
+//            }
+//        }
+    }
+    
+    
+    
+    @objc func handleRegister(){
+        guard let phone = phoneNumberTextField.text else { return }
+        PhoneAuthProvider.provider().verifyPhoneNumber(phone, uiDelegate: nil) { (verificationID, error) in
+            if let error = error {
+                self.showAlertMessage(nil,error.localizedDescription)
+                return
+            }
+            
+            guard let verificationID = verificationID else {return}
+            self.userDefault.setValue(verificationID, forKey: "verificationID")
+            self.userDefault.synchronize()
+        }
+    }
+    
+    @objc func verify(){
+        guard let verificationCode = verificationCodeTextField.text else { return }
+        guard let verificationID = userDefault.string(forKey: "verificationID") else { return }
+        let credentials = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: verificationCode)
+        Auth.auth().signIn(with: credentials) { (authResult, error) in
+            if let error = error {
+                self.showAlertMessage(nil,error.localizedDescription)
+                return
+            }
+            self.showAlertMessage("Success!!", "\(authResult?.user.uid ?? "")")
+        }
+    }
+    
+}
 
+extension AuthenticationPhoneController: UITextFieldDelegate {
+    
 
+    
 }
