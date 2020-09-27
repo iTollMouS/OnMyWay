@@ -23,6 +23,13 @@ class HomeController: UIViewController {
         return label
     }()
     
+    private let blurView : UIVisualEffectView = {
+        let blurView = UIBlurEffect(style: .regular)
+        let view = UIVisualEffectView(effect: blurView)
+        return view
+    }()
+  
+    
     private lazy var travelContainerView = createImageView(withImage: #imageLiteral(resourceName: "rosebox-BFdSCxmqvYc-unsplash"))
     private lazy var sendPackageContainerView = createImageView(withImage: #imageLiteral(resourceName: "sendPackagePhoto"))
     
@@ -87,6 +94,10 @@ class HomeController: UIViewController {
         bottomSendPackageView.anchor(left: sendPackageContainerView.leftAnchor, bottom: sendPackageContainerView.bottomAnchor, right: sendPackageContainerView.rightAnchor)
         travelContainerView.addSubview(bottomTravelView)
         bottomTravelView.anchor(left: travelContainerView.leftAnchor, bottom: travelContainerView.bottomAnchor, right: travelContainerView.rightAnchor)
+        
+        view.addSubview(blurView)
+        blurView.anchor(top: view.topAnchor, left: view.leftAnchor,
+                        bottom: view.safeAreaLayoutGuide.topAnchor, right: view.rightAnchor)
         
     }
     
