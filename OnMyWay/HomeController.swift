@@ -23,23 +23,32 @@ class HomeController: UIViewController {
         return label
     }()
     
+    private lazy var travelContainerView = createImageView(withImage: #imageLiteral(resourceName: "rosebox-BFdSCxmqvYc-unsplash"))
+    private lazy var sendPackageContainerView = createImageView(withImage: #imageLiteral(resourceName: "sendPackagePhoto"))
     
-    private lazy var travelContainerView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.cornerRadius = 20
-        imageView.image = #imageLiteral(resourceName: "rosebox-BFdSCxmqvYc-unsplash")
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        return imageView
+    private lazy var travelButton: UIButton = {
+        let button = createButton(withTitle: "Travel")
+        button.addTarget(self, action: #selector(handleTravelTapped), for: .touchUpInside)
+        return button
+    }()
+    private lazy var sendButton = createButton(withTitle: "Send Package")
+    
+    private lazy var bottomSendPackageView: UIView = {
+        let view = UIView()
+        view.setHeight(height: 200)
+        return view
     }()
     
-    private lazy var sendPackageContainerView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.cornerRadius = 20
-        imageView.image = #imageLiteral(resourceName: "sendPackagePhoto")
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        return imageView
+    private lazy var bottomTravelView: UIView = {
+        let view = UIView()
+        view.addSubview(travelButton)
+        travelButton.centerInSuperview()
+        travelButton.setDimensions(height: 50, width: 150)
+        travelButton.layer.cornerRadius = 50 / 2
+        view.setHeight(height: 100)
+        view.isUserInteractionEnabled = true
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        return view
     }()
     
     private lazy var stackView: UIStackView = {
@@ -51,11 +60,7 @@ class HomeController: UIViewController {
         return stackView
     }()
     
-    private lazy var bottomSendPackageView: UIView = {
-        let view = UIView()
-        view.setHeight(height: 200)
-        return view
-    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,8 +69,9 @@ class HomeController: UIViewController {
         configureUI()
     }
     
-    override func viewDidLayoutSubviews() {
-        bottomSendPackageView.layer.configureGradientBackground( UIColor.clear.cgColor, UIColor.black.cgColor)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        navigationController?.navigationBar.isHidden = true
     }
     
     func configureUI(){
@@ -76,9 +82,11 @@ class HomeController: UIViewController {
         view.addSubview(stackView)
         stackView.centerX(inView: view, topAnchor: titleLabel.bottomAnchor, paddingTop: 16)
         stackView.anchor(left: view.leftAnchor, right: view.rightAnchor, paddingLeft: 12, paddingRight: 12)
+        
         sendPackageContainerView.addSubview(bottomSendPackageView)
         bottomSendPackageView.anchor(left: sendPackageContainerView.leftAnchor, bottom: sendPackageContainerView.bottomAnchor, right: sendPackageContainerView.rightAnchor)
-        sendPackageContainerView.layoutIfNeeded()
+        travelContainerView.addSubview(bottomTravelView)
+        bottomTravelView.anchor(left: travelContainerView.leftAnchor, bottom: travelContainerView.bottomAnchor, right: travelContainerView.rightAnchor)
         
     }
     
@@ -115,5 +123,32 @@ class HomeController: UIViewController {
         }
     }
     
+    
+    @objc func handleTravelTapped(){
+        let newTripController = NewTripController()
+        navigationController?.pushViewController(newTripController, animated: true)
+    }
+    
+    func createImageView(withImage image: UIImage) -> UIView {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 20
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
+        return imageView
+    }
+    
+    func createButton(withTitle title: String) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setTitle("\(title)\t", for: .normal)
+        button.backgroundColor = .clear
+        button.semanticContentAttribute = UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 26)
+        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        button.tintColor = .white
+        return button
+    }
     
 }

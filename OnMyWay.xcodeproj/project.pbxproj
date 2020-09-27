@@ -31,6 +31,7 @@
 		8369E59D251F98EA00AB6216 /* AuthenticationPhoneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E59C251F98EA00AB6216 /* AuthenticationPhoneController.swift */; };
 		8369E5A0251F9B6400AB6216 /* sendingemail.json in Resources */ = {isa = PBXBuildFile; fileRef = 8369E59F251F9B6400AB6216 /* sendingemail.json */; };
 		8369E5A72520786700AB6216 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E5A62520786700AB6216 /* HomeController.swift */; };
+		8369E5D82520911900AB6216 /* NewTripController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E5D72520911800AB6216 /* NewTripController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		8369E59C251F98EA00AB6216 /* AuthenticationPhoneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationPhoneController.swift; sourceTree = "<group>"; };
 		8369E59F251F9B6400AB6216 /* sendingemail.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sendingemail.json; sourceTree = "<group>"; };
 		8369E5A62520786700AB6216 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		8369E5D72520911800AB6216 /* NewTripController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTripController.swift; sourceTree = "<group>"; };
 		99C3F803AC42488C58AEEA7D /* Pods_OnMyWay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnMyWay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -112,6 +114,7 @@
 				836965B4251DD75700810174 /* AppDelegate.swift */,
 				836965B6251DD75700810174 /* SceneDelegate.swift */,
 				8369E5A62520786700AB6216 /* HomeController.swift */,
+				8369E5D72520911800AB6216 /* NewTripController.swift */,
 				8369E58C251F5BA600AB6216 /* API */,
 				8369E57F251F344000AB6216 /* Authentication arch */,
 				8369E53A251E898F00AB6216 /* Model */,
@@ -341,6 +344,7 @@
 				8369E57D251F31DD00AB6216 /* LoggingController.swift in Sources */,
 				836965B7251DD75700810174 /* SceneDelegate.swift in Sources */,
 				8369E5A72520786700AB6216 /* HomeController.swift in Sources */,
+				8369E5D82520911900AB6216 /* NewTripController.swift in Sources */,
 				8369E597251F683300AB6216 /* Service.swift in Sources */,
 				8369E58E251F5BBE00AB6216 /* AuthService.swift in Sources */,
 				8369E571251F24FF00AB6216 /* CustomTextField.swift in Sources */,
