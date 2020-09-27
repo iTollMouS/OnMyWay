@@ -114,7 +114,7 @@
 				836965B4251DD75700810174 /* AppDelegate.swift */,
 				836965B6251DD75700810174 /* SceneDelegate.swift */,
 				8369E5A62520786700AB6216 /* HomeController.swift */,
-				8369E5D72520911800AB6216 /* NewTripController.swift */,
+				8369E5DA2520C2B800AB6216 /* Trip Arch */,
 				8369E58C251F5BA600AB6216 /* API */,
 				8369E57F251F344000AB6216 /* Authentication arch */,
 				8369E53A251E898F00AB6216 /* Model */,
@@ -185,6 +185,14 @@
 				8369E596251F683300AB6216 /* Service.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		8369E5DA2520C2B800AB6216 /* Trip Arch */ = {
+			isa = PBXGroup;
+			children = (
+				8369E5D72520911800AB6216 /* NewTripController.swift */,
+			);
+			path = "Trip Arch";
 			sourceTree = "<group>";
 		};
 		8B5971168837B2458405BCE6 /* Frameworks */ = {

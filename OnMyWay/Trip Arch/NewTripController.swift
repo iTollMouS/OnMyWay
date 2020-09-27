@@ -52,11 +52,13 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         button.setDimensions(height: 50, width: 50)
-        button.tintColor = .blueLightIcon
-        button.backgroundColor = .white
+        button.tintColor = .white
         button.layer.cornerRadius = 50 / 2
-        button.clipsToBounds = true
+        button.backgroundColor = UIColor.blueLightIcon.withAlphaComponent(0.8)
         button.addTarget(self, action: #selector(handleDismissal), for: .touchUpInside)
+        button.clipsToBounds = true
+        button.layer.masksToBounds = false
+        button.setupShadow(opacity: 0.5, radius: 3, offset: CGSize(width: 0.0, height: 8.0), color: .black)
         return button
     }()
     
@@ -200,9 +202,10 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
     
     @objc func keyboardWillShow(){
         if scrollView.frame.origin.y == 0 {
-            self.scrollView.frame.origin.y -= UIScreen.main.bounds.height > 800 ? 50 : 130
+            self.scrollView.frame.origin.y -= UIScreen.main.bounds.height > 830 ? 20 : 100
         }
     }
+    
     @objc func keyboardWillHide(){
         if scrollView.frame.origin.y != 0 {
             self.scrollView.frame.origin.y = 0
