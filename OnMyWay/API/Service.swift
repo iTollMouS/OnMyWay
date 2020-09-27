@@ -15,12 +15,7 @@ import FirebaseABTesting
 import FirebaseInstanceID
 import FirebaseRemoteConfig
 
-struct AuthCredentials {
-    let email: String
-    let password: String
-    let fullname: String
-    let profileImageView: UIImage
-}
+
 
 struct Service {
     

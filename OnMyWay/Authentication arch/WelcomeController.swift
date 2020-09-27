@@ -155,7 +155,12 @@ class WelcomeController: UIViewController {
     
     @objc func handleRegisterTapped(){
         let registerationController  = RegisterationController()
-        navigationController?.pushViewController(registerationController, animated: true)
+        animateView { [weak self] isFinished in
+            if isFinished {
+                self?.navigationController?.pushViewController(registerationController, animated: true)
+                self?.stackButtons.alpha = 0
+            }
+        }
     }
     
     func animateView(completion: ((Bool) -> Void)?){

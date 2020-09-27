@@ -16,18 +16,54 @@ import FirebaseRemoteConfig
 import GoogleSignIn
 
 
+struct AuthCredentials {
+    let email: String
+    let password: String
+    let fullname: String
+    let profileImageView: UIImage
+}
+
 struct AuthService {
+    
+    
+    static func resetPassword(withEmail email: String, completion: @escaping(Error?) -> Void){
+        Auth.auth().sendPasswordReset(withEmail: email, completion: completion)
+    }
+    
+    static func logUserIn(withEmail email: String, password: String, completion: AuthDataResultCallback?){
+        Auth.auth().signIn(withEmail: email, password: password, completion: completion)
+    }
+    
+    static func registerUser(withCredentials credentials: AuthCredentials, completion: @escaping((Error?) -> Void)){
+        Service.uploadImage(withImage: credentials.profileImageView) { imageUrl in
+            Auth.auth().createUser(withEmail: credentials.email, password: credentials.password) { (authResult, error) in
+                if let error = error {
+                    print("DEBUG: error while register new user \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let user = authResult else {return}
+                guard let fcmToken = Messaging.messaging().fcmToken else {return}
+                let userData = ["userID": user.user.uid,
+                                "userFcmToken": fcmToken,
+                                "email": credentials.email,
+                                "profileImageUrl": imageUrl,
+                                "password": credentials.password,
+                                "fullname": credentials.fullname,
+                                "timestamp": Timestamp(date: Date())] as [String : Any]
+                emailVerification(withEmail: credentials.email, userResult: user)
+                Firestore.firestore().collection("users").document(user.user.uid).setData(userData, completion: completion)
+                
+            }
+            
+        }
+        
+    }
     
     static func signInWithAppleID(credential: AuthCredential, fullname: String, imageUrl: String, fcmToken: String, completion: @escaping(Error?) -> Void){
         Auth.auth().signIn(with: credential) { (authResult, error) in
             
-            print("DEBUG: \(authResult?.user.uid)")
-            print("DEBUG: \(fullname)")
-            print("DEBUG: \(fcmToken)")
-            print("DEBUG: \(imageUrl)")
-            print("DEBUG: \(authResult?.user.email)")
             guard let user = authResult?.user else {return}
-            
             let userData = ["userID": user.uid,
                             "userFcmToken": fcmToken,
                             "email": user.email,
@@ -69,6 +105,15 @@ struct AuthService {
                     completion(error)
                 }
                 
+            }
+        }
+    }
+    
+    static func emailVerification(withEmail: String, userResult: AuthDataResult){
+        userResult.user.sendEmailVerification { error in
+            if let error = error {
+                print("DEBUG: error while verifying email\(error.localizedDescription)")
+                return
             }
         }
     }

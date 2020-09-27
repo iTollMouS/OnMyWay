@@ -108,6 +108,7 @@ class LoggingController: UIViewController {
         button.setDimensions(height: 50, width: 300)
         button.layer.cornerRadius = 50 / 2
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        button.addTarget(self, action: #selector(handleLoggingTaped), for: .touchUpInside)
         return button
     }()
     
@@ -225,6 +226,18 @@ class LoggingController: UIViewController {
         GIDSignIn.sharedInstance()?.signIn()
     }
     
+    @objc func handleLoggingTaped(){
+        guard let email = emailTextField.text else { return  }
+        guard let password = passwordTextField.text else { return  }
+        AuthService.logUserIn(withEmail: email, password: password) { (authResult, error) in
+            if let error = error {
+                self.showAlertMessage("Error", error.localizedDescription)
+                return
+            }
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+    }
     
     
     @objc func handleDismissal(){
