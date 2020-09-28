@@ -9,6 +9,11 @@ import UIKit
 import FSCalendar
 
 
+protocol DateAndTimeControllerDelegate: class {
+    func dismissDateAndTimeController(_ view: DateAndTimeController)
+}
+
+
 class DateAndTimeController: UIViewController, UIScrollViewDelegate {
     
     
@@ -16,6 +21,8 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
     private lazy var contentSizeView = CGSize(width: self.view.frame.width,
                                               height: self.view.frame.height + 200)
     
+    
+    weak var delegate: DateAndTimeControllerDelegate?
     
     private lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView(frame: .zero)
@@ -43,12 +50,15 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Choose your date and time of your travel"
+        label.text = "Choose date and time of your travel"
         label.textAlignment = .center
         label.textColor = .blueLightIcon
         label.font = UIFont.systemFont(ofSize: 18)
         label.numberOfLines = 0
         label.setHeight(height: 80)
+        label.clipsToBounds = true
+        label.layer.masksToBounds = false
+        label.setupShadow(opacity: 0.2, radius: 3, offset: CGSize(width: 0.0, height: 8.0), color: .black)
         return label
     }()
     
@@ -81,22 +91,30 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
         calendarView.appearance.titleWeekendColor = .black // color your weekend
         calendarView.appearance.titleDefaultColor = .blueLightIcon // color your week days
         calendarView.appearance.selectionColor = .blueLightIcon
+        calendarView.clipsToBounds = true
+        calendarView.layer.masksToBounds = false
+        calendarView.layer.cornerRadius = 20
+        calendarView.setupShadow(opacity: 0.2, radius: 3, offset: CGSize(width: 0.0, height: 8.0), color: .black)
         return calendarView
     }()
     
-    private lazy var dateTextField = CustomTextField(textColor: .blueLightIcon, placeholder: "clickhere",
-                                                     placeholderColor: .black, isSecure: false)
+    private lazy var dateTextField: UITextField = {
+        let textField = CustomTextField(textColor: .blueLightIcon, placeholder: "Please choose your date from calendar above",
+                                        placeholderColor: .black, isSecure: false)
+        textField.adjustsFontSizeToFitWidth = true
+        return textField
+    }()
     
     private lazy var dateTextContainerView = CustomContainerView(image: UIImage(systemName: "calendar.badge.plus"),
                                                                  textField: dateTextField, iconTintColor: .blueLightIcon,
-                                                                 dividerViewColor: .black, setViewHeight: 50)
+                                                                 dividerViewColor: .blueLightIcon, setViewHeight: 50)
     
     private lazy var timeTextField = CustomTextField(textColor: .blueLightIcon, placeholder: "Click here to configure your time",
                                                      placeholderColor: .black, isSecure: false)
     
     private lazy var timeContainerView = CustomContainerView(image: UIImage(systemName: "clock.fill"),
                                                              textField: timeTextField, iconTintColor: .blueLightIcon,
-                                                             dividerViewColor: .black, setViewHeight: 50)
+                                                             dividerViewColor: .blueLightIcon, setViewHeight: 50)
     
     
     private lazy var packageInfoTextView: UITextView = {
@@ -106,6 +124,7 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
         textView.setHeight(height: 100)
         textView.backgroundColor = .white
         textView.layer.cornerRadius = 10
+        textView.font = UIFont.systemFont(ofSize: 12)
         textView.clipsToBounds = true
         return textView
     }()
@@ -137,19 +156,19 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
     private lazy var submitTripe: UIButton = {
         let button = UIButton(type: .system)
         button.setHeight(height: 60)
-        button.backgroundColor = .green
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Submit new one ", for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
         button.backgroundColor = UIColor.blueLightIcon.withAlphaComponent(0.8)
         button.layer.cornerRadius = 60 / 2
         button.clipsToBounds = true
+        button.addTarget(self, action: #selector(handleSubmitNewTrip), for: .touchUpInside)
         return button
     }()
     
     private lazy var dismissView: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+        button.setImage(UIImage(systemName: "arrow.down"), for: .normal)
         button.setDimensions(height: 50, width: 50)
         button.tintColor = .white
         button.layer.cornerRadius = 50 / 2
@@ -167,11 +186,53 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
         return view
     }()
     
+    private lazy var timestampPickerView: UIDatePicker = {
+        let pickerView = UIDatePicker()
+        pickerView.datePickerMode = .time
+        pickerView.preferredDatePickerStyle = .wheels
+        pickerView.addTarget(self, action: #selector(handleTimeSelected(_ :)), for: .valueChanged)
+        return pickerView
+    }()
+    
+    private lazy var toolbar: UIToolbar = {
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0))
+        let flexButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let barTitle = UIBarButtonItem(title: "اختر وقت السفر", style: .plain, target: nil, action: nil)
+        let dismissButton = UIBarButtonItem(title: "تم", style: .plain, target: self,
+                                            action: #selector(handlePickViewDismissal))
+        barTitle.isEnabled = false
+        barTitle.tintColor = .white
+        toolBar.barStyle = .black
+        toolBar.isTranslucent = true
+        toolBar.sizeToFit()
+        toolBar.setItems([barTitle,flexButton, dismissButton], animated: true)
+        toolBar.isUserInteractionEnabled = true
+        return toolBar
+    }()
+    
+    
+    private lazy var placeholderLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Papers , bags , etc"
+        label.textAlignment = .left
+        label.textColor = .blueLightIcon
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 12)
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTouchOutsideTextField()
         configureUI()
+    }
+    
+    @objc func handlePickViewDismissal(){
+        timeTextField.endEditing(true)
+    }
+    
+    @objc func handleTimeSelected(_ sender: UIDatePicker){
+        timeTextField.text = sender.date.convertDate(formattedString: .timeOnly)
     }
     
     func configureUI(){
@@ -194,7 +255,23 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
                         bottom: view.safeAreaLayoutGuide.topAnchor, right: view.rightAnchor)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleTextInputChanger), name: UITextView.textDidChangeNotification, object: nil)
+        timeTextField.delegate = self
+        timeTextField.inputView = timestampPickerView
+        timeTextField.inputAccessoryView = toolbar
+        dateTextField.isUserInteractionEnabled = false
+        packageInfoTextView.addSubview(placeholderLabel)
+        placeholderLabel.anchor(top: packageInfoTextView.topAnchor, left: packageInfoTextView.leftAnchor,
+                                paddingTop: 8, paddingLeft: 8)
         
+    }
+    
+    @objc func handleSubmitNewTrip(){
+        delegate?.dismissDateAndTimeController(self)
+    }
+    
+    @objc func handleTextInputChanger(){
+        placeholderLabel.isHidden = !packageInfoTextView.text.isEmpty
     }
     
     @objc func handleDismissal(){
@@ -230,5 +307,14 @@ extension DateAndTimeController: FSCalendarDelegate {
 extension DateAndTimeController: FSCalendarDataSource {
     func minimumDate(for calendar: FSCalendar) -> Date {
         return Date()
+    }
+}
+
+extension DateAndTimeController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        guard let text = textField.text else { return  }
+        if text.isEmpty {
+            timeTextField.text = timestampPickerView.date.convertDate(formattedString: .timeOnly)
+        }
     }
 }

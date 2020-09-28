@@ -202,6 +202,7 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
     
     @objc func handleDateAndTimeTapped(){
         let dateAndTimeController = DateAndTimeController()
+        dateAndTimeController.delegate = self
         dateAndTimeController.modalPresentationStyle = .fullScreen
         present(dateAndTimeController, animated: true, completion: nil)
     }
@@ -226,4 +227,11 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
     
     
     
+}
+
+extension NewTripController: DateAndTimeControllerDelegate {
+    func dismissDateAndTimeController(_ view: DateAndTimeController) {
+        view.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+    }
 }
