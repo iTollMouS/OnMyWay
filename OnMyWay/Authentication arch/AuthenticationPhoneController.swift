@@ -146,13 +146,18 @@ class AuthenticationPhoneController: UIViewController {
     
     
     @objc func handleRegister(){
+        self.showBlurView()
+        self.showLoader(true, message: "Please wait while we send you a text message...")
         guard let phone = phoneNumberTextField.text else { return }
         PhoneAuthProvider.provider().verifyPhoneNumber("+966\(phone)", uiDelegate: nil) { (verificationID, error) in
             if let error = error {
                 self.showAlertMessage(nil,error.localizedDescription)
                 return
             }
-            
+            self.removeBlurView()
+            self.showLoader(false)
+            self.showBanner(message: "We have sent you a text message\nPlease verify once you receive it", state: .success, location: .top,
+                            presentingDirection: .vertical, dismissingDirection: .vertical, sender: self)
             guard let verificationID = verificationID else {return}
             self.userDefault.setValue(verificationID, forKey: "verificationID")
             self.userDefault.synchronize()
@@ -167,6 +172,8 @@ class AuthenticationPhoneController: UIViewController {
     }
     
     @objc func verify(){
+        self.showBlurView()
+        self.showLoader(true, message: "Please wait while we \nverify your phone number...")
         guard let verificationCode = verificationCodeTextField.text else { return }
         guard let verificationID = userDefault.string(forKey: "verificationID") else { return }
         let credentials = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: verificationCode)
@@ -175,7 +182,20 @@ class AuthenticationPhoneController: UIViewController {
                 self.showAlertMessage(nil,error.localizedDescription)
                 return
             }
-            self.showAlertMessage("Success!!", "\(authResult?.user.uid ?? "")")
+            
+            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { timer in
+                self.removeBlurView()
+                self.showLoader(false)
+            }
+            
+            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { timer in
+                self.showBanner(message: "we successfully verified your phone number!", state: .success, location: .top,
+                                presentingDirection: .vertical, dismissingDirection: .vertical, sender: self)
+            }
+                
+            Timer.scheduledTimer(withTimeInterval: 4, repeats: false) { timer in
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
     
