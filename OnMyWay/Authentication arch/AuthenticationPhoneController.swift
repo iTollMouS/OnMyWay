@@ -39,6 +39,7 @@ class AuthenticationPhoneController: UIViewController {
         textField.layer.cornerRadius = 40 / 2
         textField.setHeight(height: 40)
         textField.delegate = self
+        textField.keyboardType = .asciiCapableNumberPad
         return textField
     }()
     
@@ -51,6 +52,9 @@ class AuthenticationPhoneController: UIViewController {
         textField.textColor = .black
         textField.layer.cornerRadius = 40 / 2
         textField.setHeight(height: 40)
+        textField.delegate = self
+        textField.alpha = 0
+        textField.keyboardType = .asciiCapableNumberPad
         return textField
     }()
     
@@ -69,29 +73,29 @@ class AuthenticationPhoneController: UIViewController {
     
     private lazy var requestOPTButton: UIButton = {
         let button = UIButton(type: .system)
-//        button.isEnabled = false
-        button.setTitle("Send Text Message", for: .normal)
         button.setTitleColor(#colorLiteral(red: 0.9019607843, green: 0.9019607843, blue: 0.9058823529, alpha: 1), for: .normal)
         button.backgroundColor = #colorLiteral(red: 0.7803921569, green: 0.662745098, blue: 0.5490196078, alpha: 1)
         button.titleLabel?.font = .systemFont(ofSize: 20)
         button.setHeight(height: 60)
         button.layer.cornerRadius = 60 / 2
         button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
-//        button.transform = .init(scaleX: 0.01, y: 0.01)
+        button.setTitle("", for: .normal)
+        button.isEnabled = false
+        button.transform = .init(scaleX: 0.01, y: 0.01)
         return button
     }()
     
     private lazy var verifyOPTButton: UIButton = {
         let button = UIButton(type: .system)
-//        button.isEnabled = false
-        button.setTitle("Send Text Message", for: .normal)
         button.setTitleColor(#colorLiteral(red: 0.9019607843, green: 0.9019607843, blue: 0.9058823529, alpha: 1), for: .normal)
         button.backgroundColor = #colorLiteral(red: 0.7803921569, green: 0.662745098, blue: 0.5490196078, alpha: 1)
         button.titleLabel?.font = .systemFont(ofSize: 20)
         button.setHeight(height: 60)
         button.layer.cornerRadius = 60 / 2
         button.addTarget(self, action: #selector(verify), for: .touchUpInside)
-//        button.transform = .init(scaleX: 0.01, y: 0.01)
+        button.setTitle("", for: .normal)
+        button.isEnabled = false
+        button.transform = .init(scaleX: 0.01, y: 0.01)
         return button
     }()
     
@@ -115,35 +119,35 @@ class AuthenticationPhoneController: UIViewController {
         animationView.centerX(inView: view, topAnchor: view.topAnchor, paddingTop: 10)
         animationView.setDimensions(height: 180, width: view.frame.width)
         view.addSubview(stackView)
-        stackView.centerX(inView: view, topAnchor: animationView.bottomAnchor, paddingTop: -20)
+        stackView.centerX(inView: view, topAnchor: animationView.bottomAnchor, paddingTop: 0)
         stackView.anchor(left: view.leftAnchor, right: view.rightAnchor, paddingLeft: 30, paddingRight: 30 , height: 300)
         
         phoneNumberTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
     
     @objc func textDidChange(_ sender: UITextField){
-//        guard let textCount = sender.text?.count else { return }
-//        if textCount == 10 {
-//            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn) {
-//                self.requestOPTButton.setTitle("Send Text Message", for: .normal)
-//                self.requestOPTButton.isEnabled = true
-//                self.requestOPTButton.transform = .identity
-//            }
-//        } else {
-//
-//            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn) {
-//                self.requestOPTButton.setTitle("", for: .normal)
-//                self.requestOPTButton.isEnabled = false
-//                self.requestOPTButton.transform = .init(scaleX: 0.01, y: 0.01)
-//            }
-//        }
+        guard let textCount = sender.text?.count else { return }
+        if textCount == 10 {
+            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn) {
+                self.requestOPTButton.setTitle("Send Text Message", for: .normal)
+                self.requestOPTButton.isEnabled = true
+                self.requestOPTButton.transform = .identity
+            }
+        } else {
+
+            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn) {
+                self.requestOPTButton.setTitle("", for: .normal)
+                self.requestOPTButton.isEnabled = false
+                self.requestOPTButton.transform = .init(scaleX: 0.01, y: 0.01)
+            }
+        }
     }
     
     
     
     @objc func handleRegister(){
         guard let phone = phoneNumberTextField.text else { return }
-        PhoneAuthProvider.provider().verifyPhoneNumber(phone, uiDelegate: nil) { (verificationID, error) in
+        PhoneAuthProvider.provider().verifyPhoneNumber("+966\(phone)", uiDelegate: nil) { (verificationID, error) in
             if let error = error {
                 self.showAlertMessage(nil,error.localizedDescription)
                 return
@@ -152,6 +156,13 @@ class AuthenticationPhoneController: UIViewController {
             guard let verificationID = verificationID else {return}
             self.userDefault.setValue(verificationID, forKey: "verificationID")
             self.userDefault.synchronize()
+            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn) {
+                self.verifyOPTButton.setTitle("Verify code", for: .normal)
+                self.verifyOPTButton.isEnabled = true
+                self.verifyOPTButton.transform = .identity
+                self.verificationCodeTextField.alpha = 1
+            }
+            
         }
     }
     
@@ -171,7 +182,22 @@ class AuthenticationPhoneController: UIViewController {
 }
 
 extension AuthenticationPhoneController: UITextFieldDelegate {
-    
+ 
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        switch textField {
+        case phoneNumberTextField:
+            let newLength: Int = textField.text!.count + string.count - range.length
+            let numberOnly = NSCharacterSet.init(charactersIn: "0123456789").inverted
+            let strValid = string.rangeOfCharacter(from: numberOnly) == nil
+            return (strValid && (newLength <= 10))
+        case verificationCodeTextField:
+            let newLength: Int = textField.text!.count + string.count - range.length
+            let numberOnly = NSCharacterSet.init(charactersIn: "0123456789").inverted
+            let strValid = string.rangeOfCharacter(from: numberOnly) == nil
+            return (strValid && (newLength <= 6))
+        default:
+            return false
+        }
+    }
 
-    
 }
