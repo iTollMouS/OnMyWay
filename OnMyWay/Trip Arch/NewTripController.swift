@@ -160,6 +160,7 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
         button.backgroundColor = UIColor.blueLightIcon.withAlphaComponent(0.8)
         button.layer.cornerRadius = 50 / 2
         button.tintColor = .white
+        button.addTarget(self, action: #selector(handleDateAndTimeTapped), for: .touchUpInside)
         return button
     }()
     
@@ -197,6 +198,12 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
         blurView.anchor(top: view.topAnchor, left: view.leftAnchor,
                         bottom: view.safeAreaLayoutGuide.topAnchor, right: view.rightAnchor)
         
+    }
+    
+    @objc func handleDateAndTimeTapped(){
+        let dateAndTimeController = DateAndTimeController()
+        dateAndTimeController.modalPresentationStyle = .fullScreen
+        present(dateAndTimeController, animated: true, completion: nil)
     }
     
     

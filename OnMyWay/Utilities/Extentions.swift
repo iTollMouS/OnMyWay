@@ -299,15 +299,6 @@ extension UIViewController {
         return ret
     }
     // create gradient layer
-    func configureGradientLayer(with topColor: UIColor, bottomColor: UIColor,
-                                startPoint:NSNumber, endPoint: NSNumber) {
-        
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
-        gradientLayer.locations = [startPoint, endPoint]
-        view.layer.addSublayer(gradientLayer)
-        gradientLayer.frame = view.frame
-    }
     
 }
 
@@ -319,6 +310,16 @@ extension UIStackView{
 }
 
 extension UIView {
+    
+    func configureGradientLayer(with topColor: UIColor, bottomColor: UIColor,
+                                startPoint:NSNumber, endPoint: NSNumber) {
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
+        gradientLayer.locations = [startPoint, endPoint]
+        gradientLayer.frame = self.frame
+        self.layer.addSublayer(gradientLayer)
+    }
     
     func customAddSubViews(_ views: UIView...  ){
         views.forEach{addSubview($0)}
@@ -688,12 +689,12 @@ extension Date {
 
 extension CALayer {
     /// to apply gradient for any view with array of colors
-    public func configureGradientBackground(_ colors:CGColor...){
+    public func configureGradientBackground(_ colors:CGColor..., layerIndex: UInt32){
         let gradient = CAGradientLayer()
         let maxWidth = max(self.bounds.size.height,self.bounds.size.width)
         let squareFrame = CGRect(origin: self.bounds.origin, size: CGSize(width: maxWidth, height: maxWidth))
         gradient.frame = squareFrame
         gradient.colors = colors
-        self.insertSublayer(gradient, at: 0)
+        self.insertSublayer(gradient, at: layerIndex)
     }
 }

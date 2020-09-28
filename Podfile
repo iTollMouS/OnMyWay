@@ -15,16 +15,11 @@ pod 'Cosmos'
 pod 'ActiveLabel'
 pod 'CLTypingLabel'
 pod 'SwiftEntryKit'
-
-
-
-
+pod 'FSCalendar'
 pod 'Gallery'
 pod 'RealmSwift'
-
 pod 'ProgressHUD'
 pod 'SKPhotoBrowser'
-
 pod 'MessageKit'
 pod 'InputBarAccessoryView'
 

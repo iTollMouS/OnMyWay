@@ -32,6 +32,7 @@
 		8369E5A0251F9B6400AB6216 /* sendingemail.json in Resources */ = {isa = PBXBuildFile; fileRef = 8369E59F251F9B6400AB6216 /* sendingemail.json */; };
 		8369E5A72520786700AB6216 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E5A62520786700AB6216 /* HomeController.swift */; };
 		8369E5D82520911900AB6216 /* NewTripController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E5D72520911800AB6216 /* NewTripController.swift */; };
+		8369E5DD2520C65900AB6216 /* DateAndTimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E5DC2520C65900AB6216 /* DateAndTimeController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		8369E59F251F9B6400AB6216 /* sendingemail.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sendingemail.json; sourceTree = "<group>"; };
 		8369E5A62520786700AB6216 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		8369E5D72520911800AB6216 /* NewTripController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTripController.swift; sourceTree = "<group>"; };
+		8369E5DC2520C65900AB6216 /* DateAndTimeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeController.swift; sourceTree = "<group>"; };
 		99C3F803AC42488C58AEEA7D /* Pods_OnMyWay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnMyWay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -191,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				8369E5D72520911800AB6216 /* NewTripController.swift */,
+				8369E5DC2520C65900AB6216 /* DateAndTimeController.swift */,
 			);
 			path = "Trip Arch";
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				836965B7251DD75700810174 /* SceneDelegate.swift in Sources */,
 				8369E5A72520786700AB6216 /* HomeController.swift in Sources */,
 				8369E5D82520911900AB6216 /* NewTripController.swift in Sources */,
+				8369E5DD2520C65900AB6216 /* DateAndTimeController.swift in Sources */,
 				8369E597251F683300AB6216 /* Service.swift in Sources */,
 				8369E58E251F5BBE00AB6216 /* AuthService.swift in Sources */,
 				8369E571251F24FF00AB6216 /* CustomTextField.swift in Sources */,

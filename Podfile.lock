@@ -407,6 +407,7 @@ PODS:
   - FirebaseUI/Storage (8.5.1):
     - Firebase/Storage (~> 6.0)
     - SDWebImage (~> 5.6)
+  - FSCalendar (2.8.1)
   - Gallery (2.2.2)
   - GoogleAppMeasurement (6.8.3):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
@@ -528,6 +529,7 @@ DEPENDENCIES:
   - FirebaseFirestoreSwift
   - FirebaseUI
   - FirebaseUI/Phone
+  - FSCalendar
   - Gallery
   - GoogleSignIn
   - InputBarAccessoryView
@@ -571,6 +573,7 @@ SPEC REPOS:
     - FirebaseRemoteConfig
     - FirebaseStorage
     - FirebaseUI
+    - FSCalendar
     - Gallery
     - GoogleAppMeasurement
     - GoogleDataTransport
@@ -627,6 +630,7 @@ SPEC CHECKSUMS:
   FirebaseRemoteConfig: e40f9e084658210c4d9c341cfa9f6cab6ad4f67e
   FirebaseStorage: 33b92875a9b556824886cc7a65120c7d2cb3a8d8
   FirebaseUI: 9df84336a56f1d755ae4c37d5885c237d3084b6b
+  FSCalendar: 5245140456fcbcac5824c203b98bd8068bdfee1a
   Gallery: 634ea7d58b93fcb8e787a846febac73ec354e7d9
   GoogleAppMeasurement: 966e88df9d19c15715137bb2ddaf52373f111436
   GoogleDataTransport: b7f406340a291370045a270c599e53c6fa6ec20f
@@ -655,6 +659,6 @@ SPEC CHECKSUMS:
   SKPhotoBrowser: 343de95d89dc7913763c5dda243cc6e606e4a168
   SwiftEntryKit: 96a2fa90b2631bbbfac50d18449e9ca3d0635f13
 
-PODFILE CHECKSUM: 9b2c483a2e69a3ae5477636a88db0fa94c2fc5df
+PODFILE CHECKSUM: 75ee5b549120922703846ad36aff9d79e37ebe36
 
 COCOAPODS: 1.8.4

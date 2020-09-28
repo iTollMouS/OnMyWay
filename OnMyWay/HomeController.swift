@@ -31,7 +31,12 @@ class HomeController: UIViewController {
   
     
     private lazy var travelContainerView = createImageView(withImage: #imageLiteral(resourceName: "rosebox-BFdSCxmqvYc-unsplash"))
-    private lazy var sendPackageContainerView = createImageView(withImage: #imageLiteral(resourceName: "sendPackagePhoto"))
+    
+    private lazy var sendPackageContainerView: UIView = {
+        let view = createImageView(withImage: #imageLiteral(resourceName: "sendPackagePhoto"))
+        view.layer.configureGradientBackground(UIColor.clear.cgColor, UIColor.black.cgColor, layerIndex: 2)
+        return view
+    }()
     
     private lazy var travelButton: UIButton = {
         let button = createButton(withTitle: "Travel")
@@ -98,10 +103,9 @@ class HomeController: UIViewController {
         view.addSubview(blurView)
         blurView.anchor(top: view.topAnchor, left: view.leftAnchor,
                         bottom: view.safeAreaLayoutGuide.topAnchor, right: view.rightAnchor)
+
         
     }
-    
-    
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return .darkContent
