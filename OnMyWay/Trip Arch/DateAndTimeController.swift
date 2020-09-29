@@ -227,6 +227,10 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
         configureUI()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .darkContent
+    }
+    
     @objc func handlePickViewDismissal(){
         timeTextField.endEditing(true)
     }
@@ -250,12 +254,13 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
         contentView.addSubview(bottomContainerView)
         bottomContainerView.centerX(inView: calendarView, topAnchor: calendarView.bottomAnchor, paddingTop: 10)
         bottomContainerView.anchor(left: contentView.leftAnchor, right: contentView.rightAnchor)
-        view.addSubview(blurView)
-        blurView.anchor(top: view.topAnchor, left: view.leftAnchor,
-                        bottom: view.safeAreaLayoutGuide.topAnchor, right: view.rightAnchor)
+
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleTextInputChanger), name: UITextView.textDidChangeNotification, object: nil)
+        
+        
         timeTextField.delegate = self
         timeTextField.inputView = timestampPickerView
         timeTextField.inputAccessoryView = toolbar

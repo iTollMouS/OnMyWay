@@ -19,8 +19,6 @@ class MainTabController: UITabBarController {
     
     func configureViewControllers(){
         
-        
-        
         let homeController = HomeController()
         let homeControllerNavBar = templateNavController(image: UIImage(systemName: "car")!, rootViewController: homeController)
         
@@ -33,16 +31,16 @@ class MainTabController: UITabBarController {
         let ordersController = OrdersController()
         let ordersControllerNavBar = templateNavController(image: UIImage(systemName: "shippingbox")!, rootViewController: ordersController)
         
-        
         viewControllers = [homeControllerNavBar, ordersControllerNavBar, notificationsControllerNavBar ,profileControllerNavBar]
     }
+    
     
     
     func templateNavController(image: UIImage, rootViewController: UIViewController) -> UINavigationController {
         let navController = UINavigationController(rootViewController: rootViewController)
         navController.tabBarItem.image = image
         navController.navigationBar.barTintColor = .white
-        navController.navigationBar.barStyle = .black
+        navController.navigationBar.isTranslucent = true
         return navController
         
     }

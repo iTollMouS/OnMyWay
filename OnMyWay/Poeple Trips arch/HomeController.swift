@@ -26,13 +26,6 @@ class HomeController: UITableViewController {
         return label
     }()
     
-    //    private let blurView : UIVisualEffectView = {
-    //        let blurView = UIBlurEffect(style: .regular)
-    //        let view = UIVisualEffectView(effect: blurView)
-    //        return view
-    //    }()
-    
-    
     private lazy var travelContainerView = createImageView(withImage: #imageLiteral(resourceName: "rosebox-BFdSCxmqvYc-unsplash"))
     
     private lazy var sendPackageContainerView: UIView = {
@@ -90,9 +83,7 @@ class HomeController: UITableViewController {
         
         checkIfUserLoggedIn()
         configureUI()
-        
 
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,7 +93,7 @@ class HomeController: UITableViewController {
         demoVC.popupItem.title = "Design your trip"
         demoVC.popupItem.subtitle = "show people what packages you can take"
         demoVC.popupItem.progress = 0.34
-            
+
         tabBarController?.presentPopupBar(withContentViewController: demoVC, animated: true, completion: nil)
 
     }
@@ -113,11 +104,11 @@ class HomeController: UITableViewController {
                                smallTitleColorWhenScrolling: .dark, prefersLargeTitles: true)
         tableView.register(RecentTripsCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.rowHeight = 180
+        tableView.backgroundColor = .white
         
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle{
-        return .darkContent
+
+        
+        
     }
     
     func logout(){
@@ -189,7 +180,13 @@ extension HomeController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! RecentTripsCell
+        cell.selectionStyle = .none
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }
@@ -198,8 +195,5 @@ extension HomeController {
 extension HomeController: NewTripControllerDelegate{
     func dismissNewTripView(_ view: NewTripController) {
         tabBarController?.closePopup(animated: true, completion: nil)
-
     }
-    
-    
 }

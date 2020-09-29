@@ -207,7 +207,7 @@ extension UIViewController {
         }
     }
     
-    // to get full controller of the navigationBar , title , color , size
+    /// to get full controller of the navigationBar , title , color , size
     func configureNavigationBar(withTitle title: String,
                                 largeTitleColor: UIColor,
                                 tintColor: UIColor,

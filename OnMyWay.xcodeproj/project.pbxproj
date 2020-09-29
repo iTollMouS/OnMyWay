@@ -173,6 +173,15 @@
 			path = "Onboarding arch";
 			sourceTree = "<group>";
 		};
+		832BDAE82523431A00E0F1E0 /* Poeple Trips arch */ = {
+			isa = PBXGroup;
+			children = (
+				8369E5A62520786700AB6216 /* HomeController.swift */,
+				832BDA8325220D8800E0F1E0 /* RecentTripsCell.swift */,
+			);
+			path = "Poeple Trips arch";
+			sourceTree = "<group>";
+		};
 		836965A8251DD75700810174 = {
 			isa = PBXGroup;
 			children = (
@@ -199,13 +208,12 @@
 				836965B4251DD75700810174 /* AppDelegate.swift */,
 				836965B6251DD75700810174 /* SceneDelegate.swift */,
 				832BDA802521FCAA00E0F1E0 /* Onboarding arch */,
-				8369E5A62520786700AB6216 /* HomeController.swift */,
+				832BDAE82523431A00E0F1E0 /* Poeple Trips arch */,
 				832BDA8A252301E600E0F1E0 /* MainTabController.swift */,
 				832BDAE425230F6400E0F1E0 /* OrdersController.swift */,
 				832BDAE62523275200E0F1E0 /* PeopleReviewsController.swift */,
 				832BDAE225230CF700E0F1E0 /* NotificationsController.swift */,
 				832BDAE025230C1D00E0F1E0 /* ProfileController.swift */,
-				832BDA8325220D8800E0F1E0 /* RecentTripsCell.swift */,
 				832BDA6E2521F5A000E0F1E0 /* Safety arch */,
 				8369E5DA2520C2B800AB6216 /* Trip Arch */,
 				8369E58C251F5BA600AB6216 /* API */,
@@ -560,7 +568,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -615,7 +623,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -635,7 +643,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UGDUJASRTY;
 				INFOPLIST_FILE = OnMyWay/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -657,7 +665,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UGDUJASRTY;
 				INFOPLIST_FILE = OnMyWay/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

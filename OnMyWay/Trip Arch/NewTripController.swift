@@ -161,6 +161,17 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
         self.hideKeyboardWhenTouchOutsideTextField()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .darkContent
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        configureNavigationBar(withTitle: "Trip", largeTitleColor: #colorLiteral(red: 0.6274509804, green: 0.6274509804, blue: 0.6274509804, alpha: 1), tintColor: .white, navBarColor: #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1),
+                               smallTitleColorWhenScrolling: .light, prefersLargeTitles: false)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
     func configureUI(){
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -186,9 +197,9 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
                                       paddingLeft: 20, paddingBottom: 20 ,paddingRight: 20)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        view.addSubview(blurView)
-        blurView.anchor(top: view.topAnchor, left: view.leftAnchor,
-                        bottom: view.safeAreaLayoutGuide.topAnchor, right: view.rightAnchor)
+//        view.addSubview(blurView)
+//        blurView.anchor(top: view.topAnchor, left: view.leftAnchor,
+//                        bottom: view.safeAreaLayoutGuide.topAnchor, right: view.rightAnchor)
         
     }
     
