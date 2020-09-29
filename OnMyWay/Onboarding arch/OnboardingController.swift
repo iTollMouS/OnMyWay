@@ -66,6 +66,14 @@ class OnboardingController: UICollectionViewController, UICollectionViewDelegate
         pageControl.currentPage = Int(x / view.frame.width)
     }
     
+    
+    
+    /*
+     let layout = UICollectionViewFlowLayout()
+     layout.scrollDirection = .horizontal
+     let swipingController = OnboardingController(collectionViewLayout: layout)
+     */
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

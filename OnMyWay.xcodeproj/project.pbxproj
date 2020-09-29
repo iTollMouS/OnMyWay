@@ -14,7 +14,6 @@
 		832BDA4C2521DA5700E0F1E0 /* safety.json in Resources */ = {isa = PBXBuildFile; fileRef = 832BDA4B2521DA5700E0F1E0 /* safety.json */; };
 		832BDA4F2521DC2F00E0F1E0 /* covid_19_protect.json in Resources */ = {isa = PBXBuildFile; fileRef = 832BDA4E2521DC2F00E0F1E0 /* covid_19_protect.json */; };
 		832BDA522521DE6B00E0F1E0 /* social_distancing.json in Resources */ = {isa = PBXBuildFile; fileRef = 832BDA512521DE6B00E0F1E0 /* social_distancing.json */; };
-		832BDA582521E54400E0F1E0 /* wash_your_hands_regularly.json in Resources */ = {isa = PBXBuildFile; fileRef = 832BDA572521E54400E0F1E0 /* wash_your_hands_regularly.json */; };
 		832BDA5C2521E65E00E0F1E0 /* hand_sanitizer2.json in Resources */ = {isa = PBXBuildFile; fileRef = 832BDA5B2521E65E00E0F1E0 /* hand_sanitizer2.json */; };
 		832BDA5F2521ED8E00E0F1E0 /* SafetyFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BDA5E2521ED8E00E0F1E0 /* SafetyFooterView.swift */; };
 		832BDA622521EFA300E0F1E0 /* wearMask.json in Resources */ = {isa = PBXBuildFile; fileRef = 832BDA612521EFA300E0F1E0 /* wearMask.json */; };
@@ -24,6 +23,14 @@
 		832BDA7A2521FA9600E0F1E0 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BDA772521FA9300E0F1E0 /* Page.swift */; };
 		832BDA7B2521FA9600E0F1E0 /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BDA782521FA9500E0F1E0 /* OnboardingCell.swift */; };
 		832BDA7C2521FA9600E0F1E0 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BDA792521FA9600E0F1E0 /* OnboardingController.swift */; };
+		832BDA8425220D8800E0F1E0 /* RecentTripsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BDA8325220D8800E0F1E0 /* RecentTripsCell.swift */; };
+		832BDA872523005000E0F1E0 /* wash_your_hands_regularly.json in Resources */ = {isa = PBXBuildFile; fileRef = 832BDA862523005000E0F1E0 /* wash_your_hands_regularly.json */; };
+		832BDA8B252301E600E0F1E0 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BDA8A252301E600E0F1E0 /* MainTabController.swift */; };
+		832BDADD2523081400E0F1E0 /* LNPopupController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 832BDADC2523081400E0F1E0 /* LNPopupController.framework */; };
+		832BDADE2523081500E0F1E0 /* LNPopupController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 832BDADC2523081400E0F1E0 /* LNPopupController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		832BDAE125230C1D00E0F1E0 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BDAE025230C1D00E0F1E0 /* ProfileController.swift */; };
+		832BDAE325230CF700E0F1E0 /* NotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BDAE225230CF700E0F1E0 /* NotificationsController.swift */; };
+		832BDAE525230F6400E0F1E0 /* OrdersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BDAE425230F6400E0F1E0 /* OrdersController.swift */; };
 		836965B5251DD75700810174 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836965B4251DD75700810174 /* AppDelegate.swift */; };
 		836965B7251DD75700810174 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836965B6251DD75700810174 /* SceneDelegate.swift */; };
 		836965B9251DD75700810174 /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836965B8251DD75700810174 /* WelcomeController.swift */; };
@@ -51,6 +58,20 @@
 		8369E5DD2520C65900AB6216 /* DateAndTimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E5DC2520C65900AB6216 /* DateAndTimeController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		832BDADF2523081500E0F1E0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				832BDADE2523081500E0F1E0 /* LNPopupController.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		7BE53BE6F377BB0C384493C2 /* Pods-OnMyWay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnMyWay.release.xcconfig"; path = "Target Support Files/Pods-OnMyWay/Pods-OnMyWay.release.xcconfig"; sourceTree = "<group>"; };
 		7D1A1DB2F25AF8BAA00DB7FF /* Pods-OnMyWay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnMyWay.debug.xcconfig"; path = "Target Support Files/Pods-OnMyWay/Pods-OnMyWay.debug.xcconfig"; sourceTree = "<group>"; };
@@ -60,7 +81,6 @@
 		832BDA4B2521DA5700E0F1E0 /* safety.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = safety.json; sourceTree = "<group>"; };
 		832BDA4E2521DC2F00E0F1E0 /* covid_19_protect.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = covid_19_protect.json; sourceTree = "<group>"; };
 		832BDA512521DE6B00E0F1E0 /* social_distancing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = social_distancing.json; sourceTree = "<group>"; };
-		832BDA572521E54400E0F1E0 /* wash_your_hands_regularly.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = wash_your_hands_regularly.json; path = ../../../../wash_your_hands_regularly.json; sourceTree = "<group>"; };
 		832BDA5B2521E65E00E0F1E0 /* hand_sanitizer2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hand_sanitizer2.json; sourceTree = "<group>"; };
 		832BDA5E2521ED8E00E0F1E0 /* SafetyFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyFooterView.swift; sourceTree = "<group>"; };
 		832BDA612521EFA300E0F1E0 /* wearMask.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wearMask.json; sourceTree = "<group>"; };
@@ -70,6 +90,13 @@
 		832BDA772521FA9300E0F1E0 /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		832BDA782521FA9500E0F1E0 /* OnboardingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 		832BDA792521FA9600E0F1E0 /* OnboardingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
+		832BDA8325220D8800E0F1E0 /* RecentTripsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTripsCell.swift; sourceTree = "<group>"; };
+		832BDA862523005000E0F1E0 /* wash_your_hands_regularly.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wash_your_hands_regularly.json; sourceTree = "<group>"; };
+		832BDA8A252301E600E0F1E0 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
+		832BDADC2523081400E0F1E0 /* LNPopupController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LNPopupController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		832BDAE025230C1D00E0F1E0 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		832BDAE225230CF700E0F1E0 /* NotificationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsController.swift; sourceTree = "<group>"; };
+		832BDAE425230F6400E0F1E0 /* OrdersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersController.swift; sourceTree = "<group>"; };
 		836965B1251DD75700810174 /* OnMyWay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnMyWay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		836965B4251DD75700810174 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		836965B6251DD75700810174 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +134,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8230F51D05F591DC271A4821 /* Pods_OnMyWay.framework in Frameworks */,
+				832BDADD2523081400E0F1E0 /* LNPopupController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,6 +198,11 @@
 				836965B6251DD75700810174 /* SceneDelegate.swift */,
 				832BDA802521FCAA00E0F1E0 /* Onboarding arch */,
 				8369E5A62520786700AB6216 /* HomeController.swift */,
+				832BDA8A252301E600E0F1E0 /* MainTabController.swift */,
+				832BDAE425230F6400E0F1E0 /* OrdersController.swift */,
+				832BDAE225230CF700E0F1E0 /* NotificationsController.swift */,
+				832BDAE025230C1D00E0F1E0 /* ProfileController.swift */,
+				832BDA8325220D8800E0F1E0 /* RecentTripsCell.swift */,
 				832BDA6E2521F5A000E0F1E0 /* Safety arch */,
 				8369E5DA2520C2B800AB6216 /* Trip Arch */,
 				8369E58C251F5BA600AB6216 /* API */,
@@ -208,7 +241,7 @@
 				8369E568251F138600AB6216 /* hand_sanitizer.json */,
 				832BDA4B2521DA5700E0F1E0 /* safety.json */,
 				832BDA4E2521DC2F00E0F1E0 /* covid_19_protect.json */,
-				832BDA572521E54400E0F1E0 /* wash_your_hands_regularly.json */,
+				832BDA862523005000E0F1E0 /* wash_your_hands_regularly.json */,
 				832BDA5B2521E65E00E0F1E0 /* hand_sanitizer2.json */,
 				832BDA6A2521F51600E0F1E0 /* packageDelivery.json */,
 				832BDA512521DE6B00E0F1E0 /* social_distancing.json */,
@@ -265,6 +298,7 @@
 		8B5971168837B2458405BCE6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				832BDADC2523081400E0F1E0 /* LNPopupController.framework */,
 				99C3F803AC42488C58AEEA7D /* Pods_OnMyWay.framework */,
 			);
 			name = Frameworks;
@@ -283,6 +317,7 @@
 				836965AF251DD75700810174 /* Resources */,
 				C0F5611E8F455EB2F5CF2915 /* [CP] Embed Pods Frameworks */,
 				756B7D06F296CC1904540166 /* [CP] Copy Pods Resources */,
+				832BDADF2523081500E0F1E0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -340,11 +375,11 @@
 				8369E5A0251F9B6400AB6216 /* sendingemail.json in Resources */,
 				83696606251DD8E600810174 /* GoogleService-Info.plist in Resources */,
 				832BDA4C2521DA5700E0F1E0 /* safety.json in Resources */,
+				832BDA872523005000E0F1E0 /* wash_your_hands_regularly.json in Resources */,
 				8369E56B251F138700AB6216 /* package_delivery.json in Resources */,
 				832BDA682521F3F300E0F1E0 /* stay_home.json in Resources */,
 				832BDA652521F32600E0F1E0 /* cleanPhones.json in Resources */,
 				832BDA4F2521DC2F00E0F1E0 /* covid_19_protect.json in Resources */,
-				832BDA582521E54400E0F1E0 /* wash_your_hands_regularly.json in Resources */,
 				836965BE251DD75900810174 /* Assets.xcassets in Resources */,
 				836965BC251DD75700810174 /* Main.storyboard in Resources */,
 				832BDA522521DE6B00E0F1E0 /* social_distancing.json in Resources */,
@@ -421,6 +456,7 @@
 			files = (
 				8369660A251DDCD300810174 /* Extentions.swift in Sources */,
 				8369E575251F252C00AB6216 /* CustomContainerView.swift in Sources */,
+				832BDAE325230CF700E0F1E0 /* NotificationsController.swift in Sources */,
 				832BDA7C2521FA9600E0F1E0 /* OnboardingController.swift in Sources */,
 				836965B9251DD75700810174 /* WelcomeController.swift in Sources */,
 				836965B5251DD75700810174 /* AppDelegate.swift in Sources */,
@@ -428,18 +464,22 @@
 				8369E578251F255F00AB6216 /* RegisterationController.swift in Sources */,
 				832BDA7B2521FA9600E0F1E0 /* OnboardingCell.swift in Sources */,
 				8369E57D251F31DD00AB6216 /* LoggingController.swift in Sources */,
+				832BDA8425220D8800E0F1E0 /* RecentTripsCell.swift in Sources */,
 				832BDA452521D21500E0F1E0 /* SafetyCell.swift in Sources */,
 				832BDA492521D62700E0F1E0 /* TableHeaderView.swift in Sources */,
 				836965B7251DD75700810174 /* SceneDelegate.swift in Sources */,
 				8369E5A72520786700AB6216 /* HomeController.swift in Sources */,
 				8369E5D82520911900AB6216 /* NewTripController.swift in Sources */,
+				832BDAE525230F6400E0F1E0 /* OrdersController.swift in Sources */,
 				832BDA7A2521FA9600E0F1E0 /* Page.swift in Sources */,
 				8369E5DD2520C65900AB6216 /* DateAndTimeController.swift in Sources */,
 				8369E597251F683300AB6216 /* Service.swift in Sources */,
 				832BDA422521D0CB00E0F1E0 /* SafetyControllerGuidelines.swift in Sources */,
 				832BDA5F2521ED8E00E0F1E0 /* SafetyFooterView.swift in Sources */,
+				832BDA8B252301E600E0F1E0 /* MainTabController.swift in Sources */,
 				8369E58E251F5BBE00AB6216 /* AuthService.swift in Sources */,
 				8369E571251F24FF00AB6216 /* CustomTextField.swift in Sources */,
+				832BDAE125230C1D00E0F1E0 /* ProfileController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

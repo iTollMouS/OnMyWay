@@ -8,8 +8,11 @@
 import UIKit
 import Firebase
 import FirebaseUI
+import LNPopupController
 
-class HomeController: UIViewController {
+private let reuseIdentifier = "recentTrips"
+
+class HomeController: UITableViewController {
     
     
     private lazy var titleLabel: UILabel = {
@@ -23,12 +26,12 @@ class HomeController: UIViewController {
         return label
     }()
     
-    private let blurView : UIVisualEffectView = {
-        let blurView = UIBlurEffect(style: .regular)
-        let view = UIVisualEffectView(effect: blurView)
-        return view
-    }()
-  
+    //    private let blurView : UIVisualEffectView = {
+    //        let blurView = UIBlurEffect(style: .regular)
+    //        let view = UIVisualEffectView(effect: blurView)
+    //        return view
+    //    }()
+    
     
     private lazy var travelContainerView = createImageView(withImage: #imageLiteral(resourceName: "rosebox-BFdSCxmqvYc-unsplash"))
     
@@ -72,38 +75,40 @@ class HomeController: UIViewController {
         return stackView
     }()
     
-    
-    
+    private lazy var recentTripsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Travelers"
+        label.textAlignment = .left
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.setHeight(height: 50)
+        return label
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         checkIfUserLoggedIn()
         configureUI()
+        
+        let demoVC = NewTripController()
+        demoVC.delegate = self
+        demoVC.popupItem.title = "Design your trip"
+        demoVC.popupItem.subtitle = "show people what packages you can take"
+        demoVC.popupItem.progress = 0.34
+            
+        tabBarController?.presentPopupBar(withContentViewController: demoVC, animated: true, completion: nil)
+        
+        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        navigationController?.navigationBar.isHidden = true
-    }
     
     func configureUI(){
-        view.backgroundColor = #colorLiteral(red: 0.9019607843, green: 0.9019607843, blue: 0.9058823529, alpha: 1)
-        view.addSubview(titleLabel)
-        titleLabel.centerX(inView: view, topAnchor: view.safeAreaLayoutGuide.topAnchor, paddingTop: 16)
-        titleLabel.anchor(left: view.leftAnchor, right: view.rightAnchor, paddingLeft: 18)
-        view.addSubview(stackView)
-        stackView.centerX(inView: view, topAnchor: titleLabel.bottomAnchor, paddingTop: 16)
-        stackView.anchor(left: view.leftAnchor, right: view.rightAnchor, paddingLeft: 12, paddingRight: 12)
         
-        sendPackageContainerView.addSubview(bottomSendPackageView)
-        bottomSendPackageView.anchor(left: sendPackageContainerView.leftAnchor, bottom: sendPackageContainerView.bottomAnchor, right: sendPackageContainerView.rightAnchor)
-        travelContainerView.addSubview(bottomTravelView)
-        bottomTravelView.anchor(left: travelContainerView.leftAnchor, bottom: travelContainerView.bottomAnchor, right: travelContainerView.rightAnchor)
-        
-        view.addSubview(blurView)
-        blurView.anchor(top: view.topAnchor, left: view.leftAnchor,
-                        bottom: view.safeAreaLayoutGuide.topAnchor, right: view.rightAnchor)
-
+        configureNavigationBar(withTitle: "Travelers", largeTitleColor: #colorLiteral(red: 0.6274509804, green: 0.6274509804, blue: 0.6274509804, alpha: 1), tintColor: .white, navBarColor: #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1),
+                               smallTitleColorWhenScrolling: .dark, prefersLargeTitles: true)
+        tableView.register(RecentTripsCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.rowHeight = 180
         
     }
     
@@ -165,5 +170,32 @@ class HomeController: UIViewController {
         button.tintColor = .white
         return button
     }
+    
+}
+
+extension HomeController {
+    
+}
+
+
+extension HomeController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! RecentTripsCell
+        return cell
+    }
+    
+}
+
+
+extension HomeController: NewTripControllerDelegate{
+    func dismissNewTripView(_ view: NewTripController) {
+        tabBarController?.closePopup(animated: true, completion: nil)
+
+    }
+    
     
 }

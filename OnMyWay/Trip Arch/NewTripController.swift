@@ -6,15 +6,19 @@
 //
 
 import UIKit
+import LNPopupController
+
+protocol NewTripControllerDelegate: class {
+    func dismissNewTripView(_ view: NewTripController)
+}
 
 class NewTripController: UIViewController, UIScrollViewDelegate {
-    
-    
-    
     
     private lazy var contentSizeView = CGSize(width: self.view.frame.width,
                                               height: self.view.frame.height + 80)
     
+    
+    weak var delegate: NewTripControllerDelegate?
     
     private lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView(frame: .zero)
@@ -46,20 +50,6 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
         view.frame.size = contentSizeView
         view.backgroundColor = .white
         return view
-    }()
-    
-    private lazy var dismissView: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-        button.setDimensions(height: 50, width: 50)
-        button.tintColor = .white
-        button.layer.cornerRadius = 50 / 2
-        button.backgroundColor = UIColor.blueLightIcon.withAlphaComponent(0.8)
-        button.addTarget(self, action: #selector(handleDismissal), for: .touchUpInside)
-        button.clipsToBounds = true
-        button.layer.masksToBounds = false
-        button.setupShadow(opacity: 0.5, radius: 3, offset: CGSize(width: 0.0, height: 8.0), color: .black)
-        return button
     }()
     
     
@@ -107,15 +97,15 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
                                                                     dividerViewColor: .white, setViewHeight: 50)
     
     private let meetingForPickupTextField = CustomTextField(textColor: .blueLightIcon, placeholder: "Where you want to meet",
-                                                       placeholderColor: .blueLightFont, isSecure: false)
+                                                            placeholderColor: .blueLightFont, isSecure: false)
     private lazy var meetingForPickupDestinationContainerView = CustomContainerView(image:  #imageLiteral(resourceName: "46041"),
-                                                                    textField: meetingForPickupTextField, iconTintColor: .blueLightIcon,
-                                                                    dividerViewColor: .black, setViewHeight: 50)
+                                                                                    textField: meetingForPickupTextField, iconTintColor: .blueLightIcon,
+                                                                                    dividerViewColor: .black, setViewHeight: 50)
     private let packageDescriptionTextField = CustomTextField(textColor: .blueLightIcon, placeholder: "what inside the package ?",
-                                                       placeholderColor: .blueLightFont, isSecure: false)
+                                                              placeholderColor: .blueLightFont, isSecure: false)
     private lazy var packageDescriptionContainerView = CustomContainerView(image:  UIImage(systemName: "shippingbox.fill"),
-                                                                    textField: packageDescriptionTextField, iconTintColor: .blueLightIcon,
-                                                                    dividerViewColor: .black, setViewHeight: 50)
+                                                                           textField: packageDescriptionTextField, iconTintColor: .blueLightIcon,
+                                                                           dividerViewColor: .black, setViewHeight: 50)
     
     private let whatCanTakeTextField = CustomTextField(textColor: .blueLightIcon, placeholder: "what can you take?",
                                                        placeholderColor: .blueLightFont, isSecure: false)
@@ -124,12 +114,12 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
                                                                     dividerViewColor: .black, setViewHeight: 50)
     
     private let timeToPickPackageTextField = CustomTextField(textColor: .blueLightIcon, placeholder: "when to meet?",
-                                                       placeholderColor: .blueLightFont, isSecure: false)
+                                                             placeholderColor: .blueLightFont, isSecure: false)
     private lazy var timeToPickPackageContainerView = CustomContainerView(image:  UIImage(systemName: "clock.fill"),
-                                                                    textField: timeToPickPackageTextField, iconTintColor: .blueLightIcon,
-                                                                    dividerViewColor: .black, setViewHeight: 50)
+                                                                          textField: timeToPickPackageTextField, iconTintColor: .blueLightIcon,
+                                                                          dividerViewColor: .black, setViewHeight: 50)
     
-
+    
     private lazy var topStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [currentLocationContainerView,
                                                        destinationContainerView])
@@ -174,13 +164,15 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
     func configureUI(){
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubview(dismissView)
-        dismissView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, paddingTop: 60, paddingLeft: 36)
-        contentView.addSubview(mainContentView)
-        mainContentView.anchor(top: dismissView.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor,
-                               paddingTop: 20 , paddingLeft: 20, paddingBottom: 20 , paddingRight: 20, height: 550)
         contentView.addSubview(titleLabel)
-        titleLabel.centerY(inView: dismissView, leftAnchor: dismissView.rightAnchor, paddingLeft: 20)
+        titleLabel.centerX(inView: contentView, topAnchor: contentView.topAnchor, paddingTop: 80)
+        titleLabel.anchor(left: contentView.leftAnchor, right: contentView.rightAnchor)
+        
+        contentView.addSubview(mainContentView)
+        mainContentView.anchor(top: titleLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor,
+                               paddingTop: 20 , paddingLeft: 20, paddingBottom: 20 , paddingRight: 20, height: 550)
+        
+        
         titleLabel.centerX(inView: contentView)
         contentView.addSubview(topContainerView)
         topContainerView.anchor(top: mainContentView.topAnchor, left: mainContentView.leftAnchor, right: mainContentView.rightAnchor)
@@ -220,18 +212,12 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    
-    @objc func handleDismissal(){
-        navigationController?.popViewController(animated: true)
-    }
-    
-    
-    
 }
 
 extension NewTripController: DateAndTimeControllerDelegate {
     func dismissDateAndTimeController(_ view: DateAndTimeController) {
-        view.dismiss(animated: true, completion: nil)
-        navigationController?.popViewController(animated: true)
+        view.dismiss(animated: true) {
+            self.delegate?.dismissNewTripView(self)
+        }
     }
 }

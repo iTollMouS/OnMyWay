@@ -100,7 +100,7 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
     
     private lazy var dateTextField: UITextField = {
         let textField = CustomTextField(textColor: .blueLightIcon, placeholder: "Please choose your date from calendar above",
-                                        placeholderColor: .black, isSecure: false)
+                                        placeholderColor: .blueLightIcon, isSecure: false)
         textField.adjustsFontSizeToFitWidth = true
         return textField
     }()
@@ -110,7 +110,7 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
                                                                  dividerViewColor: .blueLightIcon, setViewHeight: 50)
     
     private lazy var timeTextField = CustomTextField(textColor: .blueLightIcon, placeholder: "Click here to configure your time",
-                                                     placeholderColor: .black, isSecure: false)
+                                                     placeholderColor: .blueLightIcon, isSecure: false)
     
     private lazy var timeContainerView = CustomContainerView(image: UIImage(systemName: "clock.fill"),
                                                              textField: timeTextField, iconTintColor: .blueLightIcon,
@@ -294,12 +294,12 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
 
 extension DateAndTimeController: FSCalendarDelegate {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-                dateTextField.text = date.convertDate(formattedString: .formattedType1)
+        dateTextField.text = date.convertDate(formattedString: .formattedType2)
         
     }
     
     func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
-                dateTextField.text = date.convertDate(formattedString: .formattedType1)
+        dateTextField.text = date.convertDate(formattedString: .formattedType2)
     }
     
 }

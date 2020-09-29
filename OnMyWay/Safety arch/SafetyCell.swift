@@ -51,7 +51,7 @@ class SafetyCell: UITableViewCell {
         let stackView = UIStackView(arrangedSubviews: [titleLabel, detailsLabel])
         stackView.axis = .vertical
         stackView.spacing = 5
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fillProportionally
         return stackView
     }()
 
@@ -61,7 +61,7 @@ class SafetyCell: UITableViewCell {
         animationView.centerY(inView: self, leftAnchor: leftAnchor, paddingLeft: 16)
         addSubview(stackView)
         stackView.centerY(inView: animationView, leftAnchor: animationView.rightAnchor, paddingLeft: 12)
-        stackView.anchor(right: rightAnchor, paddingRight: 12)
+        stackView.anchor(right: rightAnchor, paddingRight: 18)
         backgroundColor =  .blueLightFont
     }
     
@@ -92,7 +92,7 @@ enum SafetyCellViewModel: Int, CaseIterable {
     var titleLabel: String {
         switch self {
         case .socialDistancing: return "Keep 2m"
-        case .washHands: return "wash your hands regularly"
+        case .washHands: return "wash hands"
         case .handSanitizer: return "Use hans sanitizer"
         case .wearMask: return "wear mask"
         case .cleanPhones: return "Clean Phones"
