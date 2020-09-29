@@ -17,5 +17,9 @@ class NotificationsController: UIViewController {
         view.backgroundColor = .white
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        tabBarController?.dismissPopupBar(animated: true, completion: nil)
+    }
 
 }

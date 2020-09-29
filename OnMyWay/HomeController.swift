@@ -91,6 +91,12 @@ class HomeController: UITableViewController {
         checkIfUserLoggedIn()
         configureUI()
         
+
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         let demoVC = NewTripController()
         demoVC.delegate = self
         demoVC.popupItem.title = "Design your trip"
@@ -98,10 +104,8 @@ class HomeController: UITableViewController {
         demoVC.popupItem.progress = 0.34
             
         tabBarController?.presentPopupBar(withContentViewController: demoVC, animated: true, completion: nil)
-        
-        
+
     }
-    
     
     func configureUI(){
         

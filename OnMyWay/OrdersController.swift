@@ -12,10 +12,14 @@ class OrdersController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        configureNavigationBar(withTitle: "Orders", largeTitleColor: #colorLiteral(red: 0.6274509804, green: 0.6274509804, blue: 0.6274509804, alpha: 1), tintColor: .white, navBarColor: #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1),
+                               smallTitleColorWhenScrolling: .dark, prefersLargeTitles: true)
+        view.backgroundColor = .white
     }
     
-
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        tabBarController?.dismissPopupBar(animated: true, completion: nil)
+    }
 
 }

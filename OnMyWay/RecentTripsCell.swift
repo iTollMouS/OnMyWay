@@ -11,29 +11,19 @@ class RecentTripsCell: UITableViewCell {
     
     
     
-    private lazy var clientImageView1 = createImage()
-    private lazy var clientImageView2 = createImage()
-    private lazy var clientImageView3 = createImage()
-    private lazy var clientImageView4 = createImage()
-    
-    
-    private lazy var imagesStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [clientImageView1,
-                                                       clientImageView2,
-                                                       clientImageView3,
-                                                       clientImageView4])
-        stackView.spacing = -20
-        stackView.distribution = .fillEqually
-        stackView.axis = .vertical
-        stackView.setWidth(width: 50)
-        stackView.heightAnchor.constraint(lessThanOrEqualToConstant: 180).isActive = true
-        return stackView
+    private lazy var profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .blue
+        imageView.setDimensions(height: 50, width: 50)
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 50 / 2
+        return imageView
     }()
-    
+
     
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
-        label.text = "Sunday, September 23, 2020"
+        label.text = "12/9/2020"
         label.textAlignment = .center
         label.textColor = .blueLightIcon
         label.font = UIFont.systemFont(ofSize: 12)
@@ -54,13 +44,14 @@ class RecentTripsCell: UITableViewCell {
     private lazy var dateAndTimeStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [timeLabel, dateLabel])
         stackView.axis = .horizontal
+        stackView.spacing = 8
         stackView.distribution = .fillProportionally
         return stackView
     }()
     
     private lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .blue
         view.layer.cornerRadius = 20
         view.clipsToBounds = true
         return view
@@ -95,6 +86,15 @@ class RecentTripsCell: UITableViewCell {
         return label
     }()
     
+    private lazy var fullnameLable: UILabel = {
+        let label = UILabel()
+        label.text = "Tariq Almazyad"
+        label.textColor = .black
+        label.textAlignment = .left
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
     private lazy var fromCityDot: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
@@ -122,37 +122,39 @@ class RecentTripsCell: UITableViewCell {
     private lazy var citiesStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [fromCity, destinationCity])
         stackView.axis = .vertical
-        stackView.spacing = 12
         stackView.distribution = .fillEqually
-        stackView.setWidth(width: 150)
+        stackView.spacing = 24
+        stackView.setWidth(width: 70)
         return stackView
     }()
     
-    var imageArray = [UIImageView]()
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        [clientImageView1, clientImageView2, clientImageView3, clientImageView4].forEach{imageArray.append($0)}
-        addSubview(imagesStackView)
-        imagesStackView.centerY(inView: self, leftAnchor: leftAnchor, paddingLeft: 12)
-        addSubview(containerView)
-        containerView.anchor(top: topAnchor, left: imagesStackView.rightAnchor, bottom: bottomAnchor, right: rightAnchor,
-                             paddingTop: 12, paddingLeft: 12, paddingBottom: 12, paddingRight: 12)
-        containerView.addSubview(dateAndTimeStackView)
-        dateAndTimeStackView.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor,
-                                    paddingTop: 8 ,paddingLeft: 12)
+        
+        addSubview(profileImageView)
+        profileImageView.anchor(top: topAnchor, left: leftAnchor, paddingTop: 12, paddingLeft: 12)
+        addSubview(fullnameLable)
+        fullnameLable.centerY(inView: profileImageView, leftAnchor: profileImageView.rightAnchor, paddingLeft: 4)
+        addSubview(dateAndTimeStackView)
+        dateAndTimeStackView.anchor(top: topAnchor, right: rightAnchor, paddingTop: 6, paddingRight: 8)
+        
+        // construct the dots and the line in between
         addSubview(fromCityDot)
-        fromCityDot.anchor(top: dateAndTimeStackView.bottomAnchor, left: containerView.leftAnchor, paddingTop: 12, paddingLeft: 30)
-        
+        fromCityDot.centerX(inView: profileImageView, topAnchor: profileImageView.bottomAnchor, paddingTop: 18)
         addSubview(destinationCityDot)
-        destinationCityDot.centerX(inView: fromCityDot, topAnchor: fromCityDot.bottomAnchor, paddingTop: 50)
-        
+        destinationCityDot.centerX(inView: fromCityDot, topAnchor: fromCityDot.bottomAnchor, paddingTop: 60)
         addSubview(lineBetweenCities)
         lineBetweenCities.centerX(inView: fromCityDot)
-        lineBetweenCities.anchor(top: fromCityDot.bottomAnchor, bottom: destinationCityDot.topAnchor, paddingTop: 5, paddingBottom: 5)
+        lineBetweenCities.anchor(top: fromCityDot.bottomAnchor, bottom: destinationCityDot.topAnchor, paddingTop: 8, paddingBottom: 8)
         addSubview(citiesStackView)
-        citiesStackView.anchor(top: fromCityDot.topAnchor, bottom: destinationCityDot.bottomAnchor, paddingTop: -10, paddingBottom: -10)
-        citiesStackView.centerY(inView: lineBetweenCities, leftAnchor: lineBetweenCities.rightAnchor, paddingLeft: 12)
+        citiesStackView.centerY(inView: lineBetweenCities, leftAnchor: lineBetweenCities.rightAnchor, paddingLeft: 6)
+        citiesStackView.anchor(top: fromCityDot.topAnchor, bottom: destinationCityDot.bottomAnchor, paddingTop: -20, paddingBottom: -20)
+        addSubview(containerView)
+        containerView.anchor(top: fullnameLable.bottomAnchor, left: citiesStackView.rightAnchor, bottom: bottomAnchor,
+                             right: rightAnchor, paddingBottom: 8, paddingRight: 12)
+        
         
         backgroundColor = .white
     }
@@ -162,13 +164,5 @@ class RecentTripsCell: UITableViewCell {
     }
     
     
-    fileprivate func createImage() -> UIImageView {
-        let imageView = UIImageView()
-        imageView.backgroundColor = .blue
-        imageView.setDimensions(height: 50, width: 50)
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 50 / 2
-        return imageView
-    }
     
 }
