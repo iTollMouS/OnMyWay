@@ -87,6 +87,10 @@ class HomeController: UITableViewController {
 
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
@@ -192,6 +196,10 @@ extension HomeController {
 
 extension HomeController: NewTripControllerDelegate{
     func dismissNewTripView(_ view: NewTripController) {
-        tabBarController?.closePopup(animated: true, completion: nil)
+        tabBarController?.closePopup(animated: true, completion: {
+            let safetyControllerGuidelines = SafetyControllerGuidelines(style: .insetGrouped)
+            safetyControllerGuidelines.modalPresentationStyle = .fullScreen
+            self.present(safetyControllerGuidelines, animated: true, completion: nil)
+        })
     }
 }
