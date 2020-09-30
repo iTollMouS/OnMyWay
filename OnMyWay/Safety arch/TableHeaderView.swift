@@ -20,7 +20,7 @@ class TableHeaderView: UIView {
         label.font = .boldSystemFont(ofSize: 24)
         label.setHeight(height: 40)
         label.numberOfLines = 0
-        label.textColor = .blueLightIcon
+        label.textColor = UIColor.white.withAlphaComponent(0.7)
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
@@ -33,7 +33,7 @@ class TableHeaderView: UIView {
         label.font = .systemFont(ofSize: 16)
         label.setHeight(height: 100)
         label.numberOfLines = 0
-        label.textColor = .blueLightIcon
+        label.textColor = UIColor.white.withAlphaComponent(0.4)
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
@@ -54,7 +54,7 @@ class TableHeaderView: UIView {
         addSubview(stackView)
         stackView.centerX(inView: animationView, topAnchor: animationView.bottomAnchor, paddingTop: 12)
         stackView.anchor(left: leftAnchor, bottom: bottomAnchor , right: rightAnchor, paddingLeft: 16, paddingRight: 16)
-        backgroundColor = .blueLightFont
+        backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         configureAnimationView()
     }
     

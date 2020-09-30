@@ -20,7 +20,7 @@ class SafetyCell: UITableViewCell {
         animationView.setDimensions(height: 60, width: 60)
         animationView.clipsToBounds = true
         animationView.layer.cornerRadius = 60 / 2
-        animationView.backgroundColor = .blueLightIcon
+        animationView.backgroundColor = .clear
         return animationView
     }()
     
@@ -30,7 +30,7 @@ class SafetyCell: UITableViewCell {
         label.text = "Test 1 2 3 "
         label.font = .boldSystemFont(ofSize: 14)
         label.numberOfLines = 0
-        label.textColor = .blueLightIcon
+        label.textColor = .lightGray
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
@@ -42,7 +42,7 @@ class SafetyCell: UITableViewCell {
         label.text = "Test 1 2 3 "
         label.font = .systemFont(ofSize: 14)
         label.numberOfLines = 0
-        label.textColor = UIColor.blueLightIcon.withAlphaComponent(0.7)
+        label.textColor = .gray
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
@@ -62,7 +62,7 @@ class SafetyCell: UITableViewCell {
         addSubview(stackView)
         stackView.centerY(inView: animationView, leftAnchor: animationView.rightAnchor, paddingLeft: 12)
         stackView.anchor(right: rightAnchor, paddingRight: 18)
-        backgroundColor =  .blueLightFont
+        backgroundColor =  #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
     }
     
     func configure(){

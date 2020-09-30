@@ -82,6 +82,7 @@ class ProfileController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! ProfileCell
         guard let viewModel = ProfileViewModel(rawValue: indexPath.section) else { return cell }
         cell.viewModel = viewModel
+        cell.delegate = self
         return cell
     }
     
@@ -103,6 +104,10 @@ class ProfileController: UITableViewController {
         return 100
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     
 }
 
@@ -122,5 +127,14 @@ extension ProfileController: ProfileFooterDelegate {
         
     }
     
+    
+}
+
+extension ProfileController: ProfileCellDelegate {
+    func showGuidelines(_ cell: ProfileCell) {
+        let safetyControllerGuidelines = SafetyControllerGuidelines(style: .insetGrouped)
+        safetyControllerGuidelines.modalPresentationStyle = .fullScreen
+        present(safetyControllerGuidelines, animated: true, completion: nil)
+    }
     
 }

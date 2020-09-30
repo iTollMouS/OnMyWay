@@ -27,13 +27,14 @@ class SafetyControllerGuidelines: UITableViewController {
     
     func configureTableView(){
         tableView.tableHeaderView = headerView
-        tableView.backgroundColor = .blueLightFont
+        tableView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         tableView.separatorStyle = .none
         tableView.separatorColor = .clear
         tableView.register(SafetyCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.rowHeight = 100
         tableView.allowsSelection = false
         tableView.tableFooterView = footerView
+        footerView.delegate = self
         
     }
     
@@ -46,9 +47,17 @@ class SafetyControllerGuidelines: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SafetyCell
         guard let viewModel = SafetyCellViewModel(rawValue: indexPath.row) else { return cell }
         cell.viewModel = viewModel
+        
         return cell
     }
     
+    
+    
+}
+extension SafetyControllerGuidelines: SafetyFooterViewDelegate {
+    func handleDismissal(_ view: SafetyFooterView) {
+        dismiss(animated: true, completion: nil)
+    }
     
     
 }

@@ -7,13 +7,19 @@
 
 import UIKit
 
+protocol SafetyFooterViewDelegate: class {
+    func handleDismissal(_ view: SafetyFooterView)
+}
+
 class SafetyFooterView: UIView {
 
+    weak var delegate: SafetyFooterViewDelegate?
+    
     private lazy var reportButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Okay", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .blueLightIcon
+        button.backgroundColor = #colorLiteral(red: 0.2588235294, green: 0.2588235294, blue: 0.2588235294, alpha: 1)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.addTarget(self, action: #selector(handleReport), for: .touchUpInside)
         button.layer.cornerRadius = 50 / 2
@@ -30,7 +36,7 @@ class SafetyFooterView: UIView {
     }
     
     @objc func handleReport(){
-        
+        delegate?.handleDismissal(self)
     }
     
     required init?(coder: NSCoder) {
