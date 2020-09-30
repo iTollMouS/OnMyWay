@@ -88,36 +88,36 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
     private let currentLocationTextField = CustomTextField(textColor: .white, placeholder: "Your current location",
                                                            placeholderColor: .blueLightFont, isSecure: false)
     private lazy var currentLocationContainerView = CustomContainerView(image:  UIImage(systemName: "target"),
-                                                                        textField: currentLocationTextField, iconTintColor: .gray,
+                                                                        textField: currentLocationTextField, iconTintColor: .blueLightFont,
                                                                         dividerViewColor: .black, setViewHeight: 50)
     
     private let destinationTextField = CustomTextField(textColor: .white, placeholder: "destination",
                                                        placeholderColor: .blueLightFont, isSecure: false)
     private lazy var destinationContainerView = CustomContainerView(image:  UIImage(systemName: "location.fill"),
-                                                                    textField: destinationTextField, iconTintColor: .gray,
+                                                                    textField: destinationTextField, iconTintColor: .blueLightFont,
                                                                     dividerViewColor: .clear, setViewHeight: 50)
     
     private let meetingForPickupTextField = CustomTextField(textColor: .white, placeholder: "Where you want to meet",
                                                             placeholderColor: .blueLightFont, isSecure: false)
     private lazy var meetingForPickupDestinationContainerView = CustomContainerView(image:  #imageLiteral(resourceName: "46041"),
-                                                                                    textField: meetingForPickupTextField, iconTintColor: .gray,
+                                                                                    textField: meetingForPickupTextField, iconTintColor: .blueLightFont,
                                                                                     dividerViewColor: .lightGray, setViewHeight: 50)
     private let packageDescriptionTextField = CustomTextField(textColor: .white, placeholder: "what inside the package ?",
                                                               placeholderColor: .blueLightFont, isSecure: false)
     private lazy var packageDescriptionContainerView = CustomContainerView(image:  UIImage(systemName: "shippingbox.fill"),
-                                                                           textField: packageDescriptionTextField, iconTintColor: .gray,
+                                                                           textField: packageDescriptionTextField, iconTintColor: .blueLightFont,
                                                                            dividerViewColor: .lightGray, setViewHeight: 50)
     
     private let whatCanTakeTextField = CustomTextField(textColor: .white, placeholder: "what can you take?",
                                                        placeholderColor: .blueLightFont, isSecure: false)
     private lazy var whatCanTakeContainerView = CustomContainerView(image:  #imageLiteral(resourceName: "car"),
-                                                                    textField: whatCanTakeTextField, iconTintColor: .gray,
+                                                                    textField: whatCanTakeTextField, iconTintColor: .blueLightFont,
                                                                     dividerViewColor: .lightGray, setViewHeight: 50)
     
     private let timeToPickPackageTextField = CustomTextField(textColor: .white, placeholder: "when to meet?",
                                                              placeholderColor: .blueLightFont, isSecure: false)
     private lazy var timeToPickPackageContainerView = CustomContainerView(image:  UIImage(systemName: "clock.fill"),
-                                                                          textField: timeToPickPackageTextField, iconTintColor: .gray,
+                                                                          textField: timeToPickPackageTextField, iconTintColor: .blueLightFont,
                                                                           dividerViewColor: .lightGray, setViewHeight: 50)
     
     

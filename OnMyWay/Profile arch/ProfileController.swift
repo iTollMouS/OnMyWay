@@ -12,6 +12,7 @@ private let reuseIdentifier = "ProfileCell"
 class ProfileController: UITableViewController {
     
     private lazy var headerView = ProfileHeader(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 300))
+    private lazy var footerView = ProfileFooterView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,7 @@ class ProfileController: UITableViewController {
         tableView.rowHeight = 50
         tableView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         tableView.tableHeaderView = headerView
+        tableView.tableFooterView = footerView
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -64,7 +66,11 @@ class ProfileController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 80
+        return 50
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 100
     }
     
     

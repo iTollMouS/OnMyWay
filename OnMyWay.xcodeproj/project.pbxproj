@@ -59,6 +59,7 @@
 		8369E5DD2520C65900AB6216 /* DateAndTimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E5DC2520C65900AB6216 /* DateAndTimeController.swift */; };
 		839AC20D25240CA000E3D1BC /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839AC20C25240CA000E3D1BC /* ProfileCell.swift */; };
 		839AC2152524597F00E3D1BC /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839AC2142524597F00E3D1BC /* ProfileHeader.swift */; };
+		83B40751252485C30046B917 /* ProfileFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B40750252485C30046B917 /* ProfileFooterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -131,6 +132,7 @@
 		8369E5DC2520C65900AB6216 /* DateAndTimeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeController.swift; sourceTree = "<group>"; };
 		839AC20C25240CA000E3D1BC /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		839AC2142524597F00E3D1BC /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
+		83B40750252485C30046B917 /* ProfileFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFooterView.swift; sourceTree = "<group>"; };
 		99C3F803AC42488C58AEEA7D /* Pods_OnMyWay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnMyWay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -314,8 +316,9 @@
 			isa = PBXGroup;
 			children = (
 				832BDAE025230C1D00E0F1E0 /* ProfileController.swift */,
-				839AC2142524597F00E3D1BC /* ProfileHeader.swift */,
 				839AC20C25240CA000E3D1BC /* ProfileCell.swift */,
+				83B40750252485C30046B917 /* ProfileFooterView.swift */,
+				839AC2142524597F00E3D1BC /* ProfileHeader.swift */,
 			);
 			path = "Profile arch";
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				8369E571251F24FF00AB6216 /* CustomTextField.swift in Sources */,
 				839AC2152524597F00E3D1BC /* ProfileHeader.swift in Sources */,
 				832BDAE125230C1D00E0F1E0 /* ProfileController.swift in Sources */,
+				83B40751252485C30046B917 /* ProfileFooterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

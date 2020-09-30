@@ -8,12 +8,13 @@
 import UIKit
 
 
-class MainTabController: UITabBarController {
+class MainTabController: UITabBarController, UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureViewControllers()
+        self.delegate = self
     }
 
     
@@ -32,6 +33,21 @@ class MainTabController: UITabBarController {
         let ordersControllerNavBar = templateNavController(image: UIImage(systemName: "shippingbox")!, rootViewController: ordersController)
         
         viewControllers = [homeControllerNavBar, ordersControllerNavBar, notificationsControllerNavBar ,profileControllerNavBar]
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        let index = viewControllers?.firstIndex(of: viewController)
+        if index == 2 {
+            let selectImageVC = NotificationsController()
+            let navController = UINavigationController(rootViewController: selectImageVC)
+            navController.modalPresentationStyle = .popover
+            navController.navigationBar.barStyle = .default
+            navController.navigationBar.isTranslucent = true
+            present(navController, animated: true, completion: nil)
+            return false
+        }
+      
+        return true
     }
     
     
