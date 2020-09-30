@@ -38,8 +38,8 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         let index = viewControllers?.firstIndex(of: viewController)
         if index == 2 {
-            let selectImageVC = NotificationsController()
-            let navController = UINavigationController(rootViewController: selectImageVC)
+            let notificationsController = NotificationsController()
+            let navController = UINavigationController(rootViewController: notificationsController)
             navController.modalPresentationStyle = .fullScreen
             navController.navigationBar.isTranslucent = true
             present(navController, animated: true, completion: nil)
