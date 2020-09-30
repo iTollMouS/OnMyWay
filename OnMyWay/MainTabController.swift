@@ -40,8 +40,7 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
         if index == 2 {
             let selectImageVC = NotificationsController()
             let navController = UINavigationController(rootViewController: selectImageVC)
-            navController.modalPresentationStyle = .popover
-            navController.navigationBar.barStyle = .default
+            navController.modalPresentationStyle = .fullScreen
             navController.navigationBar.isTranslucent = true
             present(navController, animated: true, completion: nil)
             return false
@@ -51,14 +50,12 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
     }
     
     
-    
     func templateNavController(image: UIImage, rootViewController: UIViewController) -> UINavigationController {
         let navController = UINavigationController(rootViewController: rootViewController)
         navController.tabBarItem.image = image
         navController.navigationBar.barTintColor = .white
         navController.navigationBar.isTranslucent = true
         return navController
-        
     }
 
 }
