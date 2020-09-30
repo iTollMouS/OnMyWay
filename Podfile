@@ -22,6 +22,8 @@ pod 'ProgressHUD'
 pod 'SKPhotoBrowser'
 pod 'MessageKit'
 pod 'InputBarAccessoryView'
+pod 'IQKeyboardManagerSwift'
+
 
 pod 'FirebaseFirestoreSwift'
 pod 'FirebaseUI'

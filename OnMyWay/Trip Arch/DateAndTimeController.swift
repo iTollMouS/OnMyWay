@@ -17,9 +17,30 @@ protocol DateAndTimeControllerDelegate: class {
 class DateAndTimeController: UIViewController, UIScrollViewDelegate {
     
     
+    var dynamicScreen: CGFloat {
+        var height: CGFloat = 200
+        switch UIScreen.main.bounds.height {
+        // iPhone XS Max + 11
+        case 896:
+            height = 120
+        // iPhone 11 pro
+        case 812:
+            height = 200
+        // iPhone 8+
+        case 736:
+            height = 160
+        // iPhone 8
+        case 667:
+            height = 230
+        default:
+            break
+        }
+        return height
+    }
+    
     
     private lazy var contentSizeView = CGSize(width: self.view.frame.width,
-                                              height: self.view.frame.height + 200)
+                                              height: self.view.frame.height + dynamicScreen)
     
     
     weak var delegate: DateAndTimeControllerDelegate?
@@ -229,10 +250,11 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
         return label
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hideKeyboardWhenTouchOutsideTextField()
         configureUI()
+        self.hideKeyboardWhenTouchOutsideTextField()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
@@ -262,12 +284,6 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
         contentView.addSubview(bottomContainerView)
         bottomContainerView.centerX(inView: calendarView, topAnchor: calendarView.bottomAnchor, paddingTop: 10)
         bottomContainerView.anchor(left: contentView.leftAnchor, right: contentView.rightAnchor)
-
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleTextInputChanger), name: UITextView.textDidChangeNotification, object: nil)
-        
         
         timeTextField.delegate = self
         timeTextField.inputView = timestampPickerView
@@ -291,17 +307,6 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func keyboardWillShow(){
-        if scrollView.frame.origin.y == 0 {
-            self.scrollView.frame.origin.y -= UIScreen.main.bounds.height > 830 ? 260 : 300
-        }
-    }
-    
-    @objc func keyboardWillHide(){
-        if scrollView.frame.origin.y != 0 {
-            self.scrollView.frame.origin.y = 0
-        }
-    }
     
 }
 

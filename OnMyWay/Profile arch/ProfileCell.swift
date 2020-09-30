@@ -76,7 +76,8 @@ class ProfileCell: UITableViewCell {
             addSubview(covid_19_GuidelinesLabel)
             covid_19_GuidelinesLabel.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
             addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleShowGuidelines)))
-            accessoryType = .detailButton
+            accessoryType = .disclosureIndicator
+            
         }
     }
     

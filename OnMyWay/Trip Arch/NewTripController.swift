@@ -14,6 +14,28 @@ protocol NewTripControllerDelegate: class {
 
 class NewTripController: UIViewController, UIScrollViewDelegate {
     
+    
+    var dynamicScreen: CGFloat {
+        var height: CGFloat = 200
+        switch UIScreen.main.bounds.height {
+        // iPhone XS Max + 11
+        case 896:
+            height = 120
+        // iPhone 11 pro
+        case 812:
+            height = 200
+        // iPhone 8+
+        case 736:
+            height = 160
+        // iPhone 8
+        case 667:
+            height = 230
+        default:
+            break
+        }
+        return height
+    }
+    
     private lazy var contentSizeView = CGSize(width: self.view.frame.width,
                                               height: self.view.frame.height + 80)
     
@@ -164,12 +186,15 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
         self.hideKeyboardWhenTouchOutsideTextField()
     }
     
+    
+      
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return .lightContent
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+    
         configureNavigationBar(withTitle: "Trip", largeTitleColor: #colorLiteral(red: 0.6274509804, green: 0.6274509804, blue: 0.6274509804, alpha: 1), tintColor: .white, navBarColor: #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1),
                                smallTitleColorWhenScrolling: .light, prefersLargeTitles: false)
         navigationController?.navigationBar.isHidden = true
@@ -198,8 +223,6 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
         mainContentView.addSubview(setupDateAndTimeButton)
         setupDateAndTimeButton.anchor(left: mainContentView.leftAnchor, bottom: mainContentView.bottomAnchor ,right: mainContentView.rightAnchor,
                                       paddingLeft: 20, paddingBottom: 20 ,paddingRight: 20)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
     }
     
@@ -211,24 +234,12 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
     }
     
     
-    @objc func keyboardWillShow(){
-        if scrollView.frame.origin.y == 0 {
-            self.scrollView.frame.origin.y -= UIScreen.main.bounds.height > 830 ? 20 : 100
-        }
-    }
-    
-    @objc func keyboardWillHide(){
-        if scrollView.frame.origin.y != 0 {
-            self.scrollView.frame.origin.y = 0
-        }
-    }
-    
 }
 
 extension NewTripController: DateAndTimeControllerDelegate {
     func dismissDateAndTimeController(_ view: DateAndTimeController) {
-        view.dismiss(animated: true) {
-            self.delegate?.dismissNewTripView(self)
+        view.dismiss(animated: true) { [self] in
+            delegate?.dismissNewTripView(self)
         }
     }
 }

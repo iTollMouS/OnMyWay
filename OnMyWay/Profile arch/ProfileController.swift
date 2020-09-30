@@ -52,11 +52,11 @@ class ProfileController: UITableViewController {
     }
     
     func presentLoggingController(){
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
             let welcomeController = WelcomeController()
             let nav = UINavigationController(rootViewController: welcomeController)
             nav.modalPresentationStyle = .fullScreen
-            self.present(nav, animated: true, completion: nil)
+            present(nav, animated: true, completion: nil)
         }
     }
     
@@ -116,10 +116,7 @@ extension ProfileController: ProfileFooterDelegate {
         
         let alert = UIAlertController(title: nil, message: "Are you sure you want to logout ?", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "log out", style: .destructive, handler: { (alertAction) in
-            self.dismiss(animated: true) {
-                self.logout()
-                
-            }
+            self.dismiss(animated: true) { [self] in logout()  }
         }))
         alert.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
         

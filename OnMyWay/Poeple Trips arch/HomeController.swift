@@ -124,19 +124,15 @@ class HomeController: UITableViewController {
     }
         
     func checkIfUserLoggedIn(){
-        if Auth.auth().currentUser?.uid == nil {
-            self.presentLoggingController()
-        } else {
-            //            fetchUser()
-        }
+        Auth.auth().currentUser?.uid == nil ? presentLoggingController() : print("")
     }
     
     func presentLoggingController(){
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
             let welcomeController = WelcomeController()
             let nav = UINavigationController(rootViewController: welcomeController)
             nav.modalPresentationStyle = .fullScreen
-            self.present(nav, animated: true, completion: nil)
+            present(nav, animated: true, completion: nil)
         }
     }
     
@@ -196,10 +192,10 @@ extension HomeController {
 
 extension HomeController: NewTripControllerDelegate{
     func dismissNewTripView(_ view: NewTripController) {
-        tabBarController?.closePopup(animated: true, completion: {
+        tabBarController?.closePopup(animated: true, completion: { [self] in
             let safetyControllerGuidelines = SafetyControllerGuidelines(style: .insetGrouped)
             safetyControllerGuidelines.modalPresentationStyle = .fullScreen
-            self.present(safetyControllerGuidelines, animated: true, completion: nil)
+            present(safetyControllerGuidelines, animated: true, completion: nil)
         })
     }
 }

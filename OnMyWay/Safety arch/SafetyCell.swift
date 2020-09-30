@@ -93,7 +93,7 @@ enum SafetyCellViewModel: Int, CaseIterable {
         switch self {
         case .socialDistancing: return "Keep 2m"
         case .washHands: return "wash hands"
-        case .handSanitizer: return "Use hans sanitizer"
+        case .handSanitizer: return "Use hands sanitizer"
         case .wearMask: return "wear mask"
         case .cleanPhones: return "Clean Phones"
         case .stayHome: return "Stay Home"

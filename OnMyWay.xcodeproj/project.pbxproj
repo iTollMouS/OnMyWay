@@ -32,6 +32,9 @@
 		832BDAE325230CF700E0F1E0 /* NotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BDAE225230CF700E0F1E0 /* NotificationsController.swift */; };
 		832BDAE525230F6400E0F1E0 /* OrdersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BDAE425230F6400E0F1E0 /* OrdersController.swift */; };
 		832BDAE72523275200E0F1E0 /* PeopleReviewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BDAE62523275200E0F1E0 /* PeopleReviewsController.swift */; };
+		8343D2732525223E001D5156 /* 34548-5-estrellas.json in Resources */ = {isa = PBXBuildFile; fileRef = 8343D2712525223E001D5156 /* 34548-5-estrellas.json */; };
+		8343D2742525223E001D5156 /* chat.json in Resources */ = {isa = PBXBuildFile; fileRef = 8343D2722525223E001D5156 /* chat.json */; };
+		8343D2762525229E001D5156 /* isTypingIndicator.json in Resources */ = {isa = PBXBuildFile; fileRef = 8343D2752525229E001D5156 /* isTypingIndicator.json */; };
 		836965B5251DD75700810174 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836965B4251DD75700810174 /* AppDelegate.swift */; };
 		836965B7251DD75700810174 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836965B6251DD75700810174 /* SceneDelegate.swift */; };
 		836965B9251DD75700810174 /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836965B8251DD75700810174 /* WelcomeController.swift */; };
@@ -102,6 +105,9 @@
 		832BDAE225230CF700E0F1E0 /* NotificationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsController.swift; sourceTree = "<group>"; };
 		832BDAE425230F6400E0F1E0 /* OrdersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersController.swift; sourceTree = "<group>"; };
 		832BDAE62523275200E0F1E0 /* PeopleReviewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleReviewsController.swift; sourceTree = "<group>"; };
+		8343D2712525223E001D5156 /* 34548-5-estrellas.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "34548-5-estrellas.json"; sourceTree = "<group>"; };
+		8343D2722525223E001D5156 /* chat.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = chat.json; sourceTree = "<group>"; };
+		8343D2752525229E001D5156 /* isTypingIndicator.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = isTypingIndicator.json; sourceTree = "<group>"; };
 		836965B1251DD75700810174 /* OnMyWay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnMyWay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		836965B4251DD75700810174 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		836965B6251DD75700810174 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -261,6 +267,9 @@
 				832BDA862523005000E0F1E0 /* wash_your_hands_regularly.json */,
 				832BDA5B2521E65E00E0F1E0 /* hand_sanitizer2.json */,
 				832BDA6A2521F51600E0F1E0 /* packageDelivery.json */,
+				8343D2752525229E001D5156 /* isTypingIndicator.json */,
+				8343D2712525223E001D5156 /* 34548-5-estrellas.json */,
+				8343D2722525223E001D5156 /* chat.json */,
 				832BDA512521DE6B00E0F1E0 /* social_distancing.json */,
 				832BDA642521F32600E0F1E0 /* cleanPhones.json */,
 				832BDA612521EFA300E0F1E0 /* wearMask.json */,
@@ -315,10 +324,10 @@
 		839AC2122524593800E3D1BC /* Profile arch */ = {
 			isa = PBXGroup;
 			children = (
+				839AC2142524597F00E3D1BC /* ProfileHeader.swift */,
 				832BDAE025230C1D00E0F1E0 /* ProfileController.swift */,
 				839AC20C25240CA000E3D1BC /* ProfileCell.swift */,
 				83B40750252485C30046B917 /* ProfileFooterView.swift */,
-				839AC2142524597F00E3D1BC /* ProfileHeader.swift */,
 			);
 			path = "Profile arch";
 			sourceTree = "<group>";
@@ -393,6 +402,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8343D2762525229E001D5156 /* isTypingIndicator.json in Resources */,
 				8369E563251F136300AB6216 /* delivery_address_green.json in Resources */,
 				832BDA5C2521E65E00E0F1E0 /* hand_sanitizer2.json in Resources */,
 				8369E56D251F138700AB6216 /* width_measure_tape.json in Resources */,
@@ -409,6 +419,8 @@
 				832BDA652521F32600E0F1E0 /* cleanPhones.json in Resources */,
 				832BDA4F2521DC2F00E0F1E0 /* covid_19_protect.json in Resources */,
 				836965BE251DD75900810174 /* Assets.xcassets in Resources */,
+				8343D2732525223E001D5156 /* 34548-5-estrellas.json in Resources */,
+				8343D2742525223E001D5156 /* chat.json in Resources */,
 				836965BC251DD75700810174 /* Main.storyboard in Resources */,
 				832BDA522521DE6B00E0F1E0 /* social_distancing.json in Resources */,
 				832BDA622521EFA300E0F1E0 /* wearMask.json in Resources */,

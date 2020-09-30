@@ -120,6 +120,8 @@ class RegisterationController: UIViewController {
         self.hideKeyboardWhenTouchOutsideTextField()
     }
     
+    
+ 
     override func viewDidLayoutSubviews() {
         bottomCardView.layer.configureGradientBackground(#colorLiteral(red: 0.9019607843, green: 0.9019607843, blue: 0.9058823529, alpha: 1),#colorLiteral(red: 0.7803921569, green: 0.662745098, blue: 0.5490196078, alpha: 1), layerIndex: 0)
     }
@@ -137,8 +139,6 @@ class RegisterationController: UIViewController {
         bottomCardView.addSubview(formStackView)
         formStackView.centerX(inView: bottomCardView, topAnchor: topStackView.bottomAnchor)
         formStackView.anchor(left: bottomCardView.leftAnchor, right: bottomCardView.rightAnchor, paddingLeft: 20, paddingRight: 20)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
     }
     
@@ -166,17 +166,7 @@ class RegisterationController: UIViewController {
         }
         
     }
-    
-    @objc func keyboardWillShow(){
-        if view.frame.origin.y == 0 {
-            self.view.frame.origin.y -= 220
-        }
-    }
-    @objc func keyboardWillHide(){
-        if view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }
-    }
+
     
     @objc func handleDismissal(){
         navigationController?.popViewController(animated: true)
