@@ -104,10 +104,7 @@ class HomeController: UITableViewController {
                                smallTitleColorWhenScrolling: .dark, prefersLargeTitles: true)
         tableView.register(RecentTripsCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.rowHeight = 180
-        tableView.backgroundColor = .white
-        
-
-        
+        tableView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         
     }
     

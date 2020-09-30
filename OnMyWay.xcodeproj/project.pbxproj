@@ -57,6 +57,8 @@
 		8369E5A72520786700AB6216 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E5A62520786700AB6216 /* HomeController.swift */; };
 		8369E5D82520911900AB6216 /* NewTripController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E5D72520911800AB6216 /* NewTripController.swift */; };
 		8369E5DD2520C65900AB6216 /* DateAndTimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E5DC2520C65900AB6216 /* DateAndTimeController.swift */; };
+		839AC20D25240CA000E3D1BC /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839AC20C25240CA000E3D1BC /* ProfileCell.swift */; };
+		839AC2152524597F00E3D1BC /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839AC2142524597F00E3D1BC /* ProfileHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -127,6 +129,8 @@
 		8369E5A62520786700AB6216 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		8369E5D72520911800AB6216 /* NewTripController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTripController.swift; sourceTree = "<group>"; };
 		8369E5DC2520C65900AB6216 /* DateAndTimeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeController.swift; sourceTree = "<group>"; };
+		839AC20C25240CA000E3D1BC /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		839AC2142524597F00E3D1BC /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		99C3F803AC42488C58AEEA7D /* Pods_OnMyWay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnMyWay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -213,7 +217,7 @@
 				832BDAE425230F6400E0F1E0 /* OrdersController.swift */,
 				832BDAE62523275200E0F1E0 /* PeopleReviewsController.swift */,
 				832BDAE225230CF700E0F1E0 /* NotificationsController.swift */,
-				832BDAE025230C1D00E0F1E0 /* ProfileController.swift */,
+				839AC2122524593800E3D1BC /* Profile arch */,
 				832BDA6E2521F5A000E0F1E0 /* Safety arch */,
 				8369E5DA2520C2B800AB6216 /* Trip Arch */,
 				8369E58C251F5BA600AB6216 /* API */,
@@ -304,6 +308,16 @@
 				8369E5DC2520C65900AB6216 /* DateAndTimeController.swift */,
 			);
 			path = "Trip Arch";
+			sourceTree = "<group>";
+		};
+		839AC2122524593800E3D1BC /* Profile arch */ = {
+			isa = PBXGroup;
+			children = (
+				832BDAE025230C1D00E0F1E0 /* ProfileController.swift */,
+				839AC2142524597F00E3D1BC /* ProfileHeader.swift */,
+				839AC20C25240CA000E3D1BC /* ProfileCell.swift */,
+			);
+			path = "Profile arch";
 			sourceTree = "<group>";
 		};
 		8B5971168837B2458405BCE6 /* Frameworks */ = {
@@ -478,6 +492,7 @@
 				832BDAE72523275200E0F1E0 /* PeopleReviewsController.swift in Sources */,
 				832BDA8425220D8800E0F1E0 /* RecentTripsCell.swift in Sources */,
 				832BDA452521D21500E0F1E0 /* SafetyCell.swift in Sources */,
+				839AC20D25240CA000E3D1BC /* ProfileCell.swift in Sources */,
 				832BDA492521D62700E0F1E0 /* TableHeaderView.swift in Sources */,
 				836965B7251DD75700810174 /* SceneDelegate.swift in Sources */,
 				8369E5A72520786700AB6216 /* HomeController.swift in Sources */,
@@ -491,6 +506,7 @@
 				832BDA8B252301E600E0F1E0 /* MainTabController.swift in Sources */,
 				8369E58E251F5BBE00AB6216 /* AuthService.swift in Sources */,
 				8369E571251F24FF00AB6216 /* CustomTextField.swift in Sources */,
+				839AC2152524597F00E3D1BC /* ProfileHeader.swift in Sources */,
 				832BDAE125230C1D00E0F1E0 /* ProfileController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,7 +16,7 @@ class RecentTripsCell: UITableViewCell {
     
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .blue
+        imageView.backgroundColor = .lightGray
         imageView.setDimensions(height: 50, width: 50)
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 50 / 2
@@ -28,7 +28,7 @@ class RecentTripsCell: UITableViewCell {
         let label = UILabel()
         label.text = "12/9/2020"
         label.textAlignment = .center
-        label.textColor = .blueLightIcon
+        label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 12)
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -38,7 +38,7 @@ class RecentTripsCell: UITableViewCell {
         let label = UILabel()
         label.text = "12:32:12 AM"
         label.textAlignment = .center
-        label.textColor = .blueLightIcon
+        label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 12)
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -54,7 +54,7 @@ class RecentTripsCell: UITableViewCell {
     
     private lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
         view.layer.cornerRadius = 20
         view.clipsToBounds = true
         return view
@@ -73,7 +73,7 @@ class RecentTripsCell: UITableViewCell {
     private lazy var fromCity: UILabel = {
         let label = UILabel()
         let attributedText = NSMutableAttributedString(string: "Alrass",
-                                                       attributes: [.foregroundColor : UIColor.black,
+                                                       attributes: [.foregroundColor : #colorLiteral(red: 0.9019607843, green: 0.9019607843, blue: 0.9019607843, alpha: 1),
                                                                     .font: UIFont.systemFont(ofSize: 14)])
         attributedText.append(NSMutableAttributedString(string: "\n12:34 AM",
                                                         attributes: [.foregroundColor : UIColor.lightGray,
@@ -89,7 +89,7 @@ class RecentTripsCell: UITableViewCell {
     private lazy var destinationCity: UILabel = {
         let label = UILabel()
         let attributedText = NSMutableAttributedString(string: "Qassim",
-                                                       attributes: [.foregroundColor : UIColor.black,
+                                                       attributes: [.foregroundColor : #colorLiteral(red: 0.9019607843, green: 0.9019607843, blue: 0.9019607843, alpha: 1),
                                                                     .font: UIFont.systemFont(ofSize: 14)])
         attributedText.append(NSMutableAttributedString(string: "\n10:34 AM",
                                                         attributes: [.foregroundColor : UIColor.lightGray,
@@ -104,7 +104,7 @@ class RecentTripsCell: UITableViewCell {
     private lazy var fullnameLable: UILabel = {
         let label = UILabel()
         label.text = "Tariq Almazyad"
-        label.textColor = .black
+        label.textColor = #colorLiteral(red: 0.7058823529, green: 0.7058823529, blue: 0.7058823529, alpha: 1)
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -143,14 +143,14 @@ class RecentTripsCell: UITableViewCell {
         return stackView
     }()
     
-    private lazy var priceBaseLabel = createLabel(titleText: "Price: ", titleTextSize: 12, titleColor: .black,
-                                                  detailsText: "12.43 SR", detailsTextSize: 14,
-                                                  detailsColor: .black, textAlignment: .left, setHeight: 20)
+    private lazy var priceBaseLabel = createLabel(titleText: "Price : ", titleTextSize: 14, titleColor: #colorLiteral(red: 0.5254901961, green: 0.5254901961, blue: 0.5254901961, alpha: 1),
+                                                  detailsText: "12.43 SR", detailsTextSize: 16,
+                                                  detailsColor: #colorLiteral(red: 0.7137254902, green: 0.7137254902, blue: 0.7137254902, alpha: 1), textAlignment: .left, setHeight: 20)
     
     
-    private lazy var packagesTypes = createLabel(titleText: "Package: ", titleTextSize: 12, titleColor: .black,
-                                                 detailsText: "bags , phones , papers \n nags , beds etc", detailsTextSize: 14,
-                                                 detailsColor: .black, textAlignment: .left, setHeight: 50)
+    private lazy var packagesTypes = createLabel(titleText: "Package : ", titleTextSize: 14, titleColor: #colorLiteral(red: 0.5254901961, green: 0.5254901961, blue: 0.5254901961, alpha: 1),
+                                                 detailsText: "bags , phones , papers \n nags , beds etc", detailsTextSize: 16,
+                                                 detailsColor: #colorLiteral(red: 0.7137254902, green: 0.7137254902, blue: 0.7137254902, alpha: 1), textAlignment: .left, setHeight: 50)
     
     private lazy var ratingView: CosmosView = {
         let view = CosmosView()
@@ -160,13 +160,15 @@ class RecentTripsCell: UITableViewCell {
         view.settings.starSize = 24
         view.settings.totalStars = 5
         view.settings.starMargin = 3.0
-        view.text = " Reviews"
+        view.text = "Reviews (5/4.2)"
         view.settings.textColor = .black
         view.settings.textMargin = 10
-        view.backgroundColor = .white
+        view.settings.textFont = UIFont.systemFont(ofSize: 14)
+        view.backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
         view.setHeight(height: 60)
         return view
     }()
+    
     
     
     private lazy var containerInfoStackView: UIStackView = {
@@ -183,6 +185,8 @@ class RecentTripsCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         
         addSubview(profileImageView)
         profileImageView.anchor(top: topAnchor, left: leftAnchor, paddingTop: 6, paddingLeft: 12)
@@ -208,9 +212,8 @@ class RecentTripsCell: UITableViewCell {
      
         containerView.addSubview(containerInfoStackView)
         containerInfoStackView.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor,
-                                      paddingTop: 8, paddingLeft: 0)
+                                      paddingTop: 8, paddingLeft: 8)
         
-        backgroundColor = .white
         
     }
     

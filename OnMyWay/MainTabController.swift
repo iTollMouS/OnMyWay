@@ -22,11 +22,11 @@ class MainTabController: UITabBarController {
         let homeController = HomeController()
         let homeControllerNavBar = templateNavController(image: UIImage(systemName: "car")!, rootViewController: homeController)
         
-        let profileController = ProfileController()
+        let profileController = ProfileController(style: .insetGrouped)
         let profileControllerNavBar = templateNavController(image: UIImage(systemName: "person")!, rootViewController: profileController)
         
         let notificationsController = NotificationsController()
-        let notificationsControllerNavBar =  templateNavController(image: UIImage(systemName: "bell")!, rootViewController: notificationsController)
+        let notificationsControllerNavBar =  templateNavController(image: UIImage(systemName: "envelope")!, rootViewController: notificationsController)
         
         let ordersController = OrdersController()
         let ordersControllerNavBar = templateNavController(image: UIImage(systemName: "shippingbox")!, rootViewController: ordersController)

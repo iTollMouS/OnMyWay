@@ -22,7 +22,7 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
     
     private lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView(frame: .zero)
-        scrollView.backgroundColor = .white
+        scrollView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         scrollView.frame = self.view.bounds
         scrollView.delegate = self
         scrollView.contentInsetAdjustmentBehavior = .never
@@ -48,14 +48,14 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
         view.contentMode = .scaleAspectFill
         view.isUserInteractionEnabled = true
         view.frame.size = contentSizeView
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         return view
     }()
     
     
     private lazy var mainContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
         view.layer.cornerRadius = 20
         view.clipsToBounds = true
         view.layer.masksToBounds = false
@@ -65,10 +65,10 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
     
     private lazy var topContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
         view.layer.cornerRadius = 20
         view.setHeight(height: 150)
-        view.setupShadow(opacity: 0.2, radius: 20, offset: CGSize(width: 0.0, height: 8.0), color: .black)
+        view.setupShadow(opacity: 0.2, radius: 10, offset: CGSize(width: 0.0, height: 4.0), color: UIColor.white.withAlphaComponent(0.4))
         view.clipsToBounds = true
         view.layer.masksToBounds = false
         return view
@@ -80,44 +80,45 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
         label.textColor = UIColor.blueLightIcon.withAlphaComponent(0.6)
         label.textAlignment = .center
         label.setHeight(height: 40)
+        label.textColor = .blueLightFont
         return label
     }()
     
     
-    private let currentLocationTextField = CustomTextField(textColor: .blueLightIcon, placeholder: "Your current location",
+    private let currentLocationTextField = CustomTextField(textColor: .white, placeholder: "Your current location",
                                                            placeholderColor: .blueLightFont, isSecure: false)
     private lazy var currentLocationContainerView = CustomContainerView(image:  UIImage(systemName: "target"),
-                                                                        textField: currentLocationTextField, iconTintColor: .blueLightIcon,
+                                                                        textField: currentLocationTextField, iconTintColor: .gray,
                                                                         dividerViewColor: .black, setViewHeight: 50)
     
-    private let destinationTextField = CustomTextField(textColor: .blueLightIcon, placeholder: "destination",
+    private let destinationTextField = CustomTextField(textColor: .white, placeholder: "destination",
                                                        placeholderColor: .blueLightFont, isSecure: false)
     private lazy var destinationContainerView = CustomContainerView(image:  UIImage(systemName: "location.fill"),
-                                                                    textField: destinationTextField, iconTintColor: .blueLightIcon,
-                                                                    dividerViewColor: .white, setViewHeight: 50)
+                                                                    textField: destinationTextField, iconTintColor: .gray,
+                                                                    dividerViewColor: .clear, setViewHeight: 50)
     
-    private let meetingForPickupTextField = CustomTextField(textColor: .blueLightIcon, placeholder: "Where you want to meet",
+    private let meetingForPickupTextField = CustomTextField(textColor: .white, placeholder: "Where you want to meet",
                                                             placeholderColor: .blueLightFont, isSecure: false)
     private lazy var meetingForPickupDestinationContainerView = CustomContainerView(image:  #imageLiteral(resourceName: "46041"),
-                                                                                    textField: meetingForPickupTextField, iconTintColor: .blueLightIcon,
-                                                                                    dividerViewColor: .black, setViewHeight: 50)
-    private let packageDescriptionTextField = CustomTextField(textColor: .blueLightIcon, placeholder: "what inside the package ?",
+                                                                                    textField: meetingForPickupTextField, iconTintColor: .gray,
+                                                                                    dividerViewColor: .lightGray, setViewHeight: 50)
+    private let packageDescriptionTextField = CustomTextField(textColor: .white, placeholder: "what inside the package ?",
                                                               placeholderColor: .blueLightFont, isSecure: false)
     private lazy var packageDescriptionContainerView = CustomContainerView(image:  UIImage(systemName: "shippingbox.fill"),
-                                                                           textField: packageDescriptionTextField, iconTintColor: .blueLightIcon,
-                                                                           dividerViewColor: .black, setViewHeight: 50)
+                                                                           textField: packageDescriptionTextField, iconTintColor: .gray,
+                                                                           dividerViewColor: .lightGray, setViewHeight: 50)
     
-    private let whatCanTakeTextField = CustomTextField(textColor: .blueLightIcon, placeholder: "what can you take?",
+    private let whatCanTakeTextField = CustomTextField(textColor: .white, placeholder: "what can you take?",
                                                        placeholderColor: .blueLightFont, isSecure: false)
     private lazy var whatCanTakeContainerView = CustomContainerView(image:  #imageLiteral(resourceName: "car"),
-                                                                    textField: whatCanTakeTextField, iconTintColor: .blueLightIcon,
-                                                                    dividerViewColor: .black, setViewHeight: 50)
+                                                                    textField: whatCanTakeTextField, iconTintColor: .gray,
+                                                                    dividerViewColor: .lightGray, setViewHeight: 50)
     
-    private let timeToPickPackageTextField = CustomTextField(textColor: .blueLightIcon, placeholder: "when to meet?",
+    private let timeToPickPackageTextField = CustomTextField(textColor: .white, placeholder: "when to meet?",
                                                              placeholderColor: .blueLightFont, isSecure: false)
     private lazy var timeToPickPackageContainerView = CustomContainerView(image:  UIImage(systemName: "clock.fill"),
-                                                                          textField: timeToPickPackageTextField, iconTintColor: .blueLightIcon,
-                                                                          dividerViewColor: .black, setViewHeight: 50)
+                                                                          textField: timeToPickPackageTextField, iconTintColor: .gray,
+                                                                          dividerViewColor: .lightGray, setViewHeight: 50)
     
     
     private lazy var topStackView: UIStackView = {
@@ -139,17 +140,19 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
         return stackView
     }()
     
+    
+    
     private lazy var setupDateAndTimeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "calendar"), for: .normal)
         button.semanticContentAttribute = UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
         button.setTitle("Setup date and time travel\t", for: .normal)
         button.setHeight(height: 50)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(#colorLiteral(red: 0.7843137255, green: 0.7843137255, blue: 0.7843137255, alpha: 1), for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 16)
-        button.backgroundColor = UIColor.blueLightIcon.withAlphaComponent(0.8)
+        button.backgroundColor = #colorLiteral(red: 0.2156862745, green: 0.2156862745, blue: 0.2156862745, alpha: 1)
         button.layer.cornerRadius = 50 / 2
-        button.tintColor = .white
+        button.tintColor = #colorLiteral(red: 0.7843137255, green: 0.7843137255, blue: 0.7843137255, alpha: 1)
         button.addTarget(self, action: #selector(handleDateAndTimeTapped), for: .touchUpInside)
         return button
     }()
@@ -162,7 +165,7 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
-        return .darkContent
+        return .lightContent
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -197,9 +200,6 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
                                       paddingLeft: 20, paddingBottom: 20 ,paddingRight: 20)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-//        view.addSubview(blurView)
-//        blurView.anchor(top: view.topAnchor, left: view.leftAnchor,
-//                        bottom: view.safeAreaLayoutGuide.topAnchor, right: view.rightAnchor)
         
     }
     

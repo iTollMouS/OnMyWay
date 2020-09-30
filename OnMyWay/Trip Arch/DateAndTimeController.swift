@@ -26,7 +26,7 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
     
     private lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView(frame: .zero)
-        scrollView.backgroundColor = .white
+        scrollView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         scrollView.frame = self.view.bounds
         scrollView.delegate = self
         scrollView.contentInsetAdjustmentBehavior = .never
@@ -44,7 +44,7 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
         view.contentMode = .scaleAspectFill
         view.isUserInteractionEnabled = true
         view.frame.size = contentSizeView
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         return view
     }()
     
@@ -75,22 +75,30 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
     
     private lazy var calendarView: FSCalendar = {
         let calendarView = FSCalendar()
-        calendarView.backgroundColor = .white
+        calendarView.backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
         calendarView.scrollDirection = .horizontal
         calendarView.setHeight(height: UIScreen.main.bounds.height > 800 ? 400 : 300)
         calendarView.delegate = self
         calendarView.locale = Locale(identifier: "ar")
         calendarView.dataSource = self
         calendarView.appearance.titleFont = UIFont.systemFont(ofSize: 17)
-        calendarView.appearance.headerTitleColor = .blueLightIcon // monthly header color
-        calendarView.appearance.weekdayTextColor = .blueLightIcon // weekly header color
-        calendarView.appearance.todayColor = .redIcon
+        
+        calendarView.appearance.headerTitleColor = .white // monthly header color
+        calendarView.appearance.weekdayTextColor = .gray // weekly header color
+        
+        calendarView.appearance.titlePlaceholderColor = UIColor.white.withAlphaComponent(0.1)
+        // today configure selection
+        calendarView.appearance.todayColor = .blueLightIcon
+        calendarView.appearance.titleTodayColor = .white
+        calendarView.appearance.todaySelectionColor = .blueLightIcon
+        
+        // selection
         calendarView.appearance.titleSelectionColor = .white
-        calendarView.appearance.todaySelectionColor = .redIcon
-        calendarView.appearance.titleTodayColor = .blueLightIcon
-        calendarView.appearance.titleWeekendColor = .black // color your weekend
-        calendarView.appearance.titleDefaultColor = .blueLightIcon // color your week days
         calendarView.appearance.selectionColor = .blueLightIcon
+        
+        calendarView.appearance.titleWeekendColor = UIColor.white.withAlphaComponent(0.5) // color your weekend
+        calendarView.appearance.titleDefaultColor = .white // color your week days
+        
         calendarView.clipsToBounds = true
         calendarView.layer.masksToBounds = false
         calendarView.layer.cornerRadius = 20
@@ -240,7 +248,7 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
     }
     
     func configureUI(){
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(dismissView)
