@@ -64,10 +64,8 @@ class ProfileHeader: UIView {
     private lazy var ratingView: CosmosView = {
         let view = CosmosView()
         view.settings.fillMode = .half
-        view.settings.filledImage = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysOriginal)
-        view.settings.filledColor = .blueLightIcon
-        view.settings.emptyImage = UIImage(systemName: "star")?.withRenderingMode(.alwaysOriginal)
-        view.settings.emptyColor = .white
+        view.settings.filledImage = #imageLiteral(resourceName: "RatingStarFilled").withRenderingMode(.alwaysOriginal)
+        view.settings.emptyImage = #imageLiteral(resourceName: "RatingStarEmpty").withRenderingMode(.alwaysOriginal)
         view.settings.starSize = 24
         view.settings.totalStars = 5
         view.settings.starMargin = 3.0

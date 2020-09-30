@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseUI
 
 private let reuseIdentifier = "ProfileCell"
 
@@ -17,10 +19,15 @@ class ProfileController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureNavigationBar(withTitle: "Profile", largeTitleColor: #colorLiteral(red: 0.6274509804, green: 0.6274509804, blue: 0.6274509804, alpha: 1), tintColor: .white, navBarColor: #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1),
-                               smallTitleColorWhenScrolling: .dark, prefersLargeTitles: true)
         view.backgroundColor = .white
         configureTableView()
+        configureNavBar()
+    }
+    
+    func configureNavBar(){
+        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.title = "Profile"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,8 +36,30 @@ class ProfileController: UITableViewController {
         demoVC.popupItem.title = "People Reviews "
         demoVC.popupItem.subtitle = "Tab here to see who wrote a review about you"
         demoVC.popupItem.progress = 0.34
+        tabBarController?.popupBar.titleTextAttributes = [ .foregroundColor: UIColor.white ]
+        tabBarController?.popupBar.subtitleTextAttributes = [ .foregroundColor: UIColor.gray ]
         tabBarController?.presentPopupBar(withContentViewController: demoVC, animated: true, completion: nil)
     }
+    
+    func logout(){
+        do {
+            try Auth.auth().signOut()
+            presentLoggingController()
+            self.tabBarController?.selectedIndex = 0
+        } catch (let error){
+            print("DEBUG: error happen while logging out \(error.localizedDescription)")
+        }
+    }
+    
+    func presentLoggingController(){
+        DispatchQueue.main.async {
+            let welcomeController = WelcomeController()
+            let nav = UINavigationController(rootViewController: welcomeController)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true, completion: nil)
+        }
+    }
+    
     
     func configureTableView(){
         tableView.register(ProfileCell.self, forCellReuseIdentifier: reuseIdentifier)
@@ -38,6 +67,7 @@ class ProfileController: UITableViewController {
         tableView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         tableView.tableHeaderView = headerView
         tableView.tableFooterView = footerView
+        footerView.delegate = self
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -71,6 +101,25 @@ class ProfileController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 100
+    }
+    
+    
+}
+
+extension ProfileController: ProfileFooterDelegate {
+    func handleLogout() {
+        
+        let alert = UIAlertController(title: nil, message: "Are you sure you want to logout ?", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "log out", style: .destructive, handler: { (alertAction) in
+            self.dismiss(animated: true) {
+                self.logout()
+                
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
+        
     }
     
     

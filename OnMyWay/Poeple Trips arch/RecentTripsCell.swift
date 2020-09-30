@@ -22,7 +22,7 @@ class RecentTripsCell: UITableViewCell {
         imageView.layer.cornerRadius = 50 / 2
         return imageView
     }()
-
+    
     
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
@@ -75,7 +75,7 @@ class RecentTripsCell: UITableViewCell {
         let attributedText = NSMutableAttributedString(string: "Alrass",
                                                        attributes: [.foregroundColor : #colorLiteral(red: 0.9019607843, green: 0.9019607843, blue: 0.9019607843, alpha: 1),
                                                                     .font: UIFont.systemFont(ofSize: 14)])
-        attributedText.append(NSMutableAttributedString(string: "\n12:34 AM",
+        attributedText.append(NSMutableAttributedString(string: "\n09/11/2020\n12:12: AM",
                                                         attributes: [.foregroundColor : UIColor.lightGray,
                                                                      .font: UIFont.systemFont(ofSize: 12)]))
         label.attributedText = attributedText
@@ -91,7 +91,7 @@ class RecentTripsCell: UITableViewCell {
         let attributedText = NSMutableAttributedString(string: "Qassim",
                                                        attributes: [.foregroundColor : #colorLiteral(red: 0.9019607843, green: 0.9019607843, blue: 0.9019607843, alpha: 1),
                                                                     .font: UIFont.systemFont(ofSize: 14)])
-        attributedText.append(NSMutableAttributedString(string: "\n10:34 AM",
+        attributedText.append(NSMutableAttributedString(string: "\n09/11/2020\n12:12: AM",
                                                         attributes: [.foregroundColor : UIColor.lightGray,
                                                                      .font: UIFont.systemFont(ofSize: 12)]))
         label.attributedText = attributedText
@@ -144,12 +144,12 @@ class RecentTripsCell: UITableViewCell {
     }()
     
     private lazy var priceBaseLabel = createLabel(titleText: "Price : ", titleTextSize: 14, titleColor: #colorLiteral(red: 0.5254901961, green: 0.5254901961, blue: 0.5254901961, alpha: 1),
-                                                  detailsText: "12.43 SR", detailsTextSize: 16,
+                                                  detailsText: "12.43 SR", detailsTextSize: 18,
                                                   detailsColor: #colorLiteral(red: 0.7137254902, green: 0.7137254902, blue: 0.7137254902, alpha: 1), textAlignment: .left, setHeight: 20)
     
     
     private lazy var packagesTypes = createLabel(titleText: "Package : ", titleTextSize: 14, titleColor: #colorLiteral(red: 0.5254901961, green: 0.5254901961, blue: 0.5254901961, alpha: 1),
-                                                 detailsText: "bags , phones , papers \n nags , beds etc", detailsTextSize: 16,
+                                                 detailsText: "bags , phones , papers \n nags , beds etc", detailsTextSize: 18,
                                                  detailsColor: #colorLiteral(red: 0.7137254902, green: 0.7137254902, blue: 0.7137254902, alpha: 1), textAlignment: .left, setHeight: 50)
     
     private lazy var ratingView: CosmosView = {
@@ -157,7 +157,7 @@ class RecentTripsCell: UITableViewCell {
         view.settings.fillMode = .half
         view.settings.filledImage = #imageLiteral(resourceName: "RatingStarFilled").withRenderingMode(.alwaysOriginal)
         view.settings.emptyImage = #imageLiteral(resourceName: "RatingStarEmpty").withRenderingMode(.alwaysOriginal)
-        view.settings.starSize = 24
+        view.settings.starSize = 18
         view.settings.totalStars = 5
         view.settings.starMargin = 3.0
         view.text = "Reviews (5/4.2)"
@@ -165,19 +165,20 @@ class RecentTripsCell: UITableViewCell {
         view.settings.textMargin = 10
         view.settings.textFont = UIFont.systemFont(ofSize: 14)
         view.backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
-        view.setHeight(height: 60)
+        view.setHeight(height: 50)
         return view
     }()
     
     
     
     private lazy var containerInfoStackView: UIStackView = {
-       let stackView = UIStackView(arrangedSubviews: [priceBaseLabel,
-                                                      packagesTypes,
-                                                      ratingView])
+        let stackView = UIStackView(arrangedSubviews: [priceBaseLabel,
+                                                       packagesTypes,
+                                                       ratingView])
         stackView.axis = .vertical
+        stackView.alignment = .fill
         stackView.distribution = .fillProportionally
-        stackView.spacing = 4
+        stackView.spacing = 12
         return stackView
     }()
     
@@ -199,7 +200,7 @@ class RecentTripsCell: UITableViewCell {
         addSubview(fromCityDot)
         fromCityDot.centerX(inView: profileImageView, topAnchor: profileImageView.bottomAnchor, paddingTop: 18)
         addSubview(destinationCityDot)
-        destinationCityDot.centerX(inView: fromCityDot, topAnchor: fromCityDot.bottomAnchor, paddingTop: 60)
+        destinationCityDot.centerX(inView: fromCityDot, topAnchor: fromCityDot.bottomAnchor, paddingTop: 100)
         addSubview(lineBetweenCities)
         lineBetweenCities.centerX(inView: fromCityDot)
         lineBetweenCities.anchor(top: fromCityDot.bottomAnchor, bottom: destinationCityDot.topAnchor, paddingTop: 8, paddingBottom: 8)
@@ -209,10 +210,11 @@ class RecentTripsCell: UITableViewCell {
         addSubview(containerView)
         containerView.anchor(top: fullnameLable.bottomAnchor, left: citiesStackView.rightAnchor, bottom: bottomAnchor,
                              right: rightAnchor, paddingTop: 8 ,paddingBottom: 8, paddingRight: 12)
-     
+        
         containerView.addSubview(containerInfoStackView)
-        containerInfoStackView.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor,
-                                      paddingTop: 8, paddingLeft: 8)
+        containerInfoStackView.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor,
+                                      right: containerView.rightAnchor,
+                                      paddingTop: 14, paddingLeft: 8, paddingRight: 6)
         
         
     }

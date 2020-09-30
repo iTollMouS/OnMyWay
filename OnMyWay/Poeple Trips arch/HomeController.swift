@@ -83,41 +83,42 @@ class HomeController: UITableViewController {
         
         checkIfUserLoggedIn()
         configureUI()
+        configureNavBar()
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
         let demoVC = NewTripController()
+        
         demoVC.delegate = self
         demoVC.popupItem.title = "Design your trip"
+        demoVC.popupBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         demoVC.popupItem.subtitle = "show people what packages you can take"
         demoVC.popupItem.progress = 0.34
-
+        tabBarController?.popupBar.titleTextAttributes = [ .foregroundColor: UIColor.white ]
+        tabBarController?.popupBar.subtitleTextAttributes = [ .foregroundColor: UIColor.gray ]
         tabBarController?.presentPopupBar(withContentViewController: demoVC, animated: true, completion: nil)
-
+    }
+    
+    
+    
+    func configureNavBar(){
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.title = "Travelers"
+        
     }
     
     func configureUI(){
-        
-        configureNavigationBar(withTitle: "Travelers", largeTitleColor: #colorLiteral(red: 0.6274509804, green: 0.6274509804, blue: 0.6274509804, alpha: 1), tintColor: .white, navBarColor: #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1),
-                               smallTitleColorWhenScrolling: .dark, prefersLargeTitles: true)
+    
         tableView.register(RecentTripsCell.self, forCellReuseIdentifier: reuseIdentifier)
-        tableView.rowHeight = 180
+        tableView.rowHeight = 220
+        view.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         tableView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         
     }
-    
-    func logout(){
-        do {
-            try Auth.auth().signOut()
-            presentLoggingController()
-        } catch (let error){
-            print("DEBUG: error happen while logging out \(error.localizedDescription)")
-        }
-    }
-    
-    
+        
     func checkIfUserLoggedIn(){
         if Auth.auth().currentUser?.uid == nil {
             self.presentLoggingController()

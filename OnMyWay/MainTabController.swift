@@ -15,22 +15,25 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
 
         configureViewControllers()
         self.delegate = self
+        self.tabBar.isTranslucent = true
+        self.tabBar.barStyle = .black
+        
     }
 
     
     func configureViewControllers(){
         
         let homeController = HomeController()
-        let homeControllerNavBar = templateNavController(image: UIImage(systemName: "car")!, rootViewController: homeController)
+        let homeControllerNavBar = templateNavController(image: UIImage(systemName: "car")!, rootViewController: homeController, tabBarItemTitle: "Travelers")
         
         let profileController = ProfileController(style: .insetGrouped)
-        let profileControllerNavBar = templateNavController(image: UIImage(systemName: "person")!, rootViewController: profileController)
+        let profileControllerNavBar = templateNavController(image: UIImage(systemName: "person")!, rootViewController: profileController, tabBarItemTitle: "Profile")
         
         let notificationsController = NotificationsController()
-        let notificationsControllerNavBar =  templateNavController(image: UIImage(systemName: "envelope")!, rootViewController: notificationsController)
+        let notificationsControllerNavBar =  templateNavController(image: UIImage(systemName: "envelope")!, rootViewController: notificationsController, tabBarItemTitle: "Messages")
         
         let ordersController = OrdersController()
-        let ordersControllerNavBar = templateNavController(image: UIImage(systemName: "shippingbox")!, rootViewController: ordersController)
+        let ordersControllerNavBar = templateNavController(image: UIImage(systemName: "shippingbox")!, rootViewController: ordersController, tabBarItemTitle: "Orders")
         
         viewControllers = [homeControllerNavBar, ordersControllerNavBar, notificationsControllerNavBar ,profileControllerNavBar]
     }
@@ -41,6 +44,7 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
             let notificationsController = NotificationsController()
             let navController = UINavigationController(rootViewController: notificationsController)
             navController.modalPresentationStyle = .fullScreen
+            navController.navigationBar.barStyle = .black
             navController.navigationBar.isTranslucent = true
             present(navController, animated: true, completion: nil)
             return false
@@ -50,11 +54,13 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
     }
     
     
-    func templateNavController(image: UIImage, rootViewController: UIViewController) -> UINavigationController {
+    func templateNavController(image: UIImage, rootViewController: UIViewController, tabBarItemTitle: String) -> UINavigationController {
         let navController = UINavigationController(rootViewController: rootViewController)
         navController.tabBarItem.image = image
-        navController.navigationBar.barTintColor = .white
+        navController.tabBarItem.title = tabBarItemTitle
+        navController.navigationBar.barStyle = .black
         navController.navigationBar.isTranslucent = true
+        navController.navigationBar.prefersLargeTitles = true
         return navController
     }
 
