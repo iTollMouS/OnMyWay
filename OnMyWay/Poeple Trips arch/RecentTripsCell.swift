@@ -112,7 +112,7 @@ class RecentTripsCell: UITableViewCell {
     
     private lazy var fromCityDot: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        view.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
         view.setDimensions(height: 5, width: 5)
         view.layer.cornerRadius = 5 / 2
         return view
@@ -120,7 +120,7 @@ class RecentTripsCell: UITableViewCell {
     
     private lazy var lineBetweenCities: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        view.backgroundColor = .gray
         view.setWidth(width: 3)
         view.layer.cornerRadius = 2
         return view
@@ -128,7 +128,7 @@ class RecentTripsCell: UITableViewCell {
     
     private lazy var destinationCityDot: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.black
+        view.backgroundColor = .white
         view.setDimensions(height: 5, width: 5)
         view.layer.cornerRadius = 5 / 2
         return view
@@ -161,7 +161,7 @@ class RecentTripsCell: UITableViewCell {
         view.settings.totalStars = 5
         view.settings.starMargin = 3.0
         view.text = "Reviews (5/4.2)"
-        view.settings.textColor = .black
+        view.settings.textColor = .white
         view.settings.textMargin = 10
         view.settings.textFont = UIFont.systemFont(ofSize: 14)
         view.backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)

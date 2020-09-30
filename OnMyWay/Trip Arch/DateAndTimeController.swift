@@ -52,7 +52,7 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
         let label = UILabel()
         label.text = "Choose date and time of your travel"
         label.textAlignment = .center
-        label.textColor = .blueLightIcon
+        label.textColor = .blueLightFont
         label.font = UIFont.systemFont(ofSize: 18)
         label.numberOfLines = 0
         label.setHeight(height: 80)
@@ -66,7 +66,7 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
         let label = UILabel()
         label.text = "Design your trip"
         label.textAlignment = .left
-        label.textColor = .blueLightIcon
+        label.textColor = .blueLightFont
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.numberOfLines = 0
         label.setHeight(height: 40)
@@ -107,32 +107,32 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
     }()
     
     private lazy var dateTextField: UITextField = {
-        let textField = CustomTextField(textColor: .blueLightIcon, placeholder: "Please choose your date from calendar above",
-                                        placeholderColor: .blueLightIcon, isSecure: false)
+        let textField = CustomTextField(textColor: .blueLightFont, placeholder: "Please choose your date from calendar above",
+                                        placeholderColor: .blueLightFont, isSecure: false)
         textField.adjustsFontSizeToFitWidth = true
         return textField
     }()
     
     private lazy var dateTextContainerView = CustomContainerView(image: UIImage(systemName: "calendar.badge.plus"),
-                                                                 textField: dateTextField, iconTintColor: .blueLightIcon,
+                                                                 textField: dateTextField, iconTintColor: .blueLightFont,
                                                                  dividerViewColor: .blueLightIcon, setViewHeight: 50)
     
-    private lazy var timeTextField = CustomTextField(textColor: .blueLightIcon, placeholder: "Click here to configure your time",
-                                                     placeholderColor: .blueLightIcon, isSecure: false)
+    private lazy var timeTextField = CustomTextField(textColor: .blueLightFont, placeholder: "Click here to configure your time",
+                                                     placeholderColor: .blueLightFont, isSecure: false)
     
     private lazy var timeContainerView = CustomContainerView(image: UIImage(systemName: "clock.fill"),
-                                                             textField: timeTextField, iconTintColor: .blueLightIcon,
+                                                             textField: timeTextField, iconTintColor: .blueLightFont,
                                                              dividerViewColor: .blueLightIcon, setViewHeight: 50)
     
     
     private lazy var packageInfoTextView: UITextView = {
         let textView = UITextView()
         textView.textAlignment = .left
-        textView.textColor = .blueLightIcon
+        textView.textColor = .blueLightFont
         textView.setHeight(height: 100)
-        textView.backgroundColor = .white
+        textView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         textView.layer.cornerRadius = 10
-        textView.font = UIFont.systemFont(ofSize: 12)
+        textView.font = UIFont.systemFont(ofSize: 16)
         textView.clipsToBounds = true
         return textView
     }()
@@ -157,7 +157,7 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
         stackView.anchor(top: view.topAnchor, left: view.leftAnchor,
                          bottom: view.bottomAnchor, right: view.rightAnchor,
                          paddingLeft: 14, paddingRight: 14)
-        view.backgroundColor = UIColor.blueLightFont.withAlphaComponent(0.2)
+        view.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         return view
     }()
     
@@ -221,11 +221,11 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
     
     private lazy var placeholderLabel: UILabel = {
         let label = UILabel()
-        label.text = "Papers , bags , etc"
+        label.text = "write what stuff you can take \nfor example : Papers , bags , etc"
         label.textAlignment = .left
-        label.textColor = .blueLightIcon
+        label.textColor = .blueLightFont
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
     
@@ -236,7 +236,7 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
-        return .darkContent
+        return .lightContent
     }
     
     @objc func handlePickViewDismissal(){
