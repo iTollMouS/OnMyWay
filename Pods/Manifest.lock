@@ -481,6 +481,7 @@ PODS:
   - InputBarAccessoryView (5.2.0):
     - InputBarAccessoryView/Core (= 5.2.0)
   - InputBarAccessoryView/Core (5.2.0)
+  - IQKeyboardManagerSwift (6.5.6)
   - JGProgressHUD (2.1)
   - leveldb-library (1.22)
   - Loaf (0.5.0)
@@ -533,6 +534,7 @@ DEPENDENCIES:
   - Gallery
   - GoogleSignIn
   - InputBarAccessoryView
+  - IQKeyboardManagerSwift
   - JGProgressHUD
   - Loaf
   - lottie-ios
@@ -585,6 +587,7 @@ SPEC REPOS:
     - GTMAppAuth
     - GTMSessionFetcher
     - InputBarAccessoryView
+    - IQKeyboardManagerSwift
     - JGProgressHUD
     - leveldb-library
     - Loaf
@@ -642,6 +645,7 @@ SPEC CHECKSUMS:
   GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   InputBarAccessoryView: ac1bc2a11508fc2490c2322beb1d4c9f05c8e634
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   JGProgressHUD: aa403e9a5b45cae98903c4600cccdd98c0c3ec90
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   Loaf: 0800b444431366bc395d54267975d4ad4ad5c99c
@@ -659,6 +663,6 @@ SPEC CHECKSUMS:
   SKPhotoBrowser: 343de95d89dc7913763c5dda243cc6e606e4a168
   SwiftEntryKit: 96a2fa90b2631bbbfac50d18449e9ca3d0635f13
 
-PODFILE CHECKSUM: 75ee5b549120922703846ad36aff9d79e37ebe36
+PODFILE CHECKSUM: 3c70c86ccc9a1504911a52a58b646c8f03941f02
 
 COCOAPODS: 1.8.4
