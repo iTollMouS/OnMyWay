@@ -46,6 +46,15 @@ class ProfileCell: UITableViewCell {
         return label
     }()
     
+    private lazy var appVersionLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.text = "\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "")"
+        label.textColor = #colorLiteral(red: 0.7843137255, green: 0.7843137255, blue: 0.7843137255, alpha: 1)
+        label.font = UIFont.systemFont(ofSize: 20)
+        return label
+    }()
+    
     private lazy var covid_19_GuidelinesLabel: UILabel = {
         let label = UILabel()
         label.text = "View covid-19 guidelines "
@@ -68,6 +77,10 @@ class ProfileCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
+        
+    }
+    
+    func configureAccessory(){
         addSubview(accessoryButton)
         accessoryButton.centerY(inView: self)
         accessoryButton.anchor(right: rightAnchor, paddingRight: 10)
@@ -79,16 +92,19 @@ class ProfileCell: UITableViewCell {
         case .section_1:
             addSubview(phoneNumberLabel)
             phoneNumberLabel.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-            accessoryType = .disclosureIndicator
+            configureAccessory()
         case .section_2:
             addSubview(emailLabel)
             emailLabel.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-            accessoryType = .disclosureIndicator
+            configureAccessory()
         case .section_3:
             addSubview(covid_19_GuidelinesLabel)
             covid_19_GuidelinesLabel.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
             addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleShowGuidelines)))
-
+            configureAccessory()
+        case .section_4:
+            addSubview(appVersionLabel)
+            appVersionLabel.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         }
     }
     
@@ -108,22 +124,23 @@ enum ProfileViewModel: Int, CaseIterable {
     case section_1
     case section_2
     case section_3
+    case section_4
     
     var numberOfCells: Int {
         switch self {
         case .section_1: return 1
         case .section_2: return 1
         case .section_3: return 1
+        case .section_4: return 1
         }
     }
     
     var sectionTitle: String {
         switch self {
-        
         case .section_1: return "Phone Number"
         case .section_2: return "Email"
         case .section_3: return "COVID-19 Guidelines"
+        case .section_4: return "App Version"
         }
     }
-    
 }

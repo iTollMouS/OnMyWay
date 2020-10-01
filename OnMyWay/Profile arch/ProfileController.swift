@@ -24,7 +24,6 @@ class ProfileController: UITableViewController {
         configureNavBar()
     }
     
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -90,6 +89,7 @@ class ProfileController: UITableViewController {
         guard let viewModel = ProfileViewModel(rawValue: indexPath.section) else { return cell }
         cell.viewModel = viewModel
         cell.delegate = self
+        print("DEBUG: \(indexPath.section) \(indexPath.row)")
         cellSelectionStyle.backgroundColor = UIColor.white.withAlphaComponent(0.2)
         cell.selectedBackgroundView = cellSelectionStyle
         return cell

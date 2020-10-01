@@ -344,8 +344,8 @@
 		839AC2122524593800E3D1BC /* Profile arch */ = {
 			isa = PBXGroup;
 			children = (
-				839AC2142524597F00E3D1BC /* ProfileHeader.swift */,
 				832BDAE025230C1D00E0F1E0 /* ProfileController.swift */,
+				839AC2142524597F00E3D1BC /* ProfileHeader.swift */,
 				839AC20C25240CA000E3D1BC /* ProfileCell.swift */,
 				83B40750252485C30046B917 /* ProfileFooterView.swift */,
 			);
