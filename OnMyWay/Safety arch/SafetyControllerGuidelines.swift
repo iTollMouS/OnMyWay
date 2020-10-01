@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftEntryKit
 
 private let reuseIdentifier = "SafetyCell"
 
@@ -13,6 +14,7 @@ class SafetyControllerGuidelines: UITableViewController {
     
     private lazy var headerView = TableHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 250))
     private lazy var footerView = SafetyFooterView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100))
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

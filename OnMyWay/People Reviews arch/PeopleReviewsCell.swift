@@ -75,6 +75,7 @@ class PeopleReviewsCell: UITableViewCell {
         label.text = "making it look like readable English.\n Many desktop publishing packages and web page editors now use\n Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years\n sometimes by accident"
         label.textColor = .white
         label.backgroundColor = .clear
+        label.adjustsFontSizeToFitWidth = true
         label.layer.cornerRadius = 10
         label.font = UIFont.systemFont(ofSize: 14)
         label.numberOfLines = 0

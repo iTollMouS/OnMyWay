@@ -6,7 +6,8 @@
 //
 
 import UIKit
-
+import SwiftEntryKit
+import Cosmos
 
 private let reuseIdentifier = "PeopleReviewsCell"
 
@@ -14,6 +15,10 @@ class PeopleReviewsController: UIViewController {
     
     
     private lazy var headerView = PeopleReviewHeader(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 300))
+    
+    private lazy var reviewSheetPopOver = UIView()
+    var attributes = EKAttributes.bottomNote
+    
     
     private lazy var writeReviewButton: UIButton = {
         let button = UIButton(type: .system)
@@ -26,6 +31,7 @@ class PeopleReviewsController: UIViewController {
         button.clipsToBounds = true
         button.layer.masksToBounds = false
         button.setupShadow(opacity: 0.2, radius: 10, offset: CGSize(width: 0.0, height: 3), color: .white)
+        button.addTarget(self, action: #selector(handleShowReview), for: .touchUpInside)
         return button
     }()
     
@@ -37,8 +43,6 @@ class PeopleReviewsController: UIViewController {
         writeReviewButton.centerX(inView: view, topAnchor: view.topAnchor, paddingTop: 16)
         return view
     }()
-    
-    
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -52,21 +56,68 @@ class PeopleReviewsController: UIViewController {
         return tableView
     }()
     
+    private lazy var reviewLabel: UILabel = {
+        let label = UILabel()
+        label.text = "How was Tariq Almazyad\ndealing with your order"
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.textColor = .white
+        label.setHeight(height: 60)
+        label.font = UIFont.systemFont(ofSize: 18)
+        return label
+    }()
+    
+    private lazy var ratingView: CosmosView = {
+        let view = CosmosView()
+        view.settings.fillMode = .half
+        view.settings.filledImage = #imageLiteral(resourceName: "RatingStarFilled").withRenderingMode(.alwaysOriginal)
+        view.settings.emptyImage = #imageLiteral(resourceName: "RatingStarEmpty").withRenderingMode(.alwaysOriginal)
+        view.settings.starSize = 26
+        view.settings.totalStars = 5
+        view.settings.textMargin = 10
+        view.settings.textFont = .boldSystemFont(ofSize: 20)
+        view.settings.textColor = .white
+        view.settings.starMargin = 3.0
+        view.backgroundColor = .clear
+        view.setDimensions(height: 30, width: 180)
+        return view
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureNavBar()
         configureTableView()
+        configureReviewSheetPopOver()
         
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    func updateReviewOnTouch(){
+        ratingView.didTouchCosmos = { self.ratingView.text = "\($0)" }
+        ratingView.didFinishTouchingCosmos = { self.ratingView.text = "\($0)" }
+    }
+    
+    
+    func configureReviewSheetPopOver(){
+        reviewSheetPopOver.addSubview(reviewLabel)
+        reviewLabel.anchor(top: reviewSheetPopOver.topAnchor, left: reviewSheetPopOver.leftAnchor,
+                           right: reviewSheetPopOver.rightAnchor, paddingTop: 12)
+        
+        reviewSheetPopOver.addSubview(ratingView)
+        ratingView.centerX(inView: reviewLabel, topAnchor: reviewLabel.bottomAnchor, paddingTop: 12)
+        
+    }
+   
     func configureTableView(){
-        view.addSubview(tableView)
-        tableView.fillSuperview()
         view.addSubview(buttonContainerView)
         buttonContainerView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
-        
+        view.addSubview(tableView)
+        tableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: buttonContainerView.topAnchor, right: view.rightAnchor)
     }
     
     func configureNavBar(){
@@ -87,4 +138,57 @@ extension PeopleReviewsController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+
+
+extension PeopleReviewsController {
+    
+    func configureReviewSheet(){
+        reviewSheetPopOver.backgroundColor = #colorLiteral(red: 0.2588235294, green: 0.2588235294, blue: 0.2588235294, alpha: 1)
+        reviewSheetPopOver.layer.cornerRadius = 10
+        reviewSheetPopOver.setDimensions(height: 900, width: view.frame.width)
+        attributes.screenBackground = .visualEffect(style: .dark)
+        attributes.positionConstraints.safeArea = .overridden
+        attributes.positionConstraints.verticalOffset = -300
+        attributes.name = "Top Note"
+        attributes.windowLevel = .normal
+        attributes.position = .bottom
+        attributes.precedence = .override(priority: .max, dropEnqueuedEntries: false)
+        attributes.displayDuration = .infinity
+        attributes.entryInteraction = .absorbTouches
+        attributes.screenInteraction = .dismiss
+        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .jolt)
+        attributes.statusBar = .light
+        attributes.lifecycleEvents.willAppear = { [self] in
+            // Executed before the entry animates inside
+            ratingView.rating = 3
+            ratingView.text = "\(3.0)"
+            print("willAppear")
+        }
+        
+        attributes.lifecycleEvents.didAppear = { [self] in
+            // Executed after the entry animates inside
+            updateReviewOnTouch()
+            print("didAppear")
+        }
+        
+        attributes.lifecycleEvents.willDisappear = {
+            // Executed before the entry animates outside
+            print("willDisappear")
+        }
+        
+        attributes.lifecycleEvents.didDisappear = {
+            // Executed after the entry animates outside
+            
+            print("didDisappear")
+        }
+        attributes.entryBackground = .visualEffect(style: .dark)
+        SwiftEntryKit.display(entry: reviewSheetPopOver, using: attributes)
+    }
+    
+    
+    @objc func handleShowReview(){
+        configureReviewSheet()
+    }
+    
+}
 
