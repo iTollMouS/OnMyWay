@@ -18,8 +18,8 @@ class SafetyFooterView: UIView {
     private lazy var reportButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Okay", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.2588235294, green: 0.2588235294, blue: 0.2588235294, alpha: 1)
+        button.setTitleColor(#colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1), for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.4078431373, blue: 0.4901960784, alpha: 1)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.addTarget(self, action: #selector(handleReport), for: .touchUpInside)
         button.layer.cornerRadius = 50 / 2

@@ -99,10 +99,9 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Setup your trip info"
-        label.textColor = UIColor.blueLightIcon.withAlphaComponent(0.6)
         label.textAlignment = .center
         label.setHeight(height: 40)
-        label.textColor = .blueLightFont
+        label.textColor = #colorLiteral(red: 0.3568627451, green: 0.4078431373, blue: 0.4901960784, alpha: 1)
         return label
     }()
     
@@ -110,36 +109,36 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
     private let currentLocationTextField = CustomTextField(textColor: .white, placeholder: "Your current location",
                                                            placeholderColor: .blueLightFont, isSecure: false)
     private lazy var currentLocationContainerView = CustomContainerView(image:  UIImage(systemName: "target"),
-                                                                        textField: currentLocationTextField, iconTintColor: .blueLightFont,
+                                                                        textField: currentLocationTextField, iconTintColor: #colorLiteral(red: 0.3568627451, green: 0.4078431373, blue: 0.4901960784, alpha: 1),
                                                                         dividerViewColor: .black, setViewHeight: 50)
     
     private let destinationTextField = CustomTextField(textColor: .white, placeholder: "destination",
                                                        placeholderColor: .blueLightFont, isSecure: false)
     private lazy var destinationContainerView = CustomContainerView(image:  UIImage(systemName: "location.fill"),
-                                                                    textField: destinationTextField, iconTintColor: .blueLightFont,
+                                                                    textField: destinationTextField, iconTintColor: #colorLiteral(red: 0.3568627451, green: 0.4078431373, blue: 0.4901960784, alpha: 1),
                                                                     dividerViewColor: .clear, setViewHeight: 50)
     
     private let meetingForPickupTextField = CustomTextField(textColor: .white, placeholder: "Where you want to meet",
                                                             placeholderColor: .blueLightFont, isSecure: false)
     private lazy var meetingForPickupDestinationContainerView = CustomContainerView(image:  #imageLiteral(resourceName: "46041"),
-                                                                                    textField: meetingForPickupTextField, iconTintColor: .blueLightFont,
+                                                                                    textField: meetingForPickupTextField, iconTintColor: #colorLiteral(red: 0.3568627451, green: 0.4078431373, blue: 0.4901960784, alpha: 1),
                                                                                     dividerViewColor: .lightGray, setViewHeight: 50)
     private let packageDescriptionTextField = CustomTextField(textColor: .white, placeholder: "what inside the package ?",
                                                               placeholderColor: .blueLightFont, isSecure: false)
     private lazy var packageDescriptionContainerView = CustomContainerView(image:  UIImage(systemName: "shippingbox.fill"),
-                                                                           textField: packageDescriptionTextField, iconTintColor: .blueLightFont,
+                                                                           textField: packageDescriptionTextField, iconTintColor: #colorLiteral(red: 0.3568627451, green: 0.4078431373, blue: 0.4901960784, alpha: 1),
                                                                            dividerViewColor: .lightGray, setViewHeight: 50)
     
     private let whatCanTakeTextField = CustomTextField(textColor: .white, placeholder: "what can you take?",
                                                        placeholderColor: .blueLightFont, isSecure: false)
     private lazy var whatCanTakeContainerView = CustomContainerView(image:  #imageLiteral(resourceName: "car"),
-                                                                    textField: whatCanTakeTextField, iconTintColor: .blueLightFont,
+                                                                    textField: whatCanTakeTextField, iconTintColor: #colorLiteral(red: 0.3568627451, green: 0.4078431373, blue: 0.4901960784, alpha: 1),
                                                                     dividerViewColor: .lightGray, setViewHeight: 50)
     
     private let timeToPickPackageTextField = CustomTextField(textColor: .white, placeholder: "when to meet?",
                                                              placeholderColor: .blueLightFont, isSecure: false)
     private lazy var timeToPickPackageContainerView = CustomContainerView(image:  UIImage(systemName: "clock.fill"),
-                                                                          textField: timeToPickPackageTextField, iconTintColor: .blueLightFont,
+                                                                          textField: timeToPickPackageTextField, iconTintColor: #colorLiteral(red: 0.3568627451, green: 0.4078431373, blue: 0.4901960784, alpha: 1),
                                                                           dividerViewColor: .lightGray, setViewHeight: 50)
     
     
@@ -172,7 +171,7 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
         button.setHeight(height: 50)
         button.setTitleColor(#colorLiteral(red: 0.7843137255, green: 0.7843137255, blue: 0.7843137255, alpha: 1), for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 16)
-        button.backgroundColor = #colorLiteral(red: 0.2156862745, green: 0.2156862745, blue: 0.2156862745, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.4078431373, blue: 0.4901960784, alpha: 1)
         button.layer.cornerRadius = 50 / 2
         button.tintColor = #colorLiteral(red: 0.7843137255, green: 0.7843137255, blue: 0.7843137255, alpha: 1)
         button.addTarget(self, action: #selector(handleDateAndTimeTapped), for: .touchUpInside)

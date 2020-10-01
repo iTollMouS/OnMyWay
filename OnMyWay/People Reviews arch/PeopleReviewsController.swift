@@ -243,16 +243,17 @@ extension PeopleReviewsController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
 }
 
 extension PeopleReviewsController: UITextViewDelegate {
+    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
-        let numberOfChars = newText.count // for Swift use count(newText)
-        return numberOfChars < 300;
+        let numberOfChars = newText.count
+        return numberOfChars <= 300
     }
 }
 

@@ -109,15 +109,15 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
         
         calendarView.appearance.titlePlaceholderColor = UIColor.white.withAlphaComponent(0.1)
         // today configure selection
-        calendarView.appearance.todayColor = .blueLightIcon
+        calendarView.appearance.todayColor = #colorLiteral(red: 0.3568627451, green: 0.4745098039, blue: 0.4431372549, alpha: 1)
         calendarView.appearance.titleTodayColor = .white
-        calendarView.appearance.todaySelectionColor = .blueLightIcon
+        calendarView.appearance.todaySelectionColor = #colorLiteral(red: 0.3568627451, green: 0.4745098039, blue: 0.4431372549, alpha: 1)
         
         // selection
         calendarView.appearance.titleSelectionColor = .white
         calendarView.appearance.selectionColor = .blueLightIcon
         
-        calendarView.appearance.titleWeekendColor = UIColor.white.withAlphaComponent(0.5) // color your weekend
+        calendarView.appearance.titleWeekendColor = #colorLiteral(red: 0.3568627451, green: 0.4078431373, blue: 0.4901960784, alpha: 1)
         calendarView.appearance.titleDefaultColor = .white // color your week days
         
         calendarView.clipsToBounds = true
@@ -128,7 +128,7 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
     }()
     
     private lazy var dateTextField: UITextField = {
-        let textField = CustomTextField(textColor: .blueLightFont, placeholder: "Please choose your date from calendar above",
+        let textField = CustomTextField(textColor: .white, placeholder: "Please choose your date from calendar above",
                                         placeholderColor: .blueLightFont, isSecure: false)
         textField.adjustsFontSizeToFitWidth = true
         return textField
@@ -189,7 +189,7 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Submit new one ", for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 18)
-        button.backgroundColor = UIColor.blueLightIcon.withAlphaComponent(0.8)
+        button.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.4078431373, blue: 0.4901960784, alpha: 1)
         button.layer.cornerRadius = 60 / 2
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(handleSubmitNewTrip), for: .touchUpInside)
@@ -202,7 +202,7 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
         button.setDimensions(height: 50, width: 50)
         button.tintColor = .white
         button.layer.cornerRadius = 50 / 2
-        button.backgroundColor = UIColor.blueLightIcon.withAlphaComponent(0.8)
+        button.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.4078431373, blue: 0.4901960784, alpha: 1)
         button.addTarget(self, action: #selector(handleDismissal), for: .touchUpInside)
         button.clipsToBounds = true
         button.layer.masksToBounds = false

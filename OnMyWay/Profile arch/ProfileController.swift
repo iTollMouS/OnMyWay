@@ -24,6 +24,11 @@ class ProfileController: UITableViewController {
         configureNavBar()
     }
     
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     let cellSelectionStyle = UIView()
     
     func configureNavBar(){

@@ -54,7 +54,7 @@ class RecentTripsCell: UITableViewCell {
     
     private lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
+        view.backgroundColor = .clear
         view.layer.cornerRadius = 20
         view.clipsToBounds = true
         return view
@@ -164,8 +164,8 @@ class RecentTripsCell: UITableViewCell {
         view.settings.textColor = .white
         view.settings.textMargin = 10
         view.settings.textFont = UIFont.systemFont(ofSize: 14)
-        view.backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
-        view.setHeight(height: 50)
+        view.backgroundColor = .clear
+        view.setHeight(height: 30)
         return view
     }()
     
@@ -188,6 +188,7 @@ class RecentTripsCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
+        heightAnchor.constraint(equalToConstant: 210).isActive = true
         
         addSubview(profileImageView)
         profileImageView.anchor(top: topAnchor, left: leftAnchor, paddingTop: 6, paddingLeft: 12)
@@ -209,12 +210,11 @@ class RecentTripsCell: UITableViewCell {
         citiesStackView.anchor(top: fromCityDot.topAnchor, bottom: destinationCityDot.bottomAnchor, paddingTop: -15, paddingBottom: -15)
         addSubview(containerView)
         containerView.anchor(top: fullnameLable.bottomAnchor, left: citiesStackView.rightAnchor, bottom: bottomAnchor,
-                             right: rightAnchor, paddingTop: 8 ,paddingBottom: 8, paddingRight: 12)
+                             right: rightAnchor, paddingTop: 8 , paddingRight: 12)
         
         containerView.addSubview(containerInfoStackView)
-        containerInfoStackView.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor,
-                                      right: containerView.rightAnchor,
-                                      paddingTop: 14, paddingLeft: 8, paddingRight: 6)
+        containerInfoStackView.centerY(inView: citiesStackView, leftAnchor: citiesStackView.rightAnchor, paddingLeft: 20)
+        containerInfoStackView.anchor(right: containerView.rightAnchor, paddingRight: 12)
         
         
     }

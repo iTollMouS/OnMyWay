@@ -77,6 +77,8 @@ class HomeController: UITableViewController {
         label.setHeight(height: 50)
         return label
     }()
+    
+    let cellSelectionStyle = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -179,7 +181,8 @@ extension HomeController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! RecentTripsCell
-        cell.selectionStyle = .none
+        cellSelectionStyle.backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
+        cell.selectedBackgroundView = cellSelectionStyle
         return cell
     }
     
