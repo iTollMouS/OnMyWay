@@ -19,6 +19,8 @@ struct Trip {
     let basePrice: String
     let packageType: String
     let timestamp: Timestamp
+    var pickupLocation: String
+    var timeForPickingPackages: String
     
     init(userID: String, dictionary: [String: Any]) {
         self.userID = userID
@@ -29,6 +31,8 @@ struct Trip {
         self.basePrice = dictionary["basePrice"] as? String ?? ""
         self.packageType = dictionary["packageType"] as? String ?? ""
         self.timestamp = dictionary["timestamp"] as? Timestamp ?? Timestamp(date: Date())
+        self.pickupLocation = dictionary["pickupLocation"] as? String ?? ""
+        self.timeForPickingPackages = dictionary["timeForPickingPackages"] as? String ?? ""
         if let tripDate = dictionary["tripDate"] as? Double {
             self.tripDate = Date(timeIntervalSince1970: tripDate)
         }
