@@ -8,20 +8,35 @@
 import UIKit
 import Cosmos
 
+protocol ProfileHeaderDelegate: class {
+    func handleUpdatePhoto(_ header: ProfileHeader)
+}
+
 class ProfileHeader: UIView {
 
+    weak var delegate: ProfileHeaderDelegate?
     
-    private lazy var profileImageView: UIImageView = {
-        let imageView = UIImageView()
+     lazy var profileImageView: UIButton = {
+        let imageView = UIButton(type: .system)
         imageView.setDimensions(height: 100, width: 100)
         imageView.layer.cornerRadius = 100 / 2
-        imageView.backgroundColor = .gray
+        imageView.backgroundColor = .clear
         imageView.clipsToBounds = true
+        imageView.setImage(#imageLiteral(resourceName: "plus_photo"), for: .normal)
         imageView.layer.masksToBounds = false
-        imageView.setupShadow(opacity: 0.3, radius: 10, offset: CGSize(width: 0, height: 0.8), color: .white)
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto)))
         return imageView
     }()
     
+    private lazy var editImageLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Edit image"
+        label.textAlignment = .center
+        label.textColor = .lightGray
+        label.font = UIFont.systemFont(ofSize: 10)
+        label.setHeight(height: 20)
+        return label
+    }()
     
     private lazy var usernameLabel: UILabel = {
         let label = UILabel()
@@ -77,10 +92,16 @@ class ProfileHeader: UIView {
         addSubview(profileImageView)
         profileImageView.centerX(inView: self, topAnchor: topAnchor, paddingTop: 20)
         addSubview(userInfoStackView)
-        userInfoStackView.centerX(inView: self, topAnchor: profileImageView.bottomAnchor, paddingTop: 10)
+        userInfoStackView.centerX(inView: self, topAnchor: profileImageView.bottomAnchor, paddingTop: 20)
         userInfoStackView.anchor(left: leftAnchor, right: rightAnchor, paddingLeft: 20, paddingRight: 20)
         addSubview(ratingView)
         ratingView.centerX(inView: userInfoStackView, topAnchor: userInfoStackView.bottomAnchor, paddingTop: 12)
+        addSubview(editImageLabel)
+        editImageLabel.centerX(inView: profileImageView, topAnchor: profileImageView.bottomAnchor, paddingTop: 2)
+    }
+    
+    @objc func handleSelectPhoto(){
+        delegate?.handleUpdatePhoto(self)
     }
     
     required init?(coder: NSCoder) {

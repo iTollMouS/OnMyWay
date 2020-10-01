@@ -8,27 +8,52 @@
 import UIKit
 import Firebase
 import FirebaseUI
+import Gallery
 
 private let reuseIdentifier = "ProfileCell"
 
-class ProfileController: UITableViewController {
+class ProfileController: UIViewController {
     
     private lazy var headerView = ProfileHeader(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 300))
     private lazy var footerView = ProfileFooterView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100))
+    
+    private let gallery = GalleryController ()
+    let cellSelectionStyle = UIView()
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style:.insetGrouped)
+        tableView.register(ProfileCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.rowHeight = 50
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
+        tableView.tableHeaderView = headerView
+        tableView.tableFooterView = footerView
+        return tableView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        configureTableView()
+        configureUI()
         configureNavBar()
+    }
+    
+    
+    func configureUI(){
+        view.addSubview(tableView)
+        tableView.fillSuperview()
+        gallery.delegate = self
+        headerView.delegate = self
+        footerView.delegate = self
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
-    let cellSelectionStyle = UIView()
+    
     
     func configureNavBar(){
         
@@ -66,36 +91,29 @@ class ProfileController: UITableViewController {
         }
     }
     
+}
+
+extension ProfileController: UITableViewDelegate, UITableViewDataSource {
     
-    func configureTableView(){
-        tableView.register(ProfileCell.self, forCellReuseIdentifier: reuseIdentifier)
-        tableView.rowHeight = 50
-        tableView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
-        tableView.tableHeaderView = headerView
-        tableView.tableFooterView = footerView
-        footerView.delegate = self
-    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return ProfileViewModel.allCases.count
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ProfileViewModel.allCases[section].numberOfCells
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! ProfileCell
         guard let viewModel = ProfileViewModel(rawValue: indexPath.section) else { return cell }
         cell.viewModel = viewModel
         cell.delegate = self
-        print("DEBUG: \(indexPath.section) \(indexPath.row)")
         cellSelectionStyle.backgroundColor = UIColor.white.withAlphaComponent(0.2)
         cell.selectedBackgroundView = cellSelectionStyle
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let viewModel = ProfileViewModel(rawValue: section) else { return UIView() }
         let label = UILabel()
         label.text = viewModel.sectionTitle
@@ -105,19 +123,17 @@ class ProfileController: UITableViewController {
         return label
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
     
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 100
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    
 }
 
 extension ProfileController: ProfileFooterDelegate {
@@ -130,10 +146,7 @@ extension ProfileController: ProfileFooterDelegate {
         alert.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
         
         present(alert, animated: true, completion: nil)
-        
     }
-    
-    
 }
 
 extension ProfileController: ProfileCellDelegate {
@@ -142,5 +155,58 @@ extension ProfileController: ProfileCellDelegate {
         safetyControllerGuidelines.modalPresentationStyle = .fullScreen
         present(safetyControllerGuidelines, animated: true, completion: nil)
     }
+    
+}
+
+extension ProfileController: ProfileHeaderDelegate {
+    func handleUpdatePhoto(_ header: ProfileHeader) {
+        Config.tabsToShow = [.imageTab, .cameraTab]
+        Config.Camera.imageLimit = 1
+        Config.initialTab = .imageTab
+        gallery.modalPresentationStyle = .fullScreen
+        self.present(gallery, animated: true, completion: nil)
+    }
+}
+
+extension ProfileController: GalleryControllerDelegate {
+    func galleryController(_ controller: GalleryController, didSelectImages images: [Image]) {
+        guard let image = images.first else { return }
+        
+        self.showBlurView()
+        self.showLoader(true, message: "Please wait while we upload your photo...")
+        image.resolve { [self] in guard let image = $0 else {return}
+            headerView.profileImageView.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
+            headerView.profileImageView.setDimensions(height: 100, width: 100)
+            headerView.profileImageView.layer.cornerRadius = 100 / 2
+            headerView.profileImageView.imageView?.contentMode = .scaleAspectFill
+            headerView.profileImageView.backgroundColor = .clear
+            headerView.profileImageView.clipsToBounds = true
+            
+            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { timer in
+                self.removeBlurView()
+                self.showLoader(false)
+                self.showBanner(message: "Success!", state: .success, location: .top,
+                                presentingDirection: .vertical, dismissingDirection: .vertical,
+                                sender: self)
+            }
+            
+        }
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
+        controller.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    func galleryController(_ controller: GalleryController, requestLightbox images: [Image]) {
+        controller.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    func galleryControllerDidCancel(_ controller: GalleryController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
     
 }
