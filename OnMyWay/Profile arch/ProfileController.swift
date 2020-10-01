@@ -24,6 +24,8 @@ class ProfileController: UITableViewController {
         configureNavBar()
     }
     
+    let cellSelectionStyle = UIView()
+    
     func configureNavBar(){
         
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -83,6 +85,8 @@ class ProfileController: UITableViewController {
         guard let viewModel = ProfileViewModel(rawValue: indexPath.section) else { return cell }
         cell.viewModel = viewModel
         cell.delegate = self
+        cellSelectionStyle.backgroundColor = UIColor.white.withAlphaComponent(0.2)
+        cell.selectedBackgroundView = cellSelectionStyle
         return cell
     }
     

@@ -55,10 +55,22 @@ class ProfileCell: UITableViewCell {
         return label
     }()
     
+    private lazy var accessoryButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        button.setDimensions(height: 30, width: 30)
+        button.tintColor = #colorLiteral(red: 0.7843137255, green: 0.7843137255, blue: 0.7843137255, alpha: 1)
+        button.backgroundColor = .clear
+        return button
+    }()
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
+        addSubview(accessoryButton)
+        accessoryButton.centerY(inView: self)
+        accessoryButton.anchor(right: rightAnchor, paddingRight: 10)
     }
     
     func configureUI(){
@@ -76,8 +88,7 @@ class ProfileCell: UITableViewCell {
             addSubview(covid_19_GuidelinesLabel)
             covid_19_GuidelinesLabel.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
             addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleShowGuidelines)))
-            accessoryType = .disclosureIndicator
-            
+
         }
     }
     
