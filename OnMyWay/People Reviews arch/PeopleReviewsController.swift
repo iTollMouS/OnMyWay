@@ -26,9 +26,10 @@ class PeopleReviewsController: UITableViewController {
     
     func configureTableView(){
         tableView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(PeopleReviewsCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.tableHeaderView = headerView
         tableView.contentInsetAdjustmentBehavior = .never
+        tableView.rowHeight = 180
     }
 
     
@@ -44,7 +45,7 @@ extension PeopleReviewsController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! PeopleReviewsCell
         cell.textLabel?.text = "\(indexPath.row)"
         return cell
     }
