@@ -17,6 +17,8 @@ class ProfileHeader: UIView {
         imageView.layer.cornerRadius = 100 / 2
         imageView.backgroundColor = .gray
         imageView.clipsToBounds = true
+        imageView.layer.masksToBounds = false
+        imageView.setupShadow(opacity: 0.3, radius: 10, offset: CGSize(width: 0, height: 0.8), color: .white)
         return imageView
     }()
     
@@ -24,9 +26,9 @@ class ProfileHeader: UIView {
     private lazy var usernameLabel: UILabel = {
         let label = UILabel()
         label.text = "Tariq Almazyad"
-        label.textAlignment = .left
-        label.textColor = .gray
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.textAlignment = .center
+        label.textColor = .lightGray
+        label.font = UIFont.systemFont(ofSize: 20)
         label.setHeight(height: 50)
         return label
     }()
@@ -35,8 +37,8 @@ class ProfileHeader: UIView {
     private lazy var userStatusLabel: UILabel = {
         let label = UILabel()
         label.text = "I am using chat"
-        label.textAlignment = .left
-        label.textColor = .lightGray
+        label.textAlignment = .center
+        label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 14)
         label.setHeight(height: 50)
         return label
@@ -49,17 +51,6 @@ class ProfileHeader: UIView {
         stackView.distribution = .fill
         return stackView
     }()
-    
-    
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [profileImageView, userInfoStackView])
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        stackView.distribution = .fillProportionally
-        stackView.setWidth(width: 100)
-        return stackView
-    }()
-    
     
     private lazy var ratingView: CosmosView = {
         let view = CosmosView()
@@ -83,10 +74,13 @@ class ProfileHeader: UIView {
         super.init(frame: frame)
         backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
         heightAnchor.constraint(equalToConstant: 300).isActive = true
-        addSubview(stackView)
-        stackView.centerX(inView: self, topAnchor: topAnchor, paddingTop: 20)
+        addSubview(profileImageView)
+        profileImageView.centerX(inView: self, topAnchor: topAnchor, paddingTop: 20)
+        addSubview(userInfoStackView)
+        userInfoStackView.centerX(inView: self, topAnchor: profileImageView.bottomAnchor, paddingTop: 10)
+        userInfoStackView.anchor(left: leftAnchor, right: rightAnchor, paddingLeft: 20, paddingRight: 20)
         addSubview(ratingView)
-        ratingView.centerX(inView: stackView, topAnchor: stackView.bottomAnchor, paddingTop: 12)
+        ratingView.centerX(inView: userInfoStackView, topAnchor: userInfoStackView.bottomAnchor, paddingTop: 12)
     }
     
     required init?(coder: NSCoder) {
