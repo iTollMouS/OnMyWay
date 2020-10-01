@@ -35,14 +35,13 @@ struct AuthService {
     }
     
     static func registerUser(withCredentials credentials: AuthCredentials, completion: @escaping((Error?) -> Void)){
-        Service.uploadImage(withImage: credentials.profileImageView) { imageUrl in
             Auth.auth().createUser(withEmail: credentials.email, password: credentials.password) { (authResult, error) in
                 if let error = error {
                     print("DEBUG: error while register new user \(error.localizedDescription)")
                     return
                 }
-                
                 guard let user = authResult else {return}
+                Service.uploadProfileImageView(withImage: credentials.profileImageView, userID: user.user.uid) { imageUrl in
                 guard let fcmToken = Messaging.messaging().fcmToken else {return}
                 let userData = ["userID": user.user.uid,
                                 "userFcmToken": fcmToken,

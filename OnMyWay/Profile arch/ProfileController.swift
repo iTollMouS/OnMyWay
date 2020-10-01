@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import FirebaseUI
 import Gallery
+import ProgressHUD
 
 private let reuseIdentifier = "ProfileCell"
 
@@ -19,6 +20,8 @@ class ProfileController: UIViewController {
     
     private let gallery = GalleryController ()
     let cellSelectionStyle = UIView()
+    
+    var user: User?
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style:.insetGrouped)
@@ -170,8 +173,8 @@ extension ProfileController: ProfileHeaderDelegate {
 
 extension ProfileController: GalleryControllerDelegate {
     func galleryController(_ controller: GalleryController, didSelectImages images: [Image]) {
+        guard let userID = Auth.auth().currentUser?.uid else { return }
         guard let image = images.first else { return }
-        
         self.showBlurView()
         self.showLoader(true, message: "Please wait while we upload your photo...")
         image.resolve { [self] in guard let image = $0 else {return}
@@ -183,11 +186,19 @@ extension ProfileController: GalleryControllerDelegate {
             headerView.profileImageView.clipsToBounds = true
             
             Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { timer in
-                self.removeBlurView()
                 self.showLoader(false)
-                self.showBanner(message: "Success!", state: .success, location: .top,
-                                presentingDirection: .vertical, dismissingDirection: .vertical,
-                                sender: self)
+                Service.updateProfileImage(withImage: image, userID: userID) { error in
+                    if let error = error {
+                        self.showAlertMessage("Error", error.localizedDescription)
+                        return
+                    }
+                    self.removeBlurView()
+                    self.showLoader(false)
+                    self.showBanner(message: "Success!", state: .success, location: .top,
+                                    presentingDirection: .vertical, dismissingDirection: .vertical,
+                                    sender: self)
+                    ProgressHUD.showSucceed()
+                }
             }
             
         }

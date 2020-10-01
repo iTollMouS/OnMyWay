@@ -376,7 +376,7 @@ extension LoggingController: ASAuthorizationControllerDelegate {
         let credential = OAuthProvider.credential(withProviderID: "apple.com",
                                                   idToken: idTokenString,
                                                   rawNonce: nonce)
-        Service.uploadImage(withImage: userImageView) { imageUrl in
+        Service.uploadProfileImageView(withImage: userImageView) { imageUrl in
             self.showBlurView()
             self.showLoader(true, message: "Please wait while we create account for you...")
             AuthService.signInWithAppleID(credential: credential, fullname: fullname, imageUrl: imageUrl, fcmToken: fcmToken) { error in
