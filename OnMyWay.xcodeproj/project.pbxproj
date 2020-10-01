@@ -65,6 +65,7 @@
 		839AC20D25240CA000E3D1BC /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839AC20C25240CA000E3D1BC /* ProfileCell.swift */; };
 		839AC2152524597F00E3D1BC /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839AC2142524597F00E3D1BC /* ProfileHeader.swift */; };
 		83B40751252485C30046B917 /* ProfileFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B40750252485C30046B917 /* ProfileFooterView.swift */; };
+		83C70DA52525C2BB000B024E /* PeopleReviewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C70DA42525C2BB000B024E /* PeopleReviewHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -143,6 +144,7 @@
 		839AC20C25240CA000E3D1BC /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		839AC2142524597F00E3D1BC /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		83B40750252485C30046B917 /* ProfileFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFooterView.swift; sourceTree = "<group>"; };
+		83C70DA42525C2BB000B024E /* PeopleReviewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleReviewHeader.swift; sourceTree = "<group>"; };
 		99C3F803AC42488C58AEEA7D /* Pods_OnMyWay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnMyWay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -198,6 +200,15 @@
 			path = "Poeple Trips arch";
 			sourceTree = "<group>";
 		};
+		8343D2BE2525C153001D5156 /* People Reviews arch */ = {
+			isa = PBXGroup;
+			children = (
+				832BDAE62523275200E0F1E0 /* PeopleReviewsController.swift */,
+				83C70DA42525C2BB000B024E /* PeopleReviewHeader.swift */,
+			);
+			path = "People Reviews arch";
+			sourceTree = "<group>";
+		};
 		836965A8251DD75700810174 = {
 			isa = PBXGroup;
 			children = (
@@ -226,9 +237,9 @@
 				832BDA802521FCAA00E0F1E0 /* Onboarding arch */,
 				832BDAE82523431A00E0F1E0 /* Poeple Trips arch */,
 				832BDA8A252301E600E0F1E0 /* MainTabController.swift */,
-				832BDAE425230F6400E0F1E0 /* OrdersController.swift */,
-				832BDAE62523275200E0F1E0 /* PeopleReviewsController.swift */,
 				832BDAE225230CF700E0F1E0 /* NotificationsController.swift */,
+				832BDAE425230F6400E0F1E0 /* OrdersController.swift */,
+				8343D2BE2525C153001D5156 /* People Reviews arch */,
 				839AC2122524593800E3D1BC /* Profile arch */,
 				832BDA6E2521F5A000E0F1E0 /* Safety arch */,
 				8369E5DA2520C2B800AB6216 /* Trip Arch */,
@@ -521,6 +532,7 @@
 				8369E5A72520786700AB6216 /* HomeController.swift in Sources */,
 				8369E5D82520911900AB6216 /* NewTripController.swift in Sources */,
 				832BDAE525230F6400E0F1E0 /* OrdersController.swift in Sources */,
+				83C70DA52525C2BB000B024E /* PeopleReviewHeader.swift in Sources */,
 				832BDA7A2521FA9600E0F1E0 /* Page.swift in Sources */,
 				8369E5DD2520C65900AB6216 /* DateAndTimeController.swift in Sources */,
 				8369E597251F683300AB6216 /* Service.swift in Sources */,
