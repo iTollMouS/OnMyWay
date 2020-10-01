@@ -292,7 +292,7 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
         packageInfoTextView.addSubview(placeholderLabel)
         placeholderLabel.anchor(top: packageInfoTextView.topAnchor, left: packageInfoTextView.leftAnchor,
                                 paddingTop: 8, paddingLeft: 8)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleTextInputChanger), name: UITextView.textDidChangeNotification, object: nil)
     }
     
     @objc func handleSubmitNewTrip(){
