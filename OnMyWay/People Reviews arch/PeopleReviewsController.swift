@@ -67,6 +67,28 @@ class PeopleReviewsController: UIViewController {
         return label
     }()
     
+    private lazy var drawerView: UIView = {
+        let view = UIView()
+        view.setDimensions(height: 5, width: 60)
+        view.layer.cornerRadius = 2
+        view.backgroundColor = .gray
+        return view
+    }()
+    
+    private lazy var topDividerView: UIView = {
+        let view = UIView()
+        view.setHeight(height: 1)
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        return view
+    }()
+    
+    private lazy var bottomDividerView: UIView = {
+        let view = UIView()
+        view.setHeight(height: 1)
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        return view
+    }()
+    
     private lazy var ratingView: CosmosView = {
         let view = CosmosView()
         view.settings.fillMode = .half
@@ -83,6 +105,46 @@ class PeopleReviewsController: UIViewController {
         return view
     }()
     
+    private lazy var placeholderLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Add comment ......"
+        label.textAlignment = .left
+        label.textColor = .gray
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 16)
+        return label
+    }()
+    
+    private lazy var reviewTextView: UITextView = {
+        let textView = UITextView()
+        textView.textAlignment = .left
+        textView.textColor = .blueLightFont
+        textView.setHeight(height: 200)
+        textView.backgroundColor = .clear
+        textView.layer.cornerRadius = 10
+        textView.font = UIFont.systemFont(ofSize: 16)
+        textView.clipsToBounds = true
+        textView.addSubview(placeholderLabel)
+        placeholderLabel.anchor(top: textView.topAnchor, left: textView.leftAnchor,
+                                paddingTop: 8, paddingLeft: 8)
+        return textView
+    }()
+    
+    private lazy var submitReviewButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = #colorLiteral(red: 0.1568627451, green: 0.1568627451, blue: 0.1568627451, alpha: 1)
+        button.setTitle("Submit Review", for: .normal)
+        button.setDimensions(height: 50, width: view.frame.width - 50)
+        button.layer.cornerRadius = 50 / 2
+        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        button.setTitleColor(#colorLiteral(red: 0.08235294118, green: 0.4941176471, blue: 0.9843137255, alpha: 1), for: .normal)
+        button.clipsToBounds = true
+        button.layer.masksToBounds = false
+        button.setupShadow(opacity: 0.2, radius: 10, offset: CGSize(width: 0.0, height: 3), color: .white)
+        button.addTarget(self, action: #selector(handleDismissPopView), for: .touchUpInside)
+        return button
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,6 +152,7 @@ class PeopleReviewsController: UIViewController {
         configureNavBar()
         configureTableView()
         configureReviewSheetPopOver()
+        self.hideKeyboardWhenTouchOutsideTextField()
         
     }
     
@@ -104,15 +167,34 @@ class PeopleReviewsController: UIViewController {
     
     
     func configureReviewSheetPopOver(){
+        
+        reviewSheetPopOver.addSubview(drawerView)
+        drawerView.centerX(inView: reviewSheetPopOver, topAnchor: reviewSheetPopOver.topAnchor, paddingTop: 10)
+        
         reviewSheetPopOver.addSubview(reviewLabel)
-        reviewLabel.anchor(top: reviewSheetPopOver.topAnchor, left: reviewSheetPopOver.leftAnchor,
+        reviewLabel.anchor(top: drawerView.topAnchor, left: reviewSheetPopOver.leftAnchor,
                            right: reviewSheetPopOver.rightAnchor, paddingTop: 12)
         
         reviewSheetPopOver.addSubview(ratingView)
         ratingView.centerX(inView: reviewLabel, topAnchor: reviewLabel.bottomAnchor, paddingTop: 12)
         
+        reviewSheetPopOver.addSubview(topDividerView)
+        topDividerView.anchor(top: ratingView.bottomAnchor, left: reviewSheetPopOver.leftAnchor,
+                              right: reviewSheetPopOver.rightAnchor, paddingTop: 20)
+        
+        reviewSheetPopOver.addSubview(reviewTextView)
+        reviewTextView.anchor(top: topDividerView.bottomAnchor, left: reviewSheetPopOver.leftAnchor, right: reviewSheetPopOver.rightAnchor)
+        
+        reviewSheetPopOver.addSubview(submitReviewButton)
+        submitReviewButton.centerX(inView: reviewTextView, topAnchor: reviewTextView.bottomAnchor, paddingTop: 80)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleTextInputChanger), name: UITextView.textDidChangeNotification, object: nil)
     }
-   
+    
+    @objc func handleTextInputChanger(){
+        placeholderLabel.isHidden = !reviewTextView.text.isEmpty
+    }
+    
     func configureTableView(){
         view.addSubview(buttonContainerView)
         buttonContainerView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
@@ -145,7 +227,7 @@ extension PeopleReviewsController {
     func configureReviewSheet(){
         reviewSheetPopOver.backgroundColor = #colorLiteral(red: 0.2588235294, green: 0.2588235294, blue: 0.2588235294, alpha: 1)
         reviewSheetPopOver.layer.cornerRadius = 10
-        reviewSheetPopOver.setDimensions(height: 900, width: view.frame.width)
+        reviewSheetPopOver.setDimensions(height: 800, width: view.frame.width)
         attributes.screenBackground = .visualEffect(style: .dark)
         attributes.positionConstraints.safeArea = .overridden
         attributes.positionConstraints.verticalOffset = -300
@@ -178,16 +260,18 @@ extension PeopleReviewsController {
         
         attributes.lifecycleEvents.didDisappear = {
             // Executed after the entry animates outside
-            
             print("didDisappear")
         }
         attributes.entryBackground = .visualEffect(style: .dark)
         SwiftEntryKit.display(entry: reviewSheetPopOver, using: attributes)
     }
     
-    
     @objc func handleShowReview(){
         configureReviewSheet()
+    }
+    
+    @objc func handleDismissPopView(){
+        SwiftEntryKit.dismiss()
     }
     
 }

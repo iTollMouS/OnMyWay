@@ -289,9 +289,11 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
         timeTextField.inputView = timestampPickerView
         timeTextField.inputAccessoryView = toolbar
         dateTextField.isUserInteractionEnabled = false
+        
         packageInfoTextView.addSubview(placeholderLabel)
         placeholderLabel.anchor(top: packageInfoTextView.topAnchor, left: packageInfoTextView.leftAnchor,
                                 paddingTop: 8, paddingLeft: 8)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(handleTextInputChanger), name: UITextView.textDidChangeNotification, object: nil)
     }
     
