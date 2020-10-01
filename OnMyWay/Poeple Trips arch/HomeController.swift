@@ -117,7 +117,8 @@ class HomeController: UITableViewController {
     func configureUI(){
     
         tableView.register(RecentTripsCell.self, forCellReuseIdentifier: reuseIdentifier)
-        tableView.rowHeight = 220
+        tableView.estimatedRowHeight = UITableView.automaticDimension
+        tableView.rowHeight = 1000
         view.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         tableView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         
@@ -183,9 +184,12 @@ extension HomeController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+       return UITableView.automaticDimension
+   }
     
 }
 

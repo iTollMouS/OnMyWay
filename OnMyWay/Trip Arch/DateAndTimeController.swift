@@ -153,6 +153,7 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
         textView.setHeight(height: 100)
         textView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         textView.layer.cornerRadius = 10
+        textView.keyboardAppearance = .dark
         textView.font = UIFont.systemFont(ofSize: 16)
         textView.clipsToBounds = true
         return textView

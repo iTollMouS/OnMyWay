@@ -68,11 +68,10 @@ class PeopleReviewsCell: UITableViewCell {
         return stackView
     }()
     
-    #warning("Make sure the letters count is 290 letters")
-    private lazy var reviewLabel: UILabel = {
+
+     lazy var reviewLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.text = "making it look like readable English.\n Many desktop publishing packages and web page editors now use\n Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years\n sometimes by accident"
         label.textColor = .white
         label.backgroundColor = .clear
         label.adjustsFontSizeToFitWidth = true
