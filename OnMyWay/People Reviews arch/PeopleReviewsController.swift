@@ -32,12 +32,12 @@ class PeopleReviewsController: UIViewController {
     
     private lazy var writeReviewButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = #colorLiteral(red: 0.1568627451, green: 0.1568627451, blue: 0.1568627451, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.4078431373, blue: 0.4901960784, alpha: 1)
         button.setTitle("Write a review", for: .normal)
         button.setDimensions(height: 50, width: view.frame.width - 50)
         button.layer.cornerRadius = 50 / 2
         button.titleLabel?.font = .boldSystemFont(ofSize: 16)
-        button.setTitleColor(#colorLiteral(red: 0.08235294118, green: 0.4941176471, blue: 0.9843137255, alpha: 1), for: .normal)
+        button.setTitleColor(#colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1), for: .normal)
         button.clipsToBounds = true
         button.layer.masksToBounds = false
         button.setupShadow(opacity: 0.2, radius: 10, offset: CGSize(width: 0.0, height: 3), color: .white)
@@ -147,12 +147,12 @@ class PeopleReviewsController: UIViewController {
         let button = UIButton(type: .system)
         button.alpha = 0
         button.transform = .init(scaleX: 0.0, y: 0.01)
-        button.backgroundColor = #colorLiteral(red: 0.1568627451, green: 0.1568627451, blue: 0.1568627451, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.4745098039, blue: 0.4431372549, alpha: 1)
         button.setTitle("Submit Review", for: .normal)
         button.setDimensions(height: 50, width: view.frame.width - 50)
         button.layer.cornerRadius = 50 / 2
         button.titleLabel?.font = .boldSystemFont(ofSize: 16)
-        button.setTitleColor(#colorLiteral(red: 0.08235294118, green: 0.4941176471, blue: 0.9843137255, alpha: 1), for: .normal)
+        button.setTitleColor(#colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1), for: .normal)
         button.clipsToBounds = true
         button.layer.masksToBounds = false
         button.setupShadow(opacity: 0.2, radius: 10, offset: CGSize(width: 0.0, height: 3), color: .white)

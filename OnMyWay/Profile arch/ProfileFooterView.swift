@@ -19,10 +19,13 @@ class ProfileFooterView: UIView {
         let button = UIButton(type: .system)
         button.setTitle("Log out", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1).withAlphaComponent(0.7)
+        button.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1).withAlphaComponent(0.6)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.addTarget(self, action: #selector(handleLogout), for: .touchUpInside)
         button.layer.cornerRadius = 50 / 2
+        button.clipsToBounds = true
+        button.layer.masksToBounds = false
+        button.setupShadow(opacity: 0.5, radius: 16, offset: CGSize(width: 0.0, height: 8.0), color: #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1))
         return button
     }()
     
