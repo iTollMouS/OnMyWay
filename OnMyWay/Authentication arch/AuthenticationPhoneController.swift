@@ -14,7 +14,7 @@ class AuthenticationPhoneController: UIViewController {
     
     private lazy var animation = Animation.named("sendingemail")
     private lazy var animationView = AnimationView(animation: animation)
-    private let userDefault = UserDefaults.standard
+    
     
     private lazy var infoLabel: UILabel = {
         let label = UILabel()
@@ -156,8 +156,8 @@ class AuthenticationPhoneController: UIViewController {
             self.showBanner(message: "We have sent you a text message\nPlease verify once you receive it", state: .success, location: .top,
                             presentingDirection: .vertical, dismissingDirection: .vertical, sender: self)
             guard let verificationID = verificationID else {return}
-            self.userDefault.setValue(verificationID, forKey: "verificationID")
-            self.userDefault.synchronize()
+            userDefault.setValue(verificationID, forKey: "verificationID")
+            userDefault.synchronize()
             UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn) {
                 self.verifyOPTButton.setTitle("Verify code", for: .normal)
                 self.verifyOPTButton.isEnabled = true

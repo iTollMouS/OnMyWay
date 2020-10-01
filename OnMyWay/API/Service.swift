@@ -19,8 +19,22 @@ import ProgressHUD
 
 public let kFILEREFERENCE = "gs://mapandphoto-4f7b3.appspot.com"
 
+public let userDefault = UserDefaults.standard
+
 struct Service {
     
+    
+    static func fetchUser(withUid userID: String, completion: @escaping(User) -> Void){
+        Firestore.firestore().collection("users").document(userID).getDocument { (snapshot, error) in
+            if let error = error {
+                print("DEBUG: failed to get user info with \(error.localizedDescription)")
+                return
+            }
+            guard let dictionary = snapshot?.data() else {return}
+            let user = User(userID: userID, dictionary: dictionary)
+            completion(user)
+        }
+    }
     
     static func updateProfileImage(withImage image: UIImage, userID: String, completion: ((Error?) -> Void)?) {
         uploadProfileImageView(withImage: image, userID: userID) { imageUrl in
@@ -57,4 +71,54 @@ struct Service {
         }
         
     }
+    
+    static func downloadImage(imageUrl: String, completion: @escaping(_ image: UIImage?) -> Void) {
+        let imageFileName = fileNameFrom(fileUrl: imageUrl)
+        if fileExistsAtPath(path: imageFileName) {
+            if let contentOfFile = UIImage(contentsOfFile: fileInDocumentsDirectory(fileName: imageFileName)) {
+                
+                completion(contentOfFile)
+            } else {
+                print("DEBUG: error getting image")
+                completion(#imageLiteral(resourceName: "plus_photo"))
+            }
+        } else {
+            if imageUrl != "" {
+                let documentUrl = URL(string: imageUrl)
+                let downloadQueue = DispatchQueue(label: "imageDowloadQueue")
+                downloadQueue.async {
+                    let data = NSData(contentsOf: documentUrl!)
+                    if data != nil {
+                        Service.saveFileLocally(fileData: data!, fileName: imageFileName)
+                        DispatchQueue.main.async {
+                            completion(UIImage(data: data! as Data))
+                        }
+                    } else {
+                        print("DEBUG: No document in database ")
+                        DispatchQueue.main.async {
+                            completion(nil)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    static func saveFileLocally(fileData: NSData, fileName: String){
+        let docUrl =  getDocumentsURL().appendingPathComponent(fileName, isDirectory: false)
+        fileData.write(to: docUrl, atomically: true)
+    }
+    
+}
+
+func fileInDocumentsDirectory(fileName: String) ->  String{
+    return getDocumentsURL().appendingPathComponent(fileName).path
+}
+
+func getDocumentsURL() -> URL {
+    return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
+}
+
+func fileExistsAtPath(path: String) -> Bool {
+    return FileManager.default.fileExists(atPath: fileInDocumentsDirectory(fileName: path))
 }

@@ -11,6 +11,7 @@ import FirebaseUI
 import Gallery
 import ProgressHUD
 
+
 private let reuseIdentifier = "ProfileCell"
 
 class ProfileController: UIViewController {
@@ -41,6 +42,23 @@ class ProfileController: UIViewController {
         view.backgroundColor = .white
         configureUI()
         configureNavBar()
+        fetchUser()
+    }
+    
+    func fetchUser(){
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        Service.fetchUser(withUid: userID) { user in
+            print("DEBUG: profile is \(user.profileImageUrl)")
+            Service.downloadImage(imageUrl: user.profileImageUrl) { imageView in
+                self.headerView.profileImageView.setImage(imageView?.withRenderingMode(.alwaysOriginal), for: .normal)
+                self.headerView.profileImageView.setDimensions(height: 100, width: 100)
+                self.headerView.profileImageView.layer.cornerRadius = 100 / 2
+                self.headerView.profileImageView.imageView?.contentMode = .scaleAspectFill
+                self.headerView.profileImageView.backgroundColor = .clear
+                self.headerView.profileImageView.clipsToBounds = true
+                self.tableView.reloadData()
+            }
+        }
     }
     
     
@@ -51,6 +69,8 @@ class ProfileController: UIViewController {
         headerView.delegate = self
         footerView.delegate = self
     }
+    
+    
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -198,11 +218,13 @@ extension ProfileController: GalleryControllerDelegate {
                                     presentingDirection: .vertical, dismissingDirection: .vertical,
                                     sender: self)
                     ProgressHUD.showSucceed()
+                    
                 }
             }
             
         }
         controller.dismiss(animated: true, completion: nil)
+        
     }
     
     func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {

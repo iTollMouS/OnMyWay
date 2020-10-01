@@ -13,7 +13,7 @@ import FirebaseAuth
 struct User {
     let userID: String
     var fullname: String
-    var profileImageView: String
+    var profileImageUrl: String
     var phoneNumber: String
     var email: String
     var basePrice: String
@@ -26,7 +26,7 @@ struct User {
     init(userID: String, dictionary: [String: Any]) {
         self.userID = dictionary["userID"] as? String ?? ""
         self.fullname = dictionary["fullname"] as? String ?? ""
-        self.profileImageView = dictionary["profileImageView"] as? String ?? ""
+        self.profileImageUrl = dictionary["profileImageUrl"] as? String ?? ""
         self.phoneNumber = dictionary["phoneNumber"] as? String ?? ""
         self.email = dictionary["email"] as? String ?? ""
         self.basePrice = dictionary["basePrice"] as? String ?? ""

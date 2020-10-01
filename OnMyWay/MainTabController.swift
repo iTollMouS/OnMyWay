@@ -32,7 +32,7 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
         let notificationsControllerNavBar =  templateNavController(image: UIImage(systemName: "envelope")!, rootViewController: notificationsController, tabBarItemTitle: "Messages")
         
         let ordersController = OrdersController()
-        let ordersControllerNavBar = templateNavController(image: UIImage(systemName: "envelope")!, rootViewController: ordersController, tabBarItemTitle: "Orders")
+        let ordersControllerNavBar = templateNavController(image: UIImage(systemName: "shippingbox")!, rootViewController: ordersController, tabBarItemTitle: "Orders")
         
         viewControllers = [homeControllerNavBar, ordersControllerNavBar, notificationsControllerNavBar ,profileControllerNavBar]
     }

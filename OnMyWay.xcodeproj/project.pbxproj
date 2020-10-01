@@ -66,6 +66,7 @@
 		83B40751252485C30046B917 /* ProfileFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B40750252485C30046B917 /* ProfileFooterView.swift */; };
 		83C70DA52525C2BB000B024E /* PeopleReviewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C70DA42525C2BB000B024E /* PeopleReviewHeader.swift */; };
 		83C70DA72525C954000B024E /* PeopleReviewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C70DA62525C954000B024E /* PeopleReviewsCell.swift */; };
+		83C70DAC252695F6000B024E /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C70DAB252695F6000B024E /* GlobalFunctions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -145,6 +146,7 @@
 		83B40750252485C30046B917 /* ProfileFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFooterView.swift; sourceTree = "<group>"; };
 		83C70DA42525C2BB000B024E /* PeopleReviewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleReviewHeader.swift; sourceTree = "<group>"; };
 		83C70DA62525C954000B024E /* PeopleReviewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleReviewsCell.swift; sourceTree = "<group>"; };
+		83C70DAB252695F6000B024E /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		99C3F803AC42488C58AEEA7D /* Pods_OnMyWay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnMyWay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -325,6 +327,7 @@
 			children = (
 				8369E58D251F5BBE00AB6216 /* AuthService.swift */,
 				8369E596251F683300AB6216 /* Service.swift */,
+				83C70DAB252695F6000B024E /* GlobalFunctions.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 			files = (
 				8369660A251DDCD300810174 /* Extentions.swift in Sources */,
 				8369E575251F252C00AB6216 /* CustomContainerView.swift in Sources */,
+				83C70DAC252695F6000B024E /* GlobalFunctions.swift in Sources */,
 				832BDAE325230CF700E0F1E0 /* NotificationsController.swift in Sources */,
 				832BDA7C2521FA9600E0F1E0 /* OnboardingController.swift in Sources */,
 				8343D2BD2525BC2A001D5156 /* User.swift in Sources */,
