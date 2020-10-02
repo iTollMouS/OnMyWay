@@ -46,6 +46,15 @@ class ProfileCell: UITableViewCell {
         return label
     }()
     
+    private lazy var passwordLabel: UILabel = {
+        let label = UILabel()
+        label.text = "********** "
+        label.textAlignment = .left
+        label.textColor = #colorLiteral(red: 0.7843137255, green: 0.7843137255, blue: 0.7843137255, alpha: 1)
+        label.font = UIFont.systemFont(ofSize: 20)
+        return label
+    }()
+    
     private lazy var appVersionLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
@@ -101,10 +110,16 @@ class ProfileCell: UITableViewCell {
             addSubview(covid_19_GuidelinesLabel)
             covid_19_GuidelinesLabel.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
             addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleShowGuidelines)))
+            accessoryButton.addTarget(self, action: #selector(handleShowGuidelines), for: .touchUpInside)
             configureAccessory()
         case .section_4:
             addSubview(appVersionLabel)
             appVersionLabel.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        case .section_5:
+            addSubview(passwordLabel)
+            passwordLabel.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+            configureAccessory()
+            
         }
     }
     
@@ -123,6 +138,7 @@ class ProfileCell: UITableViewCell {
 enum ProfileViewModel: Int, CaseIterable {
     case section_1
     case section_2
+    case section_5
     case section_3
     case section_4
     
@@ -132,6 +148,7 @@ enum ProfileViewModel: Int, CaseIterable {
         case .section_2: return 1
         case .section_3: return 1
         case .section_4: return 1
+        case .section_5: return 1
         }
     }
     
@@ -141,6 +158,7 @@ enum ProfileViewModel: Int, CaseIterable {
         case .section_2: return "Email"
         case .section_3: return "COVID-19 Guidelines"
         case .section_4: return "App Version"
+        case .section_5: return "Password"
         }
     }
 }

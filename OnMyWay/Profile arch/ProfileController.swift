@@ -186,7 +186,10 @@ extension ProfileController: ProfileHeaderDelegate {
         Config.tabsToShow = [.imageTab, .cameraTab]
         Config.Camera.imageLimit = 1
         Config.initialTab = .imageTab
+        Config.Grid.FrameView.borderColor = .black
+        Config.Grid.FrameView.fillColor = .black
         gallery.modalPresentationStyle = .fullScreen
+        
         self.present(gallery, animated: true, completion: nil)
     }
 }

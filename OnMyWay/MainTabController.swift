@@ -28,7 +28,7 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
         let profileController = ProfileController()
         let profileControllerNavBar = templateNavController(image: UIImage(systemName: "person")!, rootViewController: profileController, tabBarItemTitle: "Profile")
         
-        let notificationsController = NotificationsController()
+        let notificationsController = MessagesController()
         let notificationsControllerNavBar =  templateNavController(image: UIImage(systemName: "envelope")!, rootViewController: notificationsController, tabBarItemTitle: "Messages")
         
         let ordersController = OrdersController()
@@ -40,7 +40,7 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         let index = viewControllers?.firstIndex(of: viewController)
         if index == 2 {
-            let notificationsController = NotificationsController()
+            let notificationsController = MessagesController()
             let navController = UINavigationController(rootViewController: notificationsController)
             navController.modalPresentationStyle = .fullScreen
             navController.navigationBar.barStyle = .black

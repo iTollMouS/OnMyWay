@@ -20,6 +20,7 @@ struct User {
     var userReviews: Int
     var password: String
     var userBio: String
+    let pushID: String
     
     var isCurrentUser: Bool{return Auth.auth().currentUser?.uid == userID}
     
@@ -33,6 +34,7 @@ struct User {
         self.userReviews = dictionary["userReviews"] as? Int ?? 0
         self.password = dictionary["password"] as? String ?? ""
         self.userBio = dictionary["userBio"] as? String ?? ""
+        self.pushID = dictionary["pushID"] as? String ?? ""
     }
     
 }

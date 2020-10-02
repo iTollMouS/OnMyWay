@@ -48,7 +48,8 @@ struct AuthService {
                                 "email": credentials.email,
                                 "profileImageUrl": imageUrl,
                                 "password": credentials.password,
-                                "fullname": credentials.fullname,
+                                "fullname": credentials.fullname.lowercased(),
+                                "pushID": "",
                                 "timestamp": Timestamp(date: Date())] as [String : Any]
                 emailVerification(withEmail: credentials.email, userResult: user)
                 Firestore.firestore().collection("users").document(user.user.uid).setData(userData, completion: completion)
@@ -67,7 +68,7 @@ struct AuthService {
                             "userFcmToken": fcmToken,
                             "email": user.email,
                             "profileImageUrl": imageUrl,
-                            "fullname": fullname,
+                            "fullname": fullname.lowercased(),
                             "timestamp": Timestamp(date: Date())] as [String : Any]
             Firestore.firestore().collection("users").document(user.uid).setData(userData, completion: completion)
         }
