@@ -22,7 +22,9 @@ struct User {
     var userBio: String
     let pushID: String
     
-    var isCurrentUser: Bool{return Auth.auth().currentUser?.uid == userID}
+    static var isCurrentUser: String{
+        guard let userID = Auth.auth().currentUser?.uid else {return ""}
+        return  userID}
     
     init(userID: String, dictionary: [String: Any]) {
         self.userID = dictionary["userID"] as? String ?? ""

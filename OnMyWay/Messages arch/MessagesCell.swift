@@ -9,6 +9,11 @@ import UIKit
 
 class MessagesCell: UITableViewCell {
     
+    
+    var recentChat: RecentChat? {
+        didSet{ }
+    }
+    
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.setDimensions(height: 50, width: 50)
@@ -24,7 +29,7 @@ class MessagesCell: UITableViewCell {
         let label = UILabel()
         label.text = "Hello there , could you please take it wit you ?"
         label.textAlignment = .left
-        label.numberOfLines = 0
+        label.numberOfLines = 3
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = .lightGray
         return label
@@ -64,6 +69,7 @@ class MessagesCell: UITableViewCell {
         label.setDimensions(height: 40, width: 40)
         label.layer.cornerRadius = 40 / 2
         label.clipsToBounds = true
+        label.isHidden = true
         return label
     }()
     
@@ -87,6 +93,32 @@ class MessagesCell: UITableViewCell {
         addSubview(counterMessageLabel)
         counterMessageLabel.centerX(inView: timestampLabel)
         counterMessageLabel.centerY(inView: profileImageView)
+        accessoryType = .disclosureIndicator
+        timestampLabel.text = recentChat?.date?.convertToTimeAgo(style: .abbreviated)
+        
+    }
+    
+    func configure(recent: RecentChat){
+        fullnameLabel.text = recent.receiverName
+        recentMessageLabel.text = recent.lastMessage
+        
+        if recent.unreadCounter != 0 {
+            self.counterMessageLabel.text = "\(recent.unreadCounter)"
+            self.counterMessageLabel.isHidden = false
+        } else {
+            self.counterMessageLabel.isHidden = true
+        }
+        setAvatar(avatarLink: recent.profileImage)
+    }
+    
+    private func setAvatar(avatarLink: String){
+        if avatarLink != "" {
+            Service.downloadImage(imageUrl: avatarLink) { image  in
+                self.profileImageView.image = image
+            }
+        } else {
+            self.profileImageView.image = #imageLiteral(resourceName: "plus_photo")
+        }
     }
     
     required init?(coder: NSCoder) {

@@ -23,7 +23,6 @@ public let userDefault = UserDefaults.standard
 
 struct Service {
     
-    
     static func fetchUser(withUid userID: String, completion: @escaping(User) -> Void){
         Firestore.firestore().collection("users").document(userID).getDocument { (snapshot, error) in
             if let error = error {
@@ -42,6 +41,8 @@ struct Service {
             Firestore.firestore().collection("users").document(userID).setData(userData, merge: true, completion: completion)
         }
     }
+    
+    
     
     
     static func uploadProfileImageView(withImage image: UIImage, userID: String? = nil, completion: @escaping(String) -> Void) {
@@ -103,6 +104,9 @@ struct Service {
             }
         }
     }
+    
+    
+    
     
     static func saveFileLocally(fileData: NSData, fileName: String){
         let docUrl =  getDocumentsURL().appendingPathComponent(fileName, isDirectory: false)
