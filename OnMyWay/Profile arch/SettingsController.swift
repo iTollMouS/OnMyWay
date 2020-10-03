@@ -7,14 +7,14 @@
 
 import UIKit
 import Firebase
-import FirebaseUI
 import Gallery
 import ProgressHUD
 
 
+
 private let reuseIdentifier = "ProfileCell"
 
-class ProfileController: UIViewController {
+class SettingsController: UIViewController {
     
     private lazy var headerView = ProfileHeader(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 300))
     private lazy var footerView = ProfileFooterView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100))
@@ -42,25 +42,28 @@ class ProfileController: UIViewController {
         view.backgroundColor = .white
         configureUI()
         configureNavBar()
-        fetchUser()
+        updateUserInfo()
+        
     }
     
-    func fetchUser(){
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        Service.fetchUser(withUid: userID) { user in
-            print("DEBUG: profile is \(user.profileImageUrl)")
-            Service.downloadImage(imageUrl: user.profileImageUrl) { imageView in
-                self.headerView.profileImageView.setImage(imageView?.withRenderingMode(.alwaysOriginal), for: .normal)
-                self.headerView.profileImageView.setDimensions(height: 100, width: 100)
-                self.headerView.profileImageView.layer.cornerRadius = 100 / 2
-                self.headerView.profileImageView.imageView?.contentMode = .scaleAspectFill
-                self.headerView.profileImageView.backgroundColor = .clear
-                self.headerView.profileImageView.clipsToBounds = true
-                self.tableView.reloadData()
+    func updateUserInfo(){
+        
+        if let user = User.currentUser {
+            headerView.usernameLabel.text = user.username
+            headerView.userStatusLabel.text = user.status
+            if user.avatarLink != "" {
+                FileStorage.downloadImage(imageUrl: user.avatarLink) { (avaratImage)  in
+                    self.headerView.profileImageView.setImage(avaratImage?.withRenderingMode(.alwaysOriginal), for: .normal)
+                    self.headerView.profileImageView.setDimensions(height: 100, width: 100)
+                    self.headerView.profileImageView.layer.cornerRadius = 100 / 2
+                    self.headerView.profileImageView.imageView?.contentMode = .scaleAspectFill
+                    self.headerView.profileImageView.backgroundColor = .clear
+                    self.headerView.profileImageView.clipsToBounds = true
+                    
+                }
             }
         }
     }
-    
     
     func configureUI(){
         view.addSubview(tableView)
@@ -68,15 +71,12 @@ class ProfileController: UIViewController {
         gallery.delegate = self
         headerView.delegate = self
         footerView.delegate = self
+        
     }
-    
-    
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
-    
     
     func configureNavBar(){
         
@@ -84,39 +84,21 @@ class ProfileController: UIViewController {
         self.title = "Profile"
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        let demoVC = PeopleReviewsController()
-        demoVC.popupItem.title = "People Reviews "
-        demoVC.popupItem.subtitle = "Tab here to see who wrote a review about you"
-        demoVC.popupItem.progress = 0.34
-        tabBarController?.popupBar.titleTextAttributes = [ .foregroundColor: UIColor.white ]
-        tabBarController?.popupBar.subtitleTextAttributes = [ .foregroundColor: UIColor.gray ]
-        tabBarController?.presentPopupBar(withContentViewController: demoVC, animated: true, completion: nil)
-    }
-    
-    func logout(){
-        do {
-            try Auth.auth().signOut()
-            presentLoggingController()
-            self.tabBarController?.selectedIndex = 0
-        } catch (let error){
-            print("DEBUG: error happen while logging out \(error.localizedDescription)")
+    private func uploadAvatarImage(_ image: UIImage){
+        let fileDirectory = "Avatars/" + "_\(User.currentId)" + ".jpg"
+        FileStorage.uploadImage(image, dictionary: fileDirectory) { avatarLink in
+            guard let avatarLink = avatarLink else {return}
+            if var user =  User.currentUser {
+                user.avatarLink = avatarLink
+                saveUserLocally(user)
+                FirebaseUserListener.shared.saveUserToFirestore(user)
+            }
+            FileStorage.saveFileLocally(fileData: image.jpegData(compressionQuality: 0.5)! as NSData, fileName: User.currentId)
         }
     }
-    
-    func presentLoggingController(){
-        DispatchQueue.main.async { [self] in
-            let welcomeController = WelcomeController()
-            let nav = UINavigationController(rootViewController: welcomeController)
-            nav.modalPresentationStyle = .fullScreen
-            present(nav, animated: true, completion: nil)
-        }
-    }
-    
 }
 
-extension ProfileController: UITableViewDelegate, UITableViewDataSource {
+extension SettingsController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return ProfileViewModel.allCases.count
@@ -158,13 +140,22 @@ extension ProfileController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
-
-extension ProfileController: ProfileFooterDelegate {
+ 
+extension SettingsController: ProfileFooterDelegate {
     func handleLogout() {
         
         let alert = UIAlertController(title: nil, message: "Are you sure you want to logout ?", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "log out", style: .destructive, handler: { (alertAction) in
-            self.dismiss(animated: true) { [self] in logout()  }
+            self.dismiss(animated: true) {  FirebaseUserListener.shared.logOutCurrentUser { error in
+                if let error = error {
+                    ProgressHUD.showError("Error while logging out\(error.localizedDescription)")
+                }
+                DispatchQueue.main.async {
+                    let registrationController = RegistrationController()
+                    registrationController.modalPresentationStyle = .fullScreen
+                    self.present(registrationController, animated: true, completion: nil)
+                }
+            } }
         }))
         alert.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
         
@@ -172,16 +163,14 @@ extension ProfileController: ProfileFooterDelegate {
     }
 }
 
-extension ProfileController: ProfileCellDelegate {
+extension SettingsController: ProfileCellDelegate {
     func showGuidelines(_ cell: ProfileCell) {
-        let safetyControllerGuidelines = SafetyControllerGuidelines(style: .insetGrouped)
-        safetyControllerGuidelines.modalPresentationStyle = .fullScreen
-        present(safetyControllerGuidelines, animated: true, completion: nil)
+        
     }
     
 }
 
-extension ProfileController: ProfileHeaderDelegate {
+extension SettingsController: ProfileHeaderDelegate {
     func handleUpdatePhoto(_ header: ProfileHeader) {
         Config.tabsToShow = [.imageTab, .cameraTab]
         Config.Camera.imageLimit = 1
@@ -194,37 +183,20 @@ extension ProfileController: ProfileHeaderDelegate {
     }
 }
 
-extension ProfileController: GalleryControllerDelegate {
+extension SettingsController: GalleryControllerDelegate {
     func galleryController(_ controller: GalleryController, didSelectImages images: [Image]) {
         guard let userID = Auth.auth().currentUser?.uid else { return }
         guard let image = images.first else { return }
         self.showBlurView()
-        self.showLoader(true, message: "Please wait while we upload your photo...")
         image.resolve { [self] in guard let image = $0 else {return}
+            uploadAvatarImage(image)
             headerView.profileImageView.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
             headerView.profileImageView.setDimensions(height: 100, width: 100)
             headerView.profileImageView.layer.cornerRadius = 100 / 2
             headerView.profileImageView.imageView?.contentMode = .scaleAspectFill
             headerView.profileImageView.backgroundColor = .clear
             headerView.profileImageView.clipsToBounds = true
-            
-            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { timer in
-                self.showLoader(false)
-                Service.updateProfileImage(withImage: image, userID: userID) { error in
-                    if let error = error {
-                        self.showAlertMessage("Error", error.localizedDescription)
-                        return
-                    }
-                    self.removeBlurView()
-                    self.showLoader(false)
-                    self.showBanner(message: "Success!", state: .success, location: .top,
-                                    presentingDirection: .vertical, dismissingDirection: .vertical,
-                                    sender: self)
-                    ProgressHUD.showSucceed()
-                    
-                }
-            }
-            
+            self.removeBlurView()
         }
         controller.dismiss(animated: true, completion: nil)
         
