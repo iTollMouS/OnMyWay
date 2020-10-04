@@ -85,7 +85,6 @@ class TripDetailsCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
     }
     
     func configureUI(){
@@ -116,11 +115,13 @@ class TripDetailsCell: UITableViewCell {
         addSubview(citiesStackView)
         citiesStackView.centerY(inView: lineBetweenDots, leftAnchor: lineBetweenDots.rightAnchor, paddingLeft: 12)
         citiesStackView.anchor(top: fromCityDot.topAnchor, bottom: destinationCityDot.bottomAnchor)
+        backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
     }
     
     func configureSection_1(){
         addSubview(wheretToMeetLabel)
         wheretToMeetLabel.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
     }
     
     required init?(coder: NSCoder) {
@@ -156,6 +157,26 @@ enum TripDetailsViewModel: Int, CaseIterable {
         }
     }
     
+    var titleInSection: String {
+        switch self {
+        
+        case .fromCityToCity: return "Trip Destination"
+        case .whereToMeet: return "Place to meet"
+        case .whatCanITake: return "What I can take with me"
+        case .WhenToMeet: return "Where the place to meet to take packages"
+        case .packageAllowance: return "Non of the times"
+        }
+    }
+    
+    var heightInSection: CGFloat {
+        switch self {
+        case .fromCityToCity: return 40
+        case .whereToMeet: return 60
+        case .whatCanITake: return 60
+        case .WhenToMeet: return 60
+        case .packageAllowance: return 60
+        }
+    }
     
     
 }

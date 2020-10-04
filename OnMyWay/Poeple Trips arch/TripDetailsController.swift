@@ -31,6 +31,19 @@ class TripDetailsController: UIViewController {
         configureDelegates()
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        let peopleReviewsController = PeopleReviewsController()
+        peopleReviewsController.popupItem.title = "People Reviews "
+        peopleReviewsController.popupItem.subtitle = "Tab here to see who wrote a review about you"
+        peopleReviewsController.popupItem.progress = 0.34
+        tabBarController?.popupBar.titleTextAttributes = [ .foregroundColor: UIColor.white ]
+        tabBarController?.popupBar.subtitleTextAttributes = [ .foregroundColor: UIColor.gray ]
+        tabBarController?.presentPopupBar(withContentViewController: peopleReviewsController, animated: true, completion: nil)
+    }
+    
+    
     func configureDelegates(){
         headerView.delegate = self
     }
@@ -68,6 +81,19 @@ extension TripDetailsController: UITableViewDelegate, UITableViewDataSource {
         return cellHeight.cellHeight
     }
     
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let titleInSection = TripDetailsViewModel(rawValue: section) else { return nil }
+        let label = UILabel()
+        label.text = titleInSection.titleInSection
+        label.textAlignment = .left
+        return label
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        guard let sectionHeight = TripDetailsViewModel(rawValue: section) else { return 0 }
+        return sectionHeight.heightInSection
+    }
     
 }
 

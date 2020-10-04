@@ -40,7 +40,7 @@ class PeopleReviewsController: UIViewController {
         button.setTitleColor(#colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1), for: .normal)
         button.clipsToBounds = true
         button.layer.masksToBounds = false
-        button.setupShadow(opacity: 0.2, radius: 10, offset: CGSize(width: 0.0, height: 3), color: .white)
+        button.setupShadow(opacity: 0.1, radius: 10, offset: CGSize(width: 0.0, height: 3), color: .white)
         button.addTarget(self, action: #selector(handleShowReview), for: .touchUpInside)
         return button
     }()
@@ -49,6 +49,9 @@ class PeopleReviewsController: UIViewController {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
         view.setHeight(height: 100)
+        view.clipsToBounds = true
+        view.layer.masksToBounds = false
+        view.setupShadow(opacity: 0.1, radius: 10, offset: CGSize(width: 0.0, height: 8.0), color: .white)
         view.addSubview(writeReviewButton)
         writeReviewButton.centerX(inView: view, topAnchor: view.topAnchor, paddingTop: 16)
         return view
@@ -56,7 +59,7 @@ class PeopleReviewsController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
+        tableView.backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
         tableView.register(PeopleReviewsCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.tableHeaderView = headerView
         tableView.contentInsetAdjustmentBehavior = .never
@@ -227,7 +230,7 @@ class PeopleReviewsController: UIViewController {
     
     func configureNavBar(){
         self.title = "Reviews"
-        view.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
     }
 }
 
