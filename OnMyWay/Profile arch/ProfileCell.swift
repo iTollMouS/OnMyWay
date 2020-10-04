@@ -119,6 +119,7 @@ class ProfileCell: UITableViewCell {
             addSubview(passwordLabel)
             passwordLabel.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
             configureAccessory()
+        
             
         }
     }

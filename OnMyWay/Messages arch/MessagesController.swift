@@ -39,6 +39,7 @@ class MessagesController: UITableViewController {
         refreshController.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes:
                                                                 [.foregroundColor: UIColor.white])
         tableView.refreshControl = refreshController
+        
     }
     func configureSearchController(){
         navigationItem.searchController = searchController

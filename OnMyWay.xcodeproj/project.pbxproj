@@ -28,7 +28,6 @@
 		832BDA8B252301E600E0F1E0 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BDA8A252301E600E0F1E0 /* MainTabController.swift */; };
 		832BDADD2523081400E0F1E0 /* LNPopupController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 832BDADC2523081400E0F1E0 /* LNPopupController.framework */; };
 		832BDADE2523081500E0F1E0 /* LNPopupController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 832BDADC2523081400E0F1E0 /* LNPopupController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		832BDAE125230C1D00E0F1E0 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BDAE025230C1D00E0F1E0 /* ProfileController.swift */; };
 		832BDAE325230CF700E0F1E0 /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BDAE225230CF700E0F1E0 /* MessagesController.swift */; };
 		832BDAE525230F6400E0F1E0 /* OrdersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BDAE425230F6400E0F1E0 /* OrdersController.swift */; };
 		832BDAE72523275200E0F1E0 /* PeopleReviewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BDAE62523275200E0F1E0 /* PeopleReviewsController.swift */; };
@@ -63,6 +62,10 @@
 		8369E5DD2520C65900AB6216 /* DateAndTimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E5DC2520C65900AB6216 /* DateAndTimeController.swift */; };
 		839AC20D25240CA000E3D1BC /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839AC20C25240CA000E3D1BC /* ProfileCell.swift */; };
 		839AC2152524597F00E3D1BC /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839AC2142524597F00E3D1BC /* ProfileHeader.swift */; };
+		83B05CF825299D0C0051940A /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B05CF725299D0C0051940A /* ProfileController.swift */; };
+		83B05CFA2529A8D90051940A /* TripDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B05CF92529A8D90051940A /* TripDetailsController.swift */; };
+		83B05CFC2529AA4E0051940A /* TripDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B05CFB2529AA4E0051940A /* TripDetailsCell.swift */; };
+		83B05CFE2529AB380051940A /* TripDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B05CFD2529AB380051940A /* TripDetailsHeaderView.swift */; };
 		83B40751252485C30046B917 /* ProfileFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B40750252485C30046B917 /* ProfileFooterView.swift */; };
 		83C70DA52525C2BB000B024E /* PeopleReviewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C70DA42525C2BB000B024E /* PeopleReviewHeader.swift */; };
 		83C70DA72525C954000B024E /* PeopleReviewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C70DA62525C954000B024E /* PeopleReviewsCell.swift */; };
@@ -108,7 +111,6 @@
 		832BDA862523005000E0F1E0 /* wash_your_hands_regularly.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wash_your_hands_regularly.json; sourceTree = "<group>"; };
 		832BDA8A252301E600E0F1E0 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		832BDADC2523081400E0F1E0 /* LNPopupController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LNPopupController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		832BDAE025230C1D00E0F1E0 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		832BDAE225230CF700E0F1E0 /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
 		832BDAE425230F6400E0F1E0 /* OrdersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersController.swift; sourceTree = "<group>"; };
 		832BDAE62523275200E0F1E0 /* PeopleReviewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleReviewsController.swift; sourceTree = "<group>"; };
@@ -146,6 +148,10 @@
 		8369E5DC2520C65900AB6216 /* DateAndTimeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeController.swift; sourceTree = "<group>"; };
 		839AC20C25240CA000E3D1BC /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		839AC2142524597F00E3D1BC /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
+		83B05CF725299D0C0051940A /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		83B05CF92529A8D90051940A /* TripDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailsController.swift; sourceTree = "<group>"; };
+		83B05CFB2529AA4E0051940A /* TripDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailsCell.swift; sourceTree = "<group>"; };
+		83B05CFD2529AB380051940A /* TripDetailsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailsHeaderView.swift; sourceTree = "<group>"; };
 		83B40750252485C30046B917 /* ProfileFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFooterView.swift; sourceTree = "<group>"; };
 		83C70DA42525C2BB000B024E /* PeopleReviewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleReviewHeader.swift; sourceTree = "<group>"; };
 		83C70DA62525C954000B024E /* PeopleReviewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleReviewsCell.swift; sourceTree = "<group>"; };
@@ -203,6 +209,9 @@
 			isa = PBXGroup;
 			children = (
 				8369E5A62520786700AB6216 /* HomeController.swift */,
+				83B05CF92529A8D90051940A /* TripDetailsController.swift */,
+				83B05CFD2529AB380051940A /* TripDetailsHeaderView.swift */,
+				83B05CFB2529AA4E0051940A /* TripDetailsCell.swift */,
 				832BDA8325220D8800E0F1E0 /* RecentTripsCell.swift */,
 			);
 			path = "Poeple Trips arch";
@@ -352,8 +361,8 @@
 		839AC2122524593800E3D1BC /* Profile arch */ = {
 			isa = PBXGroup;
 			children = (
-				832BDAE025230C1D00E0F1E0 /* ProfileController.swift */,
 				839AC2142524597F00E3D1BC /* ProfileHeader.swift */,
+				83B05CF725299D0C0051940A /* ProfileController.swift */,
 				839AC20C25240CA000E3D1BC /* ProfileCell.swift */,
 				83B40750252485C30046B917 /* ProfileFooterView.swift */,
 			);
@@ -551,12 +560,15 @@
 				832BDA452521D21500E0F1E0 /* SafetyCell.swift in Sources */,
 				839AC20D25240CA000E3D1BC /* ProfileCell.swift in Sources */,
 				832BDA492521D62700E0F1E0 /* TableHeaderView.swift in Sources */,
+				83B05CF825299D0C0051940A /* ProfileController.swift in Sources */,
+				83B05CFA2529A8D90051940A /* TripDetailsController.swift in Sources */,
 				836965B7251DD75700810174 /* SceneDelegate.swift in Sources */,
 				8369E5A72520786700AB6216 /* HomeController.swift in Sources */,
 				8369E5D82520911900AB6216 /* NewTripController.swift in Sources */,
 				832BDAE525230F6400E0F1E0 /* OrdersController.swift in Sources */,
 				83C70DB125273725000B024E /* RecentChat.swift in Sources */,
 				83C70DA52525C2BB000B024E /* PeopleReviewHeader.swift in Sources */,
+				83B05CFC2529AA4E0051940A /* TripDetailsCell.swift in Sources */,
 				832BDA7A2521FA9600E0F1E0 /* Page.swift in Sources */,
 				8369E5DD2520C65900AB6216 /* DateAndTimeController.swift in Sources */,
 				8369E597251F683300AB6216 /* Service.swift in Sources */,
@@ -566,7 +578,7 @@
 				8369E58E251F5BBE00AB6216 /* AuthService.swift in Sources */,
 				8369E571251F24FF00AB6216 /* CustomTextField.swift in Sources */,
 				839AC2152524597F00E3D1BC /* ProfileHeader.swift in Sources */,
-				832BDAE125230C1D00E0F1E0 /* ProfileController.swift in Sources */,
+				83B05CFE2529AB380051940A /* TripDetailsHeaderView.swift in Sources */,
 				83B40751252485C30046B917 /* ProfileFooterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
