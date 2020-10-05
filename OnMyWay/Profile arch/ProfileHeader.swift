@@ -79,7 +79,7 @@ class ProfileHeader: UIView {
         view.settings.textColor = .lightGray
         view.settings.textMargin = 10
         view.settings.textFont = UIFont.systemFont(ofSize: 14)
-        view.backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         view.setDimensions(height: 50, width: 250)
         return view
     }()
@@ -87,7 +87,7 @@ class ProfileHeader: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
+        backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         heightAnchor.constraint(equalToConstant: 300).isActive = true
         addSubview(profileImageView)
         profileImageView.centerX(inView: self, topAnchor: topAnchor, paddingTop: 20)

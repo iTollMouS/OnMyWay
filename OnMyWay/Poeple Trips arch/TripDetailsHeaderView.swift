@@ -66,7 +66,7 @@ class TripDetailsHeaderView: UIView {
     
     private lazy var submitReviewButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.4745098039, blue: 0.4431372549, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.4745098039, blue: 0.4431372549, alpha: 1).withAlphaComponent(0.4)
         button.tintColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
         button.setTitle("Chat with ", for: .normal)
         button.setImage(UIImage(systemName: "bubble.left.and.bubble.right.fill"), for: .normal)

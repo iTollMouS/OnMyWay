@@ -107,19 +107,18 @@ class ProfileCell: UITableViewCell {
             emailLabel.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
             configureAccessory()
         case .section_3:
-            addSubview(covid_19_GuidelinesLabel)
-            covid_19_GuidelinesLabel.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-            addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleShowGuidelines)))
-            accessoryButton.addTarget(self, action: #selector(handleShowGuidelines), for: .touchUpInside)
+            addSubview(passwordLabel)
+            passwordLabel.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
             configureAccessory()
         case .section_4:
             addSubview(appVersionLabel)
             appVersionLabel.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         case .section_5:
-            addSubview(passwordLabel)
-            passwordLabel.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+            addSubview(covid_19_GuidelinesLabel)
+            covid_19_GuidelinesLabel.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+            addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleShowGuidelines)))
+            accessoryButton.addTarget(self, action: #selector(handleShowGuidelines), for: .touchUpInside)
             configureAccessory()
-        
             
         }
     }
@@ -139,9 +138,9 @@ class ProfileCell: UITableViewCell {
 enum ProfileViewModel: Int, CaseIterable {
     case section_1
     case section_2
-    case section_5
     case section_3
     case section_4
+    case section_5
     
     var numberOfCells: Int {
         switch self {
@@ -157,9 +156,29 @@ enum ProfileViewModel: Int, CaseIterable {
         switch self {
         case .section_1: return "Phone Number"
         case .section_2: return "Email"
-        case .section_3: return "COVID-19 Guidelines"
+        case .section_3: return "Password"
         case .section_4: return "App Version"
-        case .section_5: return "Password"
+        case .section_5: return "COVID-19 Guidelines"
+        }
+    }
+    var systemNameIcon: String {
+        switch self {
+        case .section_1: return "iphone"
+        case .section_2: return "envelope"
+        case .section_3: return "lock"
+        case .section_4: return "apps.iphone"
+        case .section_5: return "staroflife.fill"
+            
+        }
+    }
+    
+    var iconDimension: (CGFloat, CGFloat) {
+        switch self {
+        case .section_1: return (24, 24)
+        case .section_2: return (24, 24)
+        case .section_3: return (24, 24)
+        case .section_4: return (24, 24)
+        case .section_5: return (26, 24)
         }
     }
 }

@@ -12,8 +12,15 @@ import FirebaseAuth
 
 class AuthenticationPhoneController: UIViewController {
     
-    private lazy var animation = Animation.named("sendingemail")
-    private lazy var animationView = AnimationView(animation: animation)
+    private lazy var animationView : AnimationView = {
+        let animationView = AnimationView()
+        animationView.setDimensions(height: 60, width: 60)
+        animationView.clipsToBounds = true
+        animationView.animation = Animation.named("textMessage_SMS")
+        animationView.layer.cornerRadius = 60 / 2
+        animationView.backgroundColor = .clear
+        return animationView
+    }()
     
     
     private lazy var infoLabel: UILabel = {
@@ -163,6 +170,8 @@ class AuthenticationPhoneController: UIViewController {
                 self.verifyOPTButton.isEnabled = true
                 self.verifyOPTButton.transform = .identity
                 self.verificationCodeTextField.alpha = 1
+                self.animationView.play()
+                self.animationView.loopMode = .loop
             }
             
         }

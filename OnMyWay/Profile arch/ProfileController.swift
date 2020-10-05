@@ -138,16 +138,31 @@ extension ProfileController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let viewModel = ProfileViewModel(rawValue: section) else { return UIView() }
+        
+        
+        let iconImage = UIImageView(image: UIImage(systemName: viewModel.systemNameIcon))
+        iconImage.setDimensions(height: viewModel.iconDimension.0, width: viewModel.iconDimension.1)
+
+        iconImage.tintColor = #colorLiteral(red: 0.862745098, green: 0.862745098, blue: 0.862745098, alpha: 1)
         let label = UILabel()
         label.text = viewModel.sectionTitle
         label.textColor = #colorLiteral(red: 0.6274509804, green: 0.6274509804, blue: 0.6274509804, alpha: 1)
         label.backgroundColor = .clear
         label.textAlignment = .left
-        return label
+        
+        
+        let containerView = UIView()
+        containerView.addSubview(iconImage)
+        iconImage.centerY(inView: containerView, leftAnchor: containerView.leftAnchor, paddingLeft: 12)
+        containerView.addSubview(label)
+        label.centerY(inView: iconImage, leftAnchor: iconImage.rightAnchor, paddingLeft: 8)
+        return containerView
     }
     
+  
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return 60
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -157,6 +172,8 @@ extension ProfileController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    
 }
 
 extension ProfileController: ProfileFooterDelegate {

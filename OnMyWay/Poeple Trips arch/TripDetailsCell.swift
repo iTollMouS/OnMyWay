@@ -15,7 +15,7 @@ class TripDetailsCell: UITableViewCell {
     
     private lazy var fromCityDot: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .gray
         view.setDimensions(height: 5, width: 5)
         view.layer.cornerRadius = 5 / 2
         return view
@@ -31,7 +31,7 @@ class TripDetailsCell: UITableViewCell {
     
     private lazy var lineBetweenDots: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .lightGray
         view.setDimensions(height: 5, width: 5)
         view.layer.cornerRadius = 5 / 2
         return view
@@ -121,7 +121,7 @@ class TripDetailsCell: UITableViewCell {
     func configureSection_1(){
         addSubview(wheretToMeetLabel)
         wheretToMeetLabel.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-        backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
+        backgroundColor = #colorLiteral(red: 0.1098039216, green: 0.1098039216, blue: 0.1176470588, alpha: 1)
     }
     
     required init?(coder: NSCoder) {

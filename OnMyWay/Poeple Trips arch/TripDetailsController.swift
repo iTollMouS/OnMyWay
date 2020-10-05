@@ -87,6 +87,7 @@ extension TripDetailsController: UITableViewDelegate, UITableViewDataSource {
         let label = UILabel()
         label.text = titleInSection.titleInSection
         label.textAlignment = .left
+        label.textColor = .lightGray
         return label
     }
     

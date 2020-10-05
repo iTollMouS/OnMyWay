@@ -109,13 +109,13 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
         
         calendarView.appearance.titlePlaceholderColor = UIColor.white.withAlphaComponent(0.1)
         // today configure selection
-        calendarView.appearance.todayColor = #colorLiteral(red: 0.3568627451, green: 0.4745098039, blue: 0.4431372549, alpha: 1)
+        calendarView.appearance.todayColor = .blueLightIcon
         calendarView.appearance.titleTodayColor = .white
-        calendarView.appearance.todaySelectionColor = #colorLiteral(red: 0.3568627451, green: 0.4745098039, blue: 0.4431372549, alpha: 1)
+        calendarView.appearance.todaySelectionColor = .blueLightIcon
         
         // selection
         calendarView.appearance.titleSelectionColor = .white
-        calendarView.appearance.selectionColor = .blueLightIcon
+        calendarView.appearance.selectionColor = #colorLiteral(red: 0.3568627451, green: 0.4745098039, blue: 0.4431372549, alpha: 1)
         
         calendarView.appearance.titleWeekendColor = #colorLiteral(red: 0.3568627451, green: 0.4078431373, blue: 0.4901960784, alpha: 1)
         calendarView.appearance.titleDefaultColor = .white // color your week days
@@ -281,7 +281,7 @@ class DateAndTimeController: UIViewController, UIScrollViewDelegate {
                           paddingLeft: 20, paddingRight: 20)
         
         contentView.addSubview(calendarView)
-        calendarView.anchor(top: titleLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor)
+        calendarView.anchor(top: titleLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingLeft: 12, paddingRight: 12)
         contentView.addSubview(bottomContainerView)
         bottomContainerView.centerX(inView: calendarView, topAnchor: calendarView.bottomAnchor, paddingTop: 10)
         bottomContainerView.anchor(left: contentView.leftAnchor, right: contentView.rightAnchor)

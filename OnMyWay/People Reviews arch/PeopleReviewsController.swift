@@ -204,7 +204,7 @@ class PeopleReviewsController: UIViewController {
         reviewTextView.anchor(top: topDividerView.bottomAnchor, left: reviewSheetPopOver.leftAnchor, right: reviewSheetPopOver.rightAnchor)
         
         reviewSheetPopOver.addSubview(submitReviewButton)
-        submitReviewButton.centerX(inView: reviewTextView, topAnchor: reviewTextView.bottomAnchor, paddingTop: 80)
+        submitReviewButton.centerX(inView: reviewTextView, topAnchor: reviewTextView.bottomAnchor, paddingTop: 70)
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleTextInputChanger), name: UITextView.textDidChangeNotification, object: nil)
     }
@@ -264,21 +264,29 @@ extension PeopleReviewsController: UITextViewDelegate {
 extension PeopleReviewsController {
     
     func configureReviewSheet(){
+        
         reviewSheetPopOver.backgroundColor = #colorLiteral(red: 0.2588235294, green: 0.2588235294, blue: 0.2588235294, alpha: 1)
         reviewSheetPopOver.layer.cornerRadius = 10
         reviewSheetPopOver.setDimensions(height: 800, width: view.frame.width)
         attributes.screenBackground = .visualEffect(style: .dark)
         attributes.positionConstraints.safeArea = .overridden
+        
         attributes.positionConstraints.verticalOffset = -300
-        attributes.name = "Top Note"
+        //        let offset = EKAttributes.PositionConstraints.KeyboardRelation.Offset(bottom: 10, screenEdgeResistance: 20)
+        //        let keyboardRelation = EKAttributes.PositionConstraints.KeyboardRelation.bind(offset: offset)
+        //        attributes.positionConstraints.keyboardRelation = keyboardRelation
         attributes.windowLevel = .normal
         attributes.position = .bottom
         attributes.precedence = .override(priority: .max, dropEnqueuedEntries: false)
         attributes.displayDuration = .infinity
-        attributes.entryInteraction = .absorbTouches
-        attributes.screenInteraction = .dismiss
+        attributes.entryInteraction = .absorbTouches // do something when the user touch the card e.g .dismiss make the card dismisses on touch
+        attributes.screenInteraction = .dismiss // do something when the user touch the screen e.g .dismiss make the card dismisses on touch
         attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .jolt)
         attributes.statusBar = .light
+//        attributes.entranceAnimation = .init(
+//                         translate: .init(duration: 0.7, anchorPosition: .top, spring: .init(damping: 1, initialVelocity: 0)),
+//                         scale: .init(from: 0.6, to: 1, duration: 0.7),
+//                         fade: .init(from: 0.8, to: 1, duration: 0.3))
         attributes.lifecycleEvents.willAppear = { [self] in
             // Executed before the entry animates inside
             ratingView.rating = 3
@@ -310,7 +318,8 @@ extension PeopleReviewsController {
     }
     
     @objc func handleDismissPopView(){
-        SwiftEntryKit.dismiss()
+        SwiftEntryKit.dismiss(.displayed) { [self] in reviewTextView.text = "" }
+        
     }
     
 }
