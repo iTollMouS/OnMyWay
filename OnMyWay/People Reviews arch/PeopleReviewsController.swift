@@ -179,8 +179,8 @@ class PeopleReviewsController: UIViewController {
     }
     
     func updateReviewOnTouch(){
-        ratingView.didTouchCosmos = { self.ratingView.text = "\($0)" }
-        ratingView.didFinishTouchingCosmos = { self.ratingView.text = "\($0)" }
+        ratingView.didTouchCosmos = { [self] in ratingView.text = "\($0)" }
+        ratingView.didFinishTouchingCosmos = { [self] in  ratingView.text = "\($0)" }
     }
     
     

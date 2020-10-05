@@ -14,31 +14,30 @@ protocol NewTripControllerDelegate: class {
 
 class NewTripController: UIViewController, UIScrollViewDelegate {
     
-    
-    var dynamicScreen: CGFloat {
-        var height: CGFloat = 200
-        switch UIScreen.main.bounds.height {
-        // iPhone XS Max + 11
-        case 896:
-            height = 120
-        // iPhone 11 pro
-        case 812:
-            height = 200
-        // iPhone 8+
-        case 736:
-            height = 160
-        // iPhone 8
-        case 667:
-            height = 230
-        default:
-            break
-        }
-        return height
-    }
+//
+//    var dynamicScreen: CGFloat {
+//        var height: CGFloat = 200
+//        switch UIScreen.main.bounds.height {
+//        // iPhone XS Max + 11
+//        case 896:
+//            height = 120
+//        // iPhone 11 pro
+//        case 812:
+//            height = 200
+//        // iPhone 8+
+//        case 736:
+//            height = 160
+//        // iPhone 8
+//        case 667:
+//            height = 230
+//        default:
+//            break
+//        }
+//        return height
+//    }
     
     private lazy var contentSizeView = CGSize(width: self.view.frame.width,
-                                              height: self.view.frame.height + 80)
-    
+                                              height: self.view.frame.height + 10)
     
     weak var delegate: NewTripControllerDelegate?
     
@@ -203,7 +202,7 @@ class NewTripController: UIViewController, UIScrollViewDelegate {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(titleLabel)
-        titleLabel.centerX(inView: contentView, topAnchor: contentView.topAnchor, paddingTop: 80)
+        titleLabel.centerX(inView: contentView, topAnchor: contentView.topAnchor, paddingTop: 60)
         titleLabel.anchor(left: contentView.leftAnchor, right: contentView.rightAnchor)
         
         contentView.addSubview(mainContentView)

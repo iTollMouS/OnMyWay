@@ -12,8 +12,6 @@ import Cosmos
 
 class RecentTripsCell: UITableViewCell {
     
-    
-    
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
@@ -188,14 +186,14 @@ class RecentTripsCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
-        heightAnchor.constraint(equalToConstant: 210).isActive = true
+        heightAnchor.constraint(equalToConstant: 250).isActive = true
         
         addSubview(profileImageView)
-        profileImageView.anchor(top: topAnchor, left: leftAnchor, paddingTop: 6, paddingLeft: 12)
+        profileImageView.anchor(top: topAnchor, left: leftAnchor, paddingTop: 32, paddingLeft: 12)
         addSubview(fullnameLable)
         fullnameLable.centerY(inView: profileImageView, leftAnchor: profileImageView.rightAnchor, paddingLeft: 4)
         addSubview(dateAndTimeStackView)
-        dateAndTimeStackView.anchor(top: topAnchor, right: rightAnchor, paddingTop: 6, paddingRight: 8)
+        dateAndTimeStackView.anchor(top: topAnchor, right: rightAnchor, paddingTop: 36, paddingRight: 8)
         
         // construct the dots and the line in between
         addSubview(fromCityDot)

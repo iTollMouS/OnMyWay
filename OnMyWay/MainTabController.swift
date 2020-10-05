@@ -22,7 +22,7 @@ class MainTabController: UITabBarController, UITabBarControllerDelegate {
     
     func configureViewControllers(){
         
-        let homeController = HomeController()
+        let homeController = TripsTableController()
         let homeControllerNavBar = templateNavController(image: UIImage(systemName: "car")!, rootViewController: homeController, tabBarItemTitle: "Travelers")
         
         let profileController = ProfileController()

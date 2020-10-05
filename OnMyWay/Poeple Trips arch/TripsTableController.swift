@@ -10,76 +10,10 @@ import Firebase
 import FirebaseUI
 import LNPopupController
 
-private let reuseIdentifier = "recentTrips"
+private let reuseIdentifier = "RecentTripsCell"
 
-class HomeController: UITableViewController {
+class TripsTableController: UITableViewController {
     
-    
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Welcome to \nOnMyWay "
-        label.numberOfLines = 0
-        label.font = UIFont.init(name: "AvenirNext-Heavy", size: 32)
-        label.textColor = .black
-        label.setHeight(height: 100)
-        label.textAlignment = .left
-        return label
-    }()
-    
-    private lazy var travelContainerView = createImageView(withImage: #imageLiteral(resourceName: "rosebox-BFdSCxmqvYc-unsplash"))
-    
-    private lazy var sendPackageContainerView: UIView = {
-        let view = createImageView(withImage: #imageLiteral(resourceName: "sendPackagePhoto"))
-        view.layer.configureGradientBackground(UIColor.clear.cgColor, UIColor.black.cgColor, layerIndex: 2)
-        return view
-    }()
-    
-    private lazy var travelButton: UIButton = {
-        let button = createButton(withTitle: "Travel")
-        button.addTarget(self, action: #selector(handleTravelTapped), for: .touchUpInside)
-        return button
-    }()
-    private lazy var sendButton = createButton(withTitle: "Send Package")
-    
-    private lazy var bottomSendPackageView: UIView = {
-        let view = UIView()
-        view.setHeight(height: 200)
-        return view
-    }()
-    
-    private lazy var bottomTravelView: UIView = {
-        let view = UIView()
-        view.addSubview(travelButton)
-        travelButton.centerInSuperview()
-        travelButton.setDimensions(height: 50, width: 150)
-        travelButton.layer.cornerRadius = 50 / 2
-        view.setHeight(height: 100)
-        view.isUserInteractionEnabled = true
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-        return view
-    }()
-    
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [travelContainerView, sendPackageContainerView])
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.spacing = 16
-        stackView.setHeight(height: 300)
-        return stackView
-    }()
-    
-    private lazy var recentTripsLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Travelers"
-        label.textAlignment = .left
-        label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.setHeight(height: 50)
-        return label
-    }()
-    
-    let cellSelectionStyle = UIView()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -96,18 +30,17 @@ class HomeController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        let demoVC = NewTripController()
+        let newTripController = NewTripController()
         
-        demoVC.delegate = self
-        demoVC.popupItem.title = "Design your trip"
-        demoVC.popupBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        demoVC.popupItem.subtitle = "show people what packages you can take"
-        demoVC.popupItem.progress = 0.34
+        newTripController.delegate = self
+        newTripController.popupItem.title = "Design your trip"
+        newTripController.popupBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        newTripController.popupItem.subtitle = "show people what packages you can take"
+        newTripController.popupItem.progress = 0.34
         tabBarController?.popupBar.titleTextAttributes = [ .foregroundColor: UIColor.white ]
         tabBarController?.popupBar.subtitleTextAttributes = [ .foregroundColor: UIColor.gray ]
-        tabBarController?.presentPopupBar(withContentViewController: demoVC, animated: true, completion: nil)
+        tabBarController?.presentPopupBar(withContentViewController: newTripController, animated: true, completion: nil)
     }
-    
     
     
     func configureNavBar(){
@@ -169,20 +102,14 @@ class HomeController: UITableViewController {
     
 }
 
-extension HomeController {
-    
-}
-
-
-extension HomeController {
+extension TripsTableController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 20
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! RecentTripsCell
-        cellSelectionStyle.backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
-        cell.selectedBackgroundView = cellSelectionStyle
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -199,7 +126,7 @@ extension HomeController {
 }
 
 
-extension HomeController: NewTripControllerDelegate{
+extension TripsTableController: NewTripControllerDelegate{
     func dismissNewTripView(_ view: NewTripController) {
         tabBarController?.closePopup(animated: true, completion: { [self] in
             let safetyControllerGuidelines = SafetyControllerGuidelines(style: .insetGrouped)

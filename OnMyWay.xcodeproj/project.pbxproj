@@ -57,7 +57,7 @@
 		8369E597251F683300AB6216 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E596251F683300AB6216 /* Service.swift */; };
 		8369E59D251F98EA00AB6216 /* AuthenticationPhoneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E59C251F98EA00AB6216 /* AuthenticationPhoneController.swift */; };
 		8369E5A0251F9B6400AB6216 /* sendingemail.json in Resources */ = {isa = PBXBuildFile; fileRef = 8369E59F251F9B6400AB6216 /* sendingemail.json */; };
-		8369E5A72520786700AB6216 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E5A62520786700AB6216 /* HomeController.swift */; };
+		8369E5A72520786700AB6216 /* TripsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E5A62520786700AB6216 /* TripsTableController.swift */; };
 		8369E5D82520911900AB6216 /* NewTripController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E5D72520911800AB6216 /* NewTripController.swift */; };
 		8369E5DD2520C65900AB6216 /* DateAndTimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369E5DC2520C65900AB6216 /* DateAndTimeController.swift */; };
 		839AC20D25240CA000E3D1BC /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839AC20C25240CA000E3D1BC /* ProfileCell.swift */; };
@@ -144,7 +144,7 @@
 		8369E596251F683300AB6216 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		8369E59C251F98EA00AB6216 /* AuthenticationPhoneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationPhoneController.swift; sourceTree = "<group>"; };
 		8369E59F251F9B6400AB6216 /* sendingemail.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sendingemail.json; sourceTree = "<group>"; };
-		8369E5A62520786700AB6216 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		8369E5A62520786700AB6216 /* TripsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsTableController.swift; sourceTree = "<group>"; };
 		8369E5D72520911800AB6216 /* NewTripController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTripController.swift; sourceTree = "<group>"; };
 		8369E5DC2520C65900AB6216 /* DateAndTimeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeController.swift; sourceTree = "<group>"; };
 		839AC20C25240CA000E3D1BC /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
@@ -210,11 +210,9 @@
 		832BDAE82523431A00E0F1E0 /* Poeple Trips arch */ = {
 			isa = PBXGroup;
 			children = (
-				8369E5A62520786700AB6216 /* HomeController.swift */,
-				83B05CF92529A8D90051940A /* TripDetailsController.swift */,
-				83B05CFD2529AB380051940A /* TripDetailsHeaderView.swift */,
-				83B05CFB2529AA4E0051940A /* TripDetailsCell.swift */,
+				8369E5A62520786700AB6216 /* TripsTableController.swift */,
 				832BDA8325220D8800E0F1E0 /* RecentTripsCell.swift */,
+				8346A3B3252B3D73002B87E5 /* Trip details arch */,
 			);
 			path = "Poeple Trips arch";
 			sourceTree = "<group>";
@@ -227,6 +225,16 @@
 				83C70DA42525C2BB000B024E /* PeopleReviewHeader.swift */,
 			);
 			path = "People Reviews arch";
+			sourceTree = "<group>";
+		};
+		8346A3B3252B3D73002B87E5 /* Trip details arch */ = {
+			isa = PBXGroup;
+			children = (
+				83B05CF92529A8D90051940A /* TripDetailsController.swift */,
+				83B05CFD2529AB380051940A /* TripDetailsHeaderView.swift */,
+				83B05CFB2529AA4E0051940A /* TripDetailsCell.swift */,
+			);
+			path = "Trip details arch";
 			sourceTree = "<group>";
 		};
 		836965A8251DD75700810174 = {
@@ -567,7 +575,7 @@
 				83B05CF825299D0C0051940A /* ProfileController.swift in Sources */,
 				83B05CFA2529A8D90051940A /* TripDetailsController.swift in Sources */,
 				836965B7251DD75700810174 /* SceneDelegate.swift in Sources */,
-				8369E5A72520786700AB6216 /* HomeController.swift in Sources */,
+				8369E5A72520786700AB6216 /* TripsTableController.swift in Sources */,
 				8369E5D82520911900AB6216 /* NewTripController.swift in Sources */,
 				832BDAE525230F6400E0F1E0 /* OrdersController.swift in Sources */,
 				83C70DB125273725000B024E /* RecentChat.swift in Sources */,
