@@ -8,7 +8,14 @@
 import UIKit
 
 
+
+protocol TripDetailsFooterViewDelegate: class {
+    func handleSendingPackage(_ footer: TripDetailsFooterView)
+}
+
 class TripDetailsFooterView: UIView {
+    
+    weak var delegate: TripDetailsFooterViewDelegate?
 
     private lazy var logoutButton: UIButton = {
         let button = UIButton(type: .system)
@@ -42,6 +49,6 @@ class TripDetailsFooterView: UIView {
     
     
     @objc func handleRequestSendingPackage(){
-        print("DEBUG: handle request a package")
+        delegate?.handleSendingPackage(self)
     }
 }

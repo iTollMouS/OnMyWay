@@ -12,7 +12,20 @@ import LNPopupController
 
 private let reuseIdentifier = "RecentTripsCell"
 
-class TripsTableController: UITableViewController {
+class TripsTableController: UIViewController {
+    
+    private lazy var tableView: UITableView = {
+        let tableView  = UITableView()
+        tableView.register(RecentTripsCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.estimatedRowHeight = UITableView.automaticDimension
+        tableView.rowHeight = 1000
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
+        tableView.allowsSelection = true
+        tableView.isUserInteractionEnabled = true
+        return tableView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,14 +67,8 @@ class TripsTableController: UITableViewController {
     
     func configureUI(){
         
-        tableView.register(RecentTripsCell.self, forCellReuseIdentifier: reuseIdentifier)
-        tableView.estimatedRowHeight = UITableView.automaticDimension
-        tableView.rowHeight = 1000
-        view.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
-        tableView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
-        tableView.allowsSelection = true
-        tableView.isUserInteractionEnabled = true
-        
+        view.addSubview(tableView)
+        tableView.fillSuperview()
     }
     
     func checkIfUserLoggedIn(){
@@ -79,37 +86,37 @@ class TripsTableController: UITableViewController {
     
 }
 
-extension TripsTableController {
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension TripsTableController: UITableViewDelegate, UITableViewDataSource {
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 20
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! RecentTripsCell
-        
+        cell.isUserInteractionEnabled = true
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tripDetailsController = TripDetailsController()
         navigationController?.pushViewController(tripDetailsController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
     
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         true
     }
     
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = deleteMyTrip(at: indexPath)
         return UISwipeActionsConfiguration(actions: [delete])
     }
     
-    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let edit = editMyTrip(at: indexPath)
         return UISwipeActionsConfiguration(actions: [edit])
     }

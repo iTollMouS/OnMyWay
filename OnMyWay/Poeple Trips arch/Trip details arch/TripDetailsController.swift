@@ -17,8 +17,6 @@ class TripDetailsController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.delegate = self
-        tableView.dataSource = self
         tableView.register(TripDetailsCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         tableView.tableHeaderView = headerView
@@ -26,10 +24,10 @@ class TripDetailsController: UIViewController {
         tableView.rowHeight = 160
         return tableView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureUI()
         configureDelegates()
     }
@@ -49,6 +47,10 @@ class TripDetailsController: UIViewController {
     
     func configureDelegates(){
         headerView.delegate = self
+        footerView.delegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
+        
     }
     
     func configureUI(){
@@ -57,7 +59,7 @@ class TripDetailsController: UIViewController {
         tableView.fillSuperview()
     }
     
-
+    
 }
 
 extension TripDetailsController: UITableViewDelegate, UITableViewDataSource {
@@ -106,6 +108,15 @@ extension TripDetailsController : TripDetailsHeaderViewDelegate {
         
         // it is working , now you have to implement the functionality
         print("DEBUG: ctart chat in veiw controller ")
+    }
+    
+    
+}
+
+extension TripDetailsController: TripDetailsFooterViewDelegate {
+    
+    func handleSendingPackage(_ footer: TripDetailsFooterView) {
+        print("DEBUG: handle pressed in view controller ")
     }
     
     
