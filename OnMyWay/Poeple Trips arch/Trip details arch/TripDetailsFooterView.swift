@@ -12,8 +12,11 @@ class TripDetailsFooterView: UIView {
 
     private lazy var logoutButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Send package with ", for: .normal)
+        button.semanticContentAttribute = UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
+        button.setTitle("Send package with  ", for: .normal)
+        button.setImage(UIImage(systemName: "shippingbox.fill"), for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.tintColor = .white
         button.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.4078431373, blue: 0.4901960784, alpha: 1)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.addTarget(self, action: #selector(handleRequestSendingPackage), for: .touchUpInside)

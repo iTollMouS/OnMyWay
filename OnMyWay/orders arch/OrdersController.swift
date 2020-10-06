@@ -17,7 +17,7 @@ class OrdersController: UIViewController {
         segmentedControl.selectedSegmentIndex = 0
         return segmentedControl
     }()
-  
+    
     let refreshController = UIRefreshControl()
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -44,7 +44,7 @@ class OrdersController: UIViewController {
         stackView.axis = .vertical
         return stackView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavBar()
@@ -74,7 +74,7 @@ class OrdersController: UIViewController {
         self.title = "Orders"
         navigationItem.searchController = searchController
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search for a user"
+        searchController.searchBar.placeholder = "Search for order"
         searchController.searchResultsUpdater = self
         definesPresentationContext = true
     }
@@ -89,15 +89,15 @@ class OrdersController: UIViewController {
             self.refreshController.endRefreshing()
         }
     }
-
+    
 }
 
 extension OrdersController: UITableViewDelegate, UITableViewDataSource  {
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 50
     }
     
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! OrderCell
         cell.accessoryType = .disclosureIndicator
         return cell
@@ -106,7 +106,7 @@ extension OrdersController: UITableViewDelegate, UITableViewDataSource  {
 
 extension OrdersController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        print("DEBUG: \(searchController.searchBar.text)")
+        print("DEBUG: \(searchController.searchBar.text ?? "" )")
     }
     
     
