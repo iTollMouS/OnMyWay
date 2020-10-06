@@ -18,12 +18,15 @@ class OrdersController: UIViewController {
         return segmentedControl
     }()
   
+    let refreshController = UIRefreshControl()
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.refreshControl = refreshController
         return tableView
     }()
     
@@ -39,12 +42,18 @@ class OrdersController: UIViewController {
         stackView.axis = .vertical
         return stackView
     }()
+
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavBar()
         configureUI()
+        configureRefreshController()
+    }
+    
+    func configureRefreshController(){
+        refreshController.tintColor = .white
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -66,6 +75,12 @@ class OrdersController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         tabBarController?.dismissPopupBar(animated: true, completion: nil)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if refreshController.isRefreshing {
+            self.refreshController.endRefreshing()
+        }
     }
 
 }

@@ -7,7 +7,6 @@
 
 import UIKit
 import Firebase
-import FirebaseUI
 import Gallery
 import ProgressHUD
 
