@@ -163,7 +163,7 @@ class RecentTripsCell: UITableViewCell {
         view.settings.textMargin = 10
         view.settings.textFont = UIFont.systemFont(ofSize: 14)
         view.backgroundColor = .clear
-        view.setHeight(height: 30)
+        view.setHeight(height: 70)
         return view
     }()
     
@@ -174,9 +174,9 @@ class RecentTripsCell: UITableViewCell {
                                                        packagesTypes,
                                                        ratingView])
         stackView.axis = .vertical
-        stackView.alignment = .fill
         stackView.distribution = .fillProportionally
         stackView.spacing = 12
+        stackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleOptionsTapped)))
         return stackView
     }()
     
@@ -206,15 +206,16 @@ class RecentTripsCell: UITableViewCell {
         addSubview(citiesStackView)
         citiesStackView.centerY(inView: lineBetweenCities, leftAnchor: lineBetweenCities.rightAnchor, paddingLeft: 16)
         citiesStackView.anchor(top: fromCityDot.topAnchor, bottom: destinationCityDot.bottomAnchor, paddingTop: -15, paddingBottom: -15)
-        addSubview(containerView)
-        containerView.anchor(top: fullnameLable.bottomAnchor, left: citiesStackView.rightAnchor, bottom: bottomAnchor,
-                             right: rightAnchor, paddingTop: 8 , paddingRight: 12)
-        
-        containerView.addSubview(containerInfoStackView)
-        containerInfoStackView.centerY(inView: citiesStackView, leftAnchor: citiesStackView.rightAnchor, paddingLeft: 20)
-        containerInfoStackView.anchor(right: containerView.rightAnchor, paddingRight: 12)
+        addSubview(containerInfoStackView)
+        containerInfoStackView.anchor(top: fullnameLable.bottomAnchor, left: citiesStackView.rightAnchor, bottom: bottomAnchor,
+                             right: rightAnchor, paddingRight: 12)
         
         
+    }
+    
+    
+    @objc func handleOptionsTapped(){
+        print("DEBUG: option is tapped")
     }
     
     fileprivate func createLabel(titleText: String, titleTextSize: CGFloat , titleColor: UIColor,

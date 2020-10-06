@@ -36,6 +36,7 @@
 		8343D2762525229E001D5156 /* isTypingIndicator.json in Resources */ = {isa = PBXBuildFile; fileRef = 8343D2752525229E001D5156 /* isTypingIndicator.json */; };
 		8343D2BB2525B915001D5156 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8343D2BA2525B915001D5156 /* Trip.swift */; };
 		8343D2BD2525BC2A001D5156 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8343D2BC2525BC2A001D5156 /* User.swift */; };
+		8346A3F9252C4462002B87E5 /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8346A3F8252C4462002B87E5 /* OrderCell.swift */; };
 		836965B5251DD75700810174 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836965B4251DD75700810174 /* AppDelegate.swift */; };
 		836965B7251DD75700810174 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836965B6251DD75700810174 /* SceneDelegate.swift */; };
 		836965B9251DD75700810174 /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836965B8251DD75700810174 /* WelcomeController.swift */; };
@@ -120,6 +121,7 @@
 		8343D2752525229E001D5156 /* isTypingIndicator.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = isTypingIndicator.json; sourceTree = "<group>"; };
 		8343D2BA2525B915001D5156 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		8343D2BC2525BC2A001D5156 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8346A3F8252C4462002B87E5 /* OrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
 		836965B1251DD75700810174 /* OnMyWay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnMyWay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		836965B4251DD75700810174 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		836965B6251DD75700810174 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -237,6 +239,15 @@
 			path = "Trip details arch";
 			sourceTree = "<group>";
 		};
+		8346A3FA252C4466002B87E5 /* orders arch */ = {
+			isa = PBXGroup;
+			children = (
+				832BDAE425230F6400E0F1E0 /* OrdersController.swift */,
+				8346A3F8252C4462002B87E5 /* OrderCell.swift */,
+			);
+			path = "orders arch";
+			sourceTree = "<group>";
+		};
 		836965A8251DD75700810174 = {
 			isa = PBXGroup;
 			children = (
@@ -266,7 +277,7 @@
 				832BDAE82523431A00E0F1E0 /* Poeple Trips arch */,
 				832BDA8A252301E600E0F1E0 /* MainTabController.swift */,
 				83C70DAF25272D55000B024E /* Messages arch */,
-				832BDAE425230F6400E0F1E0 /* OrdersController.swift */,
+				8346A3FA252C4466002B87E5 /* orders arch */,
 				83C70DB225274AB6000B024E /* StartChat.swift */,
 				8343D2BE2525C153001D5156 /* People Reviews arch */,
 				839AC2122524593800E3D1BC /* Profile arch */,
@@ -567,6 +578,7 @@
 				832BDA7B2521FA9600E0F1E0 /* OnboardingCell.swift in Sources */,
 				83C70DB325274AB6000B024E /* StartChat.swift in Sources */,
 				8369E57D251F31DD00AB6216 /* LoggingController.swift in Sources */,
+				8346A3F9252C4462002B87E5 /* OrderCell.swift in Sources */,
 				832BDAE72523275200E0F1E0 /* PeopleReviewsController.swift in Sources */,
 				832BDA8425220D8800E0F1E0 /* RecentTripsCell.swift in Sources */,
 				832BDA452521D21500E0F1E0 /* SafetyCell.swift in Sources */,
