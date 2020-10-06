@@ -12,6 +12,8 @@ private let reuseIdentifier = "TripDetailsCell"
 class TripDetailsController: UIViewController {
     
     private lazy var headerView = TripDetailsHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 300))
+    private lazy var footerView = TripDetailsFooterView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100))
+    
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
@@ -20,6 +22,7 @@ class TripDetailsController: UIViewController {
         tableView.register(TripDetailsCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         tableView.tableHeaderView = headerView
+        tableView.tableFooterView = footerView
         tableView.rowHeight = 160
         return tableView
     }()
@@ -51,7 +54,7 @@ class TripDetailsController: UIViewController {
     func configureUI(){
         view.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         view.addSubview(tableView)
-        tableView.fillSuperviewSafeAreaLayoutGuide()
+        tableView.fillSuperview()
     }
     
 
