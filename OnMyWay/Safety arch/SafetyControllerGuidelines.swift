@@ -10,15 +10,39 @@ import SwiftEntryKit
 
 private let reuseIdentifier = "SafetyCell"
 
-class SafetyControllerGuidelines: UITableViewController {
+class SafetyControllerGuidelines: UIViewController {
     
     private lazy var headerView = TableHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 250))
     private lazy var footerView = SafetyFooterView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100))
     
-
+    
+    private let blurView : UIVisualEffectView = {
+        let blurView = UIBlurEffect(style: .dark)
+        let view = UIVisualEffectView(effect: blurView)
+        return view
+    }()
+    
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.tableHeaderView = headerView
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        tableView.separatorColor = .clear
+        tableView.register(SafetyCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.rowHeight = 100
+        tableView.allowsSelection = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.tableFooterView = footerView
+        footerView.delegate = self
+        return tableView
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureTableView()
     }
     
@@ -32,31 +56,26 @@ class SafetyControllerGuidelines: UITableViewController {
     }
     
     func configureTableView(){
-        tableView.tableHeaderView = headerView
-        tableView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
-        tableView.separatorStyle = .none
-        tableView.separatorColor = .clear
-        tableView.register(SafetyCell.self, forCellReuseIdentifier: reuseIdentifier)
-        tableView.rowHeight = 100
-        tableView.allowsSelection = false
-        tableView.tableFooterView = footerView
-        footerView.delegate = self
-        
+        view.addSubview(blurView)
+        blurView.frame = view.frame
+        view.addSubview(tableView)
+        tableView.fillSuperview()
     }
     
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+}
+
+extension SafetyControllerGuidelines : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return SafetyCellViewModel.allCases.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SafetyCell
         guard let viewModel = SafetyCellViewModel(rawValue: indexPath.row) else { return cell }
         cell.viewModel = viewModel
-        
         return cell
     }
-    
     
     
 }

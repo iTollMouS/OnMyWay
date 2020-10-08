@@ -62,7 +62,7 @@ class SafetyCell: UITableViewCell {
         addSubview(stackView)
         stackView.centerY(inView: animationView, leftAnchor: animationView.rightAnchor, paddingLeft: 12)
         stackView.anchor(right: rightAnchor, paddingRight: 18)
-        backgroundColor =  #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
+        backgroundColor =  .clear
     }
     
     func configure(){

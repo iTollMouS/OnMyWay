@@ -33,6 +33,7 @@ class SafetyFooterView: UIView {
                             paddingLeft: 32, paddingRight: 32)
         reportButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         reportButton.centerY(inView: self)
+        backgroundColor = .clear
     }
     
     @objc func handleReport(){

@@ -54,7 +54,7 @@ class TableHeaderView: UIView {
         addSubview(stackView)
         stackView.centerX(inView: animationView, topAnchor: animationView.bottomAnchor, paddingTop: 12)
         stackView.anchor(left: leftAnchor, bottom: bottomAnchor , right: rightAnchor, paddingLeft: 16, paddingRight: 16)
-        backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
+        backgroundColor = .clear
         configureAnimationView()
     }
     

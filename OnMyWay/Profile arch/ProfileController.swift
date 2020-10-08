@@ -190,8 +190,8 @@ extension ProfileController: ProfileFooterDelegate {
 
 extension ProfileController: ProfileCellDelegate {
     func showGuidelines(_ cell: ProfileCell) {
-        let safetyControllerGuidelines = SafetyControllerGuidelines(style: .insetGrouped)
-        safetyControllerGuidelines.modalPresentationStyle = .fullScreen
+        let safetyControllerGuidelines = SafetyControllerGuidelines()
+        safetyControllerGuidelines.modalPresentationStyle = .custom
         present(safetyControllerGuidelines, animated: true, completion: nil)
     }
     

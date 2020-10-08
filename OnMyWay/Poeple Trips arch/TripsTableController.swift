@@ -149,7 +149,7 @@ extension TripsTableController: UITableViewDelegate, UITableViewDataSource {
 extension TripsTableController: NewTripControllerDelegate{
     func dismissNewTripView(_ view: NewTripController) {
         tabBarController?.closePopup(animated: true, completion: { [self] in
-            let safetyControllerGuidelines = SafetyControllerGuidelines(style: .insetGrouped)
+            let safetyControllerGuidelines = SafetyControllerGuidelines()
             safetyControllerGuidelines.modalPresentationStyle = .fullScreen
             present(safetyControllerGuidelines, animated: true, completion: nil)
         })
