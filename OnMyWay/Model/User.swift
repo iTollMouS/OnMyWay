@@ -24,7 +24,9 @@ struct User {
     
     static var isCurrentUser: String{
         guard let userID = Auth.auth().currentUser?.uid else {return ""}
-        return  userID}
+        return  userID
+        
+    }
     
     init(userID: String, dictionary: [String: Any]) {
         self.userID = dictionary["userID"] as? String ?? ""
