@@ -150,7 +150,7 @@ extension TripsTableController: NewTripControllerDelegate{
     func dismissNewTripView(_ view: NewTripController) {
         tabBarController?.closePopup(animated: true, completion: { [self] in
             let safetyControllerGuidelines = SafetyControllerGuidelines()
-            safetyControllerGuidelines.modalPresentationStyle = .fullScreen
+            safetyControllerGuidelines.modalPresentationStyle = .custom
             present(safetyControllerGuidelines, animated: true, completion: nil)
         })
     }
